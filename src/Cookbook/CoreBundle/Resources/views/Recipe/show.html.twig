@@ -1,0 +1,19 @@
+ {% extends '::base.html.twig' %}
+
+ {% block body %}
+
+<div class="header_recipe">Recette : {{ recipe.name }}
+</div>
+
+<div class="content_recipe"> {{ recipe.description }}
+</div>
+
+Servie :
+<ul> 
+{% for event in recipe.events %}
+            <li><a href="{{ path('event_show', { 'id': event.id }) }}">{{ event.name }}</a> le {{ event.date|date("d/m/Y") }}</li>
+{% endfor %}
+</ul>
+ une recette de  {{ recipe.people.name }}
+<a href="{{ path('recipe_edit', { 'id': recipe.id }) }}">modifer</a>
+ {% endblock %}

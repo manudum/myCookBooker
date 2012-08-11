@@ -1,0 +1,29 @@
+ {% extends '::base.html.twig' %}
+
+ {% block body %}
+
+<div class="header_event">Evenement : {{ event.name }}
+</div>
+
+<div class="content_event"> {{ event.description }}
+</div>
+Le : {{ event.date|date("d/m/Y") }}
+<br />
+Invité : 
+<ul> 
+{% for friend in event.friends %}
+            <li><a href="{{ path('friend_show', { 'id': friend.id }) }}">{{ friend.name }}</a></li>
+{% endfor %}
+</ul>
+
+Recette : 
+<ul> 
+{% for recipe in event.recipes %}
+            <li><a href="{{ path('recipe_show', { 'id': recipe.id }) }}">{{ recipe.name }}</a></li>
+{% endfor %}
+</ul>
+
+
+ une evenement de  {{ event.people.name }}
+<a href="{{ path('event_edit', { 'id': event.id }) }}">modifer</a>
+ {% endblock %}

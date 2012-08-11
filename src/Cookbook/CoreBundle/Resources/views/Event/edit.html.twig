@@ -1,0 +1,14 @@
+<form action="" method="post" {{ form_enctype(form) }}>
+
+{{ form_errors(form) }}
+
+<div>
+    {{ form_label(form.name) }}
+    {{ form_errors(form.name) }}
+    {{ form_widget(form.name) }}
+</div>
+
+{{ form_rest(form) }}
+
+<input type="submit" />
+</form>

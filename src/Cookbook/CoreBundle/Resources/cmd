@@ -1,0 +1,4 @@
+ php app/console doctrine:generate:entities CookbookCoreBundle
+php app/console doctrine:schema:update --dump-sql
+
+php app/console cache:clear

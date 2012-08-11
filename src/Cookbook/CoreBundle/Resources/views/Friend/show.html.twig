@@ -1,0 +1,14 @@
+ {% extends '::base.html.twig' %}
+
+ {% block body %}
+
+<div class="header_friend">Ami : {{ friend.name }}
+</div>
+invité :
+<ul> 
+{% for event in friend.events %}
+            <li><a href="{{ path('event_show', { 'id': event.id }) }}">{{ event.name }}</a> le {{ event.date|date("d/m/Y") }}</li>
+{% endfor %}
+</ul>
+ un ami de  {{ friend.people.name }}
+ {% endblock %}

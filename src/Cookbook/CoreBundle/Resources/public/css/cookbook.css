@@ -1,0 +1,50 @@
+/* 
+    Document   : cookbook.css
+    Created on : Aug 6, 2012, 10:47:47 PM
+    Author     : edumonti
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.header_cookbook { 
+    background-color : #FAF7F7;
+    border: 1px solid red;
+    display: block;
+    height: 30px;
+}
+
+.logo_cookbook { 
+    float:left;
+}
+
+.user_cookbook { 
+    float: right;
+}
+
+.recipes{ 
+    background-color : #FAF7F7;
+    border: 1px solid red;
+    display: block;
+    width:200px;
+    float:left;
+}
+
+
+.friends{ 
+    background-color : #FAF7F7;
+    border: 1px solid red;
+    display: block;
+    width:200px;
+    float:left;
+}
+
+.events{ 
+    background-color : #FAF7F7;
+    border: 1px solid red;
+    display: block;
+    width:400px;
+    float:left;
+}
+
+
+

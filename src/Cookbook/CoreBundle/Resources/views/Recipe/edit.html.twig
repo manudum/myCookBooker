@@ -1,0 +1,31 @@
+<form action="" method="post" {{ form_enctype(form) }}>
+
+{{ form_errors(form) }}
+
+<div>
+    {{ form_label(form.name) }}
+    {{ form_errors(form.name) }}
+    {{ form_widget(form.name) }}
+</div>
+
+<div>
+    {{ form_label(form.category) }}
+    {{ form_errors(form.category) }}
+    {{ form_widget(form.category) }}<a href="{{ path('categoryrecipe_new') }}">Ajouter une category</a>
+</div>
+
+<div>
+    {{ form_label(form.type) }}
+    {{ form_errors(form.type) }}
+    {{ form_widget(form.type) }}<a href="{{ path('typerecipe_new') }}">Ajouter un type</a>
+</div>
+
+<div>
+    {{ form_label(form.format) }}
+    {{ form_errors(form.format) }}
+    {{ form_widget(form.format) }}<a href="{{ path('formatrecipe_new') }}">Ajouter un format</a>
+</div>
+{{ form_rest(form) }}
+
+<input type="submit" />
+</form>

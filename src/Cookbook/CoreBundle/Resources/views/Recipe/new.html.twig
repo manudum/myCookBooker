@@ -1,0 +1,48 @@
+ {% extends '::base.html.twig' %}
+
+ {% block javascript %}
+<script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/recipe.js') }}"></script>
+  {% endblock %} 
+{% block body %}
+<script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/recipe.js') }}"></script>
+ 
+<div class="header_cookbook">
+<div class="logo_cookbook">My cookbook</div>
+<div class="user_cookbook"></div>
+
+</div>  
+Nouvelle recette :
+<form action="{{ path('recipe_new') }}" method="post" {{ form_enctype(form) }}>
+
+{{ form_errors(form) }}
+
+<div>
+    {{ form_label(form.name) }}
+    {{ form_errors(form.name) }}
+    {{ form_widget(form.name) }}
+</div>
+
+<div>
+    {{ form_label(form.category) }}
+    {{ form_errors(form.category) }}
+    {{ form_widget(form.category) }}<a href="#" id="add_categ">Ajouter une category</a>
+</div>
+
+<div>
+    {{ form_label(form.type) }}
+    {{ form_errors(form.type) }}
+    {{ form_widget(form.type) }}<a href="{{ path('typerecipe_new') }}">Ajouter un type</a>
+</div>
+
+<div>
+    {{ form_label(form.format) }}
+    {{ form_errors(form.format) }}
+    {{ form_widget(form.format) }}<a href="{{ path('formatrecipe_new') }}">Ajouter un format</a>
+</div>
+{{ form_rest(form) }}
+
+<input type="submit" />
+</form>
+
+<div id="new_cat"></div>
+{% endblock %}

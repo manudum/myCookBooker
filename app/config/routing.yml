@@ -1,0 +1,114 @@
+CookbookSecurityBundle:
+    resource: "@CookbookSecurityBundle/Resources/config/routing.yml"
+    prefix:   /
+
+CookbookCoreBundle:
+    resource: "@CookbookCoreBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+AcmeStoreBundle:
+    resource: "@AcmeStoreBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+AcmeHelloBundle:
+    resource: "@AcmeHelloBundle/Resources/config/routing.yml"
+    prefix:   /
+
+# Internal routing configuration to handle ESI
+#_internal:
+#   resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
+#   prefix:   /_internal
+
+
+login:
+    pattern:   /login
+    defaults:  { _controller: CookbookSecurityBundle:Security:login }
+login_check:
+    pattern:   /login_check
+logout:
+    pattern:   /logout
+
+    
+cookbook:
+  pattern: /cookbook/
+  defaults:  { _controller: CookbookCoreBundle:Default:show }
+  
+people:
+  pattern: /people/
+  defaults:  { _controller: CookbookCoreBundle:Admin:index }
+  
+people_edit:
+  pattern: /people/edit/{id}
+  defaults:  { _controller: CookbookCoreBundle:Admin:edit }
+  
+people_new:
+  pattern: /people/new/
+  defaults:  { _controller: CookbookCoreBundle:Admin:new }
+  
+  
+  
+recipe_new:
+  pattern: /recipe/new/
+  defaults:  { _controller: CookbookCoreBundle:Recipe:new }
+  
+recipe_show:
+  pattern: /recipe/show/{id}
+  defaults:  { _controller: CookbookCoreBundle:Recipe:show }
+
+recipe_edit:
+  pattern: /recipe/edit/{id}
+  defaults:  { _controller: CookbookCoreBundle:Recipe:edit }
+  
+  
+  
+categoryrecipe_new:
+  pattern: /categoryrecipe/new/
+  defaults:  { _controller: CookbookCoreBundle:CategoryRecipe:new }
+  
+categoryrecipe_show:
+  pattern: /categoryrecipe/show/{id}
+  defaults:  { _controller: CookbookCoreBundle:CategoryRecipe:show }
+  
+  
+typerecipe_new:
+  pattern: /typerecipe/new/
+  defaults:  { _controller: CookbookCoreBundle:TypeRecipe:new }
+  
+typerecipe_show:
+  pattern: /typerecipe/show/{id}
+  defaults:  { _controller: CookbookCoreBundle:TypeRecipe:show }
+  
+  
+formatrecipe_new:
+  pattern: /formatrecipe/new/
+  defaults:  { _controller: CookbookCoreBundle:FormatRecipe:new }
+  
+formatrecipe_show:
+  pattern: /formatrecipe/show/{id}
+  defaults:  { _controller: CookbookCoreBundle:FormatRecipe:show }
+  
+  
+  
+friend_new:
+  pattern: /friend/new/
+  defaults:  { _controller: CookbookCoreBundle:Friend:new }
+  
+friend_show:
+  pattern: /friend/show/{id}
+  defaults:  { _controller: CookbookCoreBundle:Friend:show }
+  
+  
+event_new:
+  pattern: /event/new/
+  defaults:  { _controller: CookbookCoreBundle:Event:new }
+  
+event_show:
+  pattern: /event/show/{id}
+  defaults:  { _controller: CookbookCoreBundle:Event:show }
+
+event_edit:
+  pattern: /event/edit/{id}
+  defaults:  { _controller: CookbookCoreBundle:Event:edit }
+

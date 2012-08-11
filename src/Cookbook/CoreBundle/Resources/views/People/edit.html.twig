@@ -1,0 +1,14 @@
+ {% extends '::base.html.twig' %}
+
+ {% block body %}
+ <ul> 
+    {% for item in people %}
+                <li><a href="{{ item.id }}">{{ item.name }}</a></li>
+                <ul> 
+                    {% for recipe in item.recipes %}
+                                <li><a href="{{ recipe.id }}">{{ recipe.name }}</a></li>
+                    {% endfor %}
+                    </ul>
+     {% endfor %}
+     </ul>
+ {% endblock %}
