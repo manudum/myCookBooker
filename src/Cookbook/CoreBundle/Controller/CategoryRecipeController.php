@@ -3,6 +3,7 @@
 namespace Cookbook\CoreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response; // retour ajax
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Cookbook\CoreBundle\Entity\CategoryRecipe;
@@ -21,7 +22,7 @@ class CategoryRecipeController extends Controller
 
         // create a task and give it some dummy data for this example
         $categoryRecipe = new CategoryRecipe();
-        $categoryRecipe->setName('Put a name');
+        $categoryRecipe->setName('Nouvelle Catégorie');
 
         $form = $this->createFormBuilder($categoryRecipe)
                 ->add('name', 'text')
@@ -30,16 +31,20 @@ class CategoryRecipeController extends Controller
             $form->bindRequest($request);
 
             if ($form->isValid()) {
-                $people = $this->getDoctrine()
-                ->getRepository('CookbookCoreBundle:People')
-                ->find(1);
+                $people = $this->get('security.context')->getToken()->getUser();
+        
                 $categoryRecipe->setPeople($people);
                 // perform some action, such as saving the task to the database
                 $em = $this->getDoctrine()->getEntityManager();
                 $em->persist($categoryRecipe);
                 $em->flush();
-
-                return $this->redirect($this->generateUrl('cookbook'));
+                if(!$request->isXmlHttpRequest())
+                {
+                    return $this->redirect($this->generateUrl('cookbook'));
+                } else {
+                    $return = json_encode(array('id' => $categoryRecipe->getId(), 'name' =>$categoryRecipe->getName()));
+                    return new Response($return,200,array('Content-Type'=>'application/json'));
+                }
             }
         }
 

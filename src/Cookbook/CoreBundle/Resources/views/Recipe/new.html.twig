@@ -5,14 +5,18 @@
   {% endblock %} 
 {% block body %}
 <script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/recipe.js') }}"></script>
- 
-<div class="header_cookbook">
-<div class="logo_cookbook">My cookbook</div>
-<div class="user_cookbook"></div>
+<script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/jquery-ui-1.8.22.custom.min.js') }}"></script>
 
-</div>  
+
+{% include 'CookbookCoreBundle:Default:header.html.twig' %}
+
+
+{% if action == 'recipe_new' %}
 Nouvelle recette :
-<form action="{{ path('recipe_new') }}" method="post" {{ form_enctype(form) }}>
+{% else %}
+   Recette : {{ form.vars.value.name }}
+{% endif %}
+<form action="" method="post" {{ form_enctype(form) }}>
 
 {{ form_errors(form) }}
 
@@ -31,13 +35,13 @@ Nouvelle recette :
 <div>
     {{ form_label(form.type) }}
     {{ form_errors(form.type) }}
-    {{ form_widget(form.type) }}<a href="{{ path('typerecipe_new') }}">Ajouter un type</a>
+    {{ form_widget(form.type) }}<a href="#" id="add_type">Ajouter un type</a>
 </div>
 
 <div>
     {{ form_label(form.format) }}
     {{ form_errors(form.format) }}
-    {{ form_widget(form.format) }}<a href="{{ path('formatrecipe_new') }}">Ajouter un format</a>
+    {{ form_widget(form.format) }}<a href="#" id="add_format">Ajouter un format</a>
 </div>
 {{ form_rest(form) }}
 
@@ -45,4 +49,6 @@ Nouvelle recette :
 </form>
 
 <div id="new_cat"></div>
+<div id="new_format"></div>
+<div id="new_type"></div>
 {% endblock %}

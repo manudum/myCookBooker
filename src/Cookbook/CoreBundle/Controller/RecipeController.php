@@ -22,12 +22,14 @@ class RecipeController extends Controller
      */
     public function newAction(Request $request) {
 
+
+        $usr= $this->get('security.context')->getToken()->getUser();
         // create a task and give it some dummy data for this example
         $recipe = new Recipe();
         $recipe->setName('Put a name');
-        $form = $this->createForm(new RecipeType, $recipe);
+        $form = $this->createForm(new RecipeType, $recipe, array('user_id' => $usr->getId()));
 
-        $formHandler = new RecipeHandler($form, $this->get('request'), $this->getDoctrine()->getEntityManager());
+        $formHandler = new RecipeHandler($form, $this->get('request'), $this->getDoctrine()->getEntityManager(), $usr);
 
         // On exécute le traitement du formulaire. S'il retourne true, alors le formulaire a bien été traité
         if( $formHandler->process() )
@@ -37,6 +39,8 @@ class RecipeController extends Controller
         
         return $this->render('CookbookCoreBundle:Recipe:new.html.twig', array(
                     'form' => $form->createView(),
+                    'action' => 'recipe_new',
+                    'user' => $usr,
                 ));
     }
     
@@ -45,22 +49,25 @@ class RecipeController extends Controller
      * @Template()
      */
     public function editAction($id) {
-
+        
+        $usr= $this->get('security.context')->getToken()->getUser();
         // create a task and give it some dummy data for this example
         $recipe = $this->getDoctrine()
                 ->getRepository('CookbookCoreBundle:Recipe')
                 ->find($id);
-        $form = $this->createForm(new RecipeType, $recipe);
+        $form = $this->createForm(new RecipeType, $recipe, array('user_id' => $usr->getId()));
 
-        $formHandler = new RecipeHandler($form, $this->get('request'), $this->getDoctrine()->getEntityManager());
-
+        $formHandler = new RecipeHandler($form, $this->get('request'), $this->getDoctrine()->getEntityManager(), $usr);
+        
         // On exécute le traitement du formulaire. S'il retourne true, alors le formulaire a bien été traité
         if( $formHandler->process() )
         {
             return $this->redirect($this->generateUrl('cookbook'));
         }
-        return $this->render('CookbookCoreBundle:Recipe:edit.html.twig', array(
+        return $this->render('CookbookCoreBundle:Recipe:new.html.twig', array(
                     'form' => $form->createView(),
+                    'action' => 'recipe_edit',
+                    'user' => $usr,
                 ));
     }
     
@@ -71,10 +78,13 @@ class RecipeController extends Controller
      */
     public function showAction($id) {
 
+        $usr= $this->get('security.context')->getToken()->getUser();
         $recipe = $this->getDoctrine()
                 ->getRepository('CookbookCoreBundle:Recipe')
                 ->find($id);
-        return $this->render('CookbookCoreBundle:Recipe:show.html.twig', array('recipe' => $recipe));
+        return $this->render('CookbookCoreBundle:Recipe:show.html.twig', 
+                    array('recipe' => $recipe,
+                    'user' => $usr,));
     }
     
     

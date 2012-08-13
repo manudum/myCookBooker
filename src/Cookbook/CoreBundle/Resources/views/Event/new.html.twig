@@ -1,9 +1,40 @@
-<form action="{{ path('event_new') }}" method="post" {{ form_enctype(form) }}>
+ {% extends '::base.html.twig' %}
+
+{% block body %}
+<script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/recipe.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/jquery-ui-1.8.22.custom.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/cookbookcore/michael-multiselect-a07f91c/js/ui.multiselect.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/cookbookcore/michael-multiselect-a07f91c/js/locale/ui-multiselect-fr.js') }}"></script>
+<script type="text/javascript">
+    jQuery(function($){
+   $.datepicker.regional['fr'] = {
+      closeText: 'Fermer',
+      prevText: '<Préc',
+      nextText: 'Suiv>',
+      currentText: 'Courant',
+      monthNames: ['Janvier','Février','Mars','Avril','Mai','Juin',
+      'Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
+      monthNamesShort: ['Jan','Fév','Mar','Avr','Mai','Jun',
+      'Jul','Aoû','Sep','Oct','Nov','Déc'],
+      dayNames: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
+      dayNamesShort: ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],
+      dayNamesMin: ['Di','Lu','Ma','Me','Je','Ve','Sa'],
+      weekHeader: 'Sm',
+      //dateFormat: 'dd/mm/yy',
+                dateFormat: 'dd/mm/yy',
+      firstDay: 1,
+      isRTL: false,
+      showMonthAfterYear: false,
+      yearSuffix: ''};
+   $.datepicker.setDefaults($.datepicker.regional['fr']);
+});
+</script>
+{% include 'CookbookCoreBundle:Default:header.html.twig' %}<form action="{{ path('event_new') }}" method="post" {{ form_enctype(form) }}>
 
 {{ form_errors(form) }}
-
+Nouvelle recette :
 <div>
-    {{ form_label(form.name) }}
+    {{ form_label(form.name, 'Nom') }}
     {{ form_errors(form.name) }}
     {{ form_widget(form.name) }}
 </div>
@@ -12,3 +43,9 @@
 
 <input type="submit" />
 </form>
+<script>
+$( "form input.date" ).datepicker();
+$("#cookbook_corebundle_recipetype_friends").multiselect();
+$("#cookbook_corebundle_recipetype_recipes").multiselect();
+</script>
+{% endblock %}

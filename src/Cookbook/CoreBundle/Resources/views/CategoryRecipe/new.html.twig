@@ -1,5 +1,10 @@
 <form id="cat_form" action="{{ path('categoryrecipe_new') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
+   {{ form_errors(form) }}
 
-    <input type="button" id="cat_new" />
+<div>
+    {{ form_label(form.name,'Nom') }}
+    {{ form_errors(form.name) }}
+    {{ form_widget(form.name) }}
+</div>
+{{ form_rest(form) }}
 </form>

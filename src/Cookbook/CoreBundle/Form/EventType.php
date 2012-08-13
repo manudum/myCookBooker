@@ -11,14 +11,23 @@ class EventType extends AbstractType
     public function buildForm(FormBuilder $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('date')
+            ->add('name','text', array(
+                'attr' => array('placeholder' => 'Nom de la recette'),
+                
+            ))
+            ->add('date', 'date', array(
+                'widget' => 'single_text',
+                'input' => 'datetime',
+                'format' => 'dd/MM/yyyy',
+                'attr' => array('class' => 'date'),
+                ))
             ->add('description', 'textarea', array('required' => false,))
             ->add('friends', 'entity', array(
+                'attr' => array('style' => 'width: 600px;height:100px;'),
                 'class' => 'CookbookCoreBundle:Friend',
-                'query_builder' => function(EntityRepository $repository) {
+                'query_builder' => function(EntityRepository $repository) use($options) {
                 return $repository->createQueryBuilder('q')
-                    ->where('q.people = 1')
+                    ->where('q.people = '.$options['user_id'])
                     ->orderBy('q.name');
                 },
                 'empty_value' => 'Choose an option',
@@ -26,10 +35,11 @@ class EventType extends AbstractType
                 'multiple' => true,
             ))
             ->add('recipes', 'entity', array(
+                'attr' => array('style' => 'width: 600px;height:100px;'),
                 'class' => 'CookbookCoreBundle:Recipe',
-                'query_builder' => function(EntityRepository $repository) {
+                'query_builder' => function(EntityRepository $repository) use($options) {
                 return $repository->createQueryBuilder('q')
-                    ->where('q.people = 1')
+                    ->where('q.people = '.$options['user_id'])
                     ->orderBy('q.name');
                 },
                 'empty_value' => 'Choose an option',
@@ -48,6 +58,7 @@ class EventType extends AbstractType
     {
         return array(
             'data_class' => 'Cookbook\CoreBundle\Entity\Event',
+            'user_id'         => null,
         );
     }
 }

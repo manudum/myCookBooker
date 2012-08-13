@@ -13,12 +13,14 @@ class EventHandler
     protected $form;
     protected $request;
     protected $em;
+    protected $user;
 
-    public function __construct(Form $form, Request $request, EntityManager $em)
+    public function __construct(Form $form, Request $request, EntityManager $em, People $usr)
     {
         $this->form    = $form;
         $this->request = $request;
         $this->em      = $em;
+        $this->user    = $usr;
     }
 
     public function process()
@@ -40,8 +42,7 @@ class EventHandler
 
     public function onSuccess(Event $event)
     {
-        $people = $this->em->find('CookbookCoreBundle:People', 1);
-        $event->setPeople($people);
+        $event->setPeople($this->user);
         $this->em->persist($event);
         $this->em->flush();
     }

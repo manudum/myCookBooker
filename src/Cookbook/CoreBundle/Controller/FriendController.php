@@ -30,9 +30,8 @@ class FriendController extends Controller
             $form->bindRequest($request);
 
             if ($form->isValid()) {
-                $people = $this->getDoctrine()
-                ->getRepository('CookbookCoreBundle:People')
-                ->find(1);
+                $people = $this->get('security.context')->getToken()->getUser();
+        
                 $friend->setPeople($people);
                 // perform some action, such as saving the task to the database
                 $em = $this->getDoctrine()->getEntityManager();

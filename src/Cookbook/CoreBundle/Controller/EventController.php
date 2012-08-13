@@ -23,12 +23,13 @@ class EventController extends Controller
      */
     public function newAction(Request $request) {
 
+        $usr= $this->get('security.context')->getToken()->getUser();
+        
         // create a task and give it some dummy data for this example
         $event = new Event();
-        $event->setName('Put a name');
-        $form = $this->createForm(new EventType, $event);
+        $form = $this->createForm(new EventType, $event, array('user_id' => $usr->getId()));
 
-        $formHandler = new EventHandler($form, $this->get('request'), $this->getDoctrine()->getEntityManager());
+        $formHandler = new EventHandler($form, $this->get('request'), $this->getDoctrine()->getEntityManager(), $usr);
 
         // On exécute le traitement du formulaire. S'il retourne true, alors le formulaire a bien été traité
         if( $formHandler->process() )
@@ -38,6 +39,7 @@ class EventController extends Controller
         
         return $this->render('CookbookCoreBundle:Event:new.html.twig', array(
                     'form' => $form->createView(),
+                    'user' => $usr,
                 ));
     }
     
@@ -47,13 +49,15 @@ class EventController extends Controller
      */
     public function editAction($id) {
 
+        $usr= $this->get('security.context')->getToken()->getUser();
+        
         // create a task and give it some dummy data for this example
         $event = $this->getDoctrine()
                 ->getRepository('CookbookCoreBundle:Event')
                 ->find($id);
-        $form = $this->createForm(new EventType, $event);
+        $form = $this->createForm(new EventType, $event, array('user_id' => $usr->getId()));
 
-        $formHandler = new EventHandler($form, $this->get('request'), $this->getDoctrine()->getEntityManager());
+        $formHandler = new EventHandler($form, $this->get('request'), $this->getDoctrine()->getEntityManager(), $usr);
 
         // On exécute le traitement du formulaire. S'il retourne true, alors le formulaire a bien été traité
         if( $formHandler->process() )

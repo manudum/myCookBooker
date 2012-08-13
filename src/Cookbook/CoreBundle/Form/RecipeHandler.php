@@ -13,12 +13,14 @@ class RecipeHandler
     protected $form;
     protected $request;
     protected $em;
+    protected $user;
 
-    public function __construct(Form $form, Request $request, EntityManager $em)
+    public function __construct(Form $form, Request $request, EntityManager $em, People $usr)
     {
         $this->form    = $form;
         $this->request = $request;
         $this->em      = $em;
+        $this->user    = $usr;
     }
 
     public function process()
@@ -40,9 +42,7 @@ class RecipeHandler
 
     public function onSuccess(Recipe $recipe)
     {
-       
-        $people = $this->em->find('CookbookCoreBundle:People', 1);
-        $recipe->setPeople($people);
+        $recipe->setPeople($this->user);
         $this->em->persist($recipe);
         $this->em->flush();
     }

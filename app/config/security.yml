@@ -24,9 +24,10 @@ security:
             form_login:
                 login_path: /login
                 check_path: /login_check
+                default_target_path: /cookbook
             logout:
                 path:   /logout
-                target: /login/
+                target: /cookbook/
             #anonymous: ~
             #http_basic:
             #    realm: "Secured Demo Area"

@@ -10,13 +10,13 @@ class RecipeType extends AbstractType
 {
     public function buildForm(FormBuilder $builder, array $options)
     {
-        $builder
+       $builder
             ->add('name')
             ->add('type', 'entity', array(
                     'class' => 'CookbookCoreBundle:TypeRecipe',
-                    'query_builder' => function(EntityRepository $repository) {
+                    'query_builder' => function(EntityRepository $repository) use($options) {
                     return $repository->createQueryBuilder('q')
-                        ->where('q.people = 1')
+                        ->where('q.people = '.$options['user_id'])
                         ->orderBy('q.name');
                     },
                     'empty_value' => 'Choose an option',
@@ -24,9 +24,9 @@ class RecipeType extends AbstractType
                 ))
             ->add('category', 'entity', array(
                     'class' => 'CookbookCoreBundle:CategoryRecipe',
-                    'query_builder' => function(EntityRepository $repository) {
+                    'query_builder' => function(EntityRepository $repository) use($options){
                     return $repository->createQueryBuilder('q')
-                        ->where('q.people = 1')
+                        ->where('q.people = '.$options['user_id'])
                         ->orderBy('q.name');
                     },
                     'empty_value' => 'Choose an option',
@@ -34,9 +34,9 @@ class RecipeType extends AbstractType
                 ))
             ->add('format', 'entity', array(
                     'class' => 'CookbookCoreBundle:FormatRecipe',
-                    'query_builder' => function(EntityRepository $repository) {
+                    'query_builder' => function(EntityRepository $repository) use($options){
                     return $repository->createQueryBuilder('q')
-                        ->where('q.people = 1')
+                        ->where('q.people = '.$options['user_id'])
                         ->orderBy('q.name');
                     },
                     'empty_value' => 'Choose an option',
@@ -55,6 +55,7 @@ class RecipeType extends AbstractType
     {
         return array(
             'data_class' => 'Cookbook\CoreBundle\Entity\Recipe',
+            'user_id'         => null,
         );
     }
 }

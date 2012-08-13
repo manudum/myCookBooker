@@ -7,7 +7,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Cookbook\CoreBundle\Entity\People;
 use Cookbook\CoreBundle\Entity\Recipe;
-use Cookbook\CoreBundle\Entity\PeopleFriend;
 use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
@@ -20,13 +19,10 @@ class DefaultController extends Controller
      */
     public function showAction()
     {
-        $id =1; // à lire en session
-        $people = $this->getDoctrine()
-        ->getRepository('CookbookCoreBundle:People')
-        ->find($id);
+        $user = $this->get('security.context')->getToken()->getUser();
         //var_dump($people);
        
-        return $this->render('CookbookCoreBundle:Default:index.html.twig', array('people' => $people));
+        return $this->render('CookbookCoreBundle:Default:index.html.twig', array('user' => $user));
             
     }
     //plus utilisé
@@ -44,9 +40,8 @@ class DefaultController extends Controller
 
             if ($form->isValid()) {
                 // perform some action, such as saving the task to the database
-                $people = $this->getDoctrine()
-                ->getRepository('CookbookCoreBundle:People')
-                ->find(1);
+                $people = $this->get('security.context')->getToken()->getUser();
+        
                 $peopleFriend->setPeople($people);
                 $em = $this->getDoctrine()->getEntityManager();
                 $em->persist($peopleFriend);
