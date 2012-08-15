@@ -7,6 +7,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Cookbook\CoreBundle\Entity\Recipe;
 use Cookbook\CoreBundle\Entity\People;
+
+use Cookbook\CoreBundle\Entity\CategoryRecipe;
 use Cookbook\CoreBundle\Entity\Event;
 use Cookbook\CoreBundle\Form\EventType;
 use Cookbook\CoreBundle\Form\EventHandler;
@@ -37,9 +39,25 @@ class EventController extends Controller
             return $this->redirect($this->generateUrl('cookbook'));
         }
         
+        $categoryRecipe = $this->getDoctrine()
+                ->getRepository('CookbookCoreBundle:CategoryRecipe')
+                ->findByPeople($usr->getId());
+        
+        $typeRecipe = $this->getDoctrine()
+                ->getRepository('CookbookCoreBundle:TypeRecipe')
+                ->findByPeople($usr->getId());
+        
+        $formatRecipe = $this->getDoctrine()
+                ->getRepository('CookbookCoreBundle:FormatRecipe')
+                ->findByPeople($usr->getId());
+        
         return $this->render('CookbookCoreBundle:Event:new.html.twig', array(
-                    'form' => $form->createView(),
-                    'user' => $usr,
+                    'form'          => $form->createView(),
+                    'user'          => $usr,
+                    'action'        => 'event_new',
+                    'categories'    => $categoryRecipe,
+                    'types'          => $typeRecipe,
+                    'formats'        => $formatRecipe,
                 ));
     }
     
@@ -64,8 +82,10 @@ class EventController extends Controller
         {
             return $this->redirect($this->generateUrl('cookbook'));
         }
-        return $this->render('CookbookCoreBundle:Event:edit.html.twig', array(
+        return $this->render('CookbookCoreBundle:Event:new.html.twig', array(
                     'form' => $form->createView(),
+                    'user' => $usr,
+                    'action' => 'event_edit',
                 ));
     }
     
@@ -76,10 +96,12 @@ class EventController extends Controller
      */
     public function showAction($id) {
 
+        $usr= $this->get('security.context')->getToken()->getUser();
+        
         $event = $this->getDoctrine()
                 ->getRepository('CookbookCoreBundle:Event')
                 ->find($id);
-        return $this->render('CookbookCoreBundle:Event:show.html.twig', array('event' => $event));
+        return $this->render('CookbookCoreBundle:Event:show.html.twig', array('event' => $event, 'user' => $usr));
     }
     
     

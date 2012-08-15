@@ -3,6 +3,7 @@
 namespace Cookbook\CoreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Cookbook\CoreBundle\Entity\Recipe;
@@ -11,6 +12,8 @@ use Cookbook\CoreBundle\Form\RecipeType;
 use Cookbook\CoreBundle\Form\RecipeHandler;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityRepository;
+
+use Symfony\Component\HttpFoundation\Response;
 
 class RecipeController extends Controller
 {
@@ -26,7 +29,6 @@ class RecipeController extends Controller
         $usr= $this->get('security.context')->getToken()->getUser();
         // create a task and give it some dummy data for this example
         $recipe = new Recipe();
-        $recipe->setName('Put a name');
         $form = $this->createForm(new RecipeType, $recipe, array('user_id' => $usr->getId()));
 
         $formHandler = new RecipeHandler($form, $this->get('request'), $this->getDoctrine()->getEntityManager(), $usr);
@@ -85,6 +87,33 @@ class RecipeController extends Controller
         return $this->render('CookbookCoreBundle:Recipe:show.html.twig', 
                     array('recipe' => $recipe,
                     'user' => $usr,));
+    }
+    
+    /**
+     * @Route("/recipe/get")
+     * @Template()
+     */
+    public function getAction(Request $request) {
+
+        $usr= $this->get('security.context')->getToken()->getUser();
+       
+        $filter = $request->request->all();
+        $filter= array_filter($filter);
+        $recipes = $this->getDoctrine()
+                ->getRepository('CookbookCoreBundle:Recipe')
+                ->findBy(array_merge($filter, array('people' => $usr->getId())));
+        
+        $jsons = array();
+        foreach ($recipes as $recipe) {
+            $json = $recipe->__toArray();
+            $jsons[]=$json;
+        }
+        
+        
+        
+        $response = new Response(json_encode($jsons));
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
     }
     
     

@@ -11,7 +11,9 @@ class RecipeType extends AbstractType
     public function buildForm(FormBuilder $builder, array $options)
     {
        $builder
-            ->add('name')
+            ->add('name','text', array(
+                'attr' => array('placeholder' => 'Nouvelle recette'),
+            ))
             ->add('type', 'entity', array(
                     'class' => 'CookbookCoreBundle:TypeRecipe',
                     'query_builder' => function(EntityRepository $repository) use($options) {

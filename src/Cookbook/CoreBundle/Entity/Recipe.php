@@ -70,9 +70,26 @@ class Recipe
     
     public function __toString()
     {
-        return $this->name;
+        return $this->category.' - '.$this->name;
     }
     
+    public function __toArray()
+    {
+       return array('id'=>$this->getId(),'name' => $this->getName());
+    }
+    
+    public function serialize()
+    {
+       return serialize(array('id'=>$this->getId(),'name' => $this->getName()));
+    }
+ 
+    public function unserialize($data)
+    {
+         list(
+           $this->id,
+           $this->name,
+       ) = unserialize($data);
+    }
     
     protected $wines;
     

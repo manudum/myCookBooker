@@ -1,7 +1,7 @@
  {% extends '::base.html.twig' %}
 
 {% block body %}
-<script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/recipe.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/event.js') }}"></script>
 <script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/jquery-ui-1.8.22.custom.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('bundles/cookbookcore/michael-multiselect-a07f91c/js/ui.multiselect.js') }}"></script>
 <script type="text/javascript" src="{{ asset('bundles/cookbookcore/michael-multiselect-a07f91c/js/locale/ui-multiselect-fr.js') }}"></script>
@@ -32,20 +32,65 @@
 {% include 'CookbookCoreBundle:Default:header.html.twig' %}<form action="{{ path('event_new') }}" method="post" {{ form_enctype(form) }}>
 
 {{ form_errors(form) }}
-Nouvelle recette :
+
+{% if action == 'event_new' %}
+Nouvel événement :
+{% else %}
+   Evénement : {{ form.vars.value.name }}
+{% endif %}
+<form action="" method="post" {{ form_enctype(form) }}>
+
+
 <div>
     {{ form_label(form.name, 'Nom') }}
     {{ form_errors(form.name) }}
     {{ form_widget(form.name) }}
 </div>
 
+<div>
+    {{ form_label(form.date) }}
+    {{ form_errors(form.date) }}
+    {{ form_widget(form.date) }}
+</div>
+
+<div>
+    {{ form_label(form.description) }}
+    {{ form_errors(form.description) }}
+    {{ form_widget(form.description) }}
+</div>
+
+<div>
+    {{ form_label(form.friends) }}
+    {{ form_errors(form.friends) }}
+    {{ form_widget(form.friends) }}
+</div>
+
+<div>
+    {{ form_label(form.recipes) }}
+<br />
+Catégorie :
+            <input type="radio" id="category" name="category" value="" />Tous
+ {% for category in categories %}
+            <input type="radio" id="category" name="category" value="{{ category.id }}" />{{ category.name }}
+{% endfor %}
+<br />
+Type :
+            <input type="radio" id="type" name="type" value="" />Tous
+ {% for type in types %}
+            <input type="radio" id="type" name="type" value="{{ type.id }}" />{{ type.name }}
+{% endfor %}
+<br />
+Format :
+            <input type="radio" id="format" name="format" value="" />Tous
+ {% for format in formats %}
+            <input type="radio" id="format" name="format" value="{{ format.id }}" />{{ format.name }}
+{% endfor %}
+    {{ form_errors(form.recipes) }}
+    {{ form_widget(form.recipes) }}
+</div>
+
 {{ form_rest(form) }}
 
 <input type="submit" />
 </form>
-<script>
-$( "form input.date" ).datepicker();
-$("#cookbook_corebundle_recipetype_friends").multiselect();
-$("#cookbook_corebundle_recipetype_recipes").multiselect();
-</script>
 {% endblock %}

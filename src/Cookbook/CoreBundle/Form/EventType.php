@@ -12,8 +12,7 @@ class EventType extends AbstractType
     {
         $builder
             ->add('name','text', array(
-                'attr' => array('placeholder' => 'Nom de la recette'),
-                
+                'attr' => array('placeholder' => 'Nouvel événement'),
             ))
             ->add('date', 'date', array(
                 'widget' => 'single_text',
@@ -40,6 +39,7 @@ class EventType extends AbstractType
                 'query_builder' => function(EntityRepository $repository) use($options) {
                 return $repository->createQueryBuilder('q')
                     ->where('q.people = '.$options['user_id'])
+                    ->orderBy('q.category')
                     ->orderBy('q.name');
                 },
                 'empty_value' => 'Choose an option',

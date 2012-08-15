@@ -2,9 +2,11 @@
 
  {% block body %}
 
+{% include 'CookbookCoreBundle:Default:header.html.twig' %}
+
 <div class="header_friend">Ami : {{ friend.name }}
 </div>
-invité :
+Evénements :
 <ul> 
 {% for event in friend.events %}
             <li><a href="{{ path('event_show', { 'id': event.id }) }}">{{ event.name }}</a> le {{ event.date|date("d/m/Y") }}</li>

@@ -137,6 +137,30 @@ $.widget("ui.multiselect", {
 
 		$.Widget.prototype.destroy.apply(this, arguments);
 	},
+        refreshAvailableList: function(json) {
+		this.availableList.children('.ui-element').remove();
+		this.count = 0;
+
+		var that = this;
+		var items = json.map(function(i) {
+	      
+              
+              var item = that._getJsonNode(i).appendTo(that.availableList).show();
+
+			that._applyItemState(item, false);
+			item.data('idx', i);
+			return item[0];
+    });
+		
+		// update count
+		this._updateCount();
+		that._filter.apply(this.availableContainer.find('input.search'), [that.availableList]);
+  },
+  _getJsonNode: function(option) {
+		var node = $('<li class="ui-state-default ui-element" title="'+option.name+'"><span class="ui-icon"/>'+option.name+'<a href="#" class="action"><span class="ui-corner-all ui-icon"/></a></li>').hide();
+		node.data('optionLink', $("#"+this.id+"[value='"+option.id+"']"));
+		return node;
+	},
 	_populateLists: function(options) {
 		this.selectedList.children('.ui-element').remove();
 		this.availableList.children('.ui-element').remove();

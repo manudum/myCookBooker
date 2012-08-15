@@ -3,6 +3,7 @@
 namespace Cookbook\CoreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Cookbook\CoreBundle\Entity\People;
@@ -20,11 +21,14 @@ class FriendController extends Controller
     public function newAction(Request $request) {
 
         // create a task and give it some dummy data for this example
+        $usr= $this->get('security.context')->getToken()->getUser();
+        
         $friend = new Friend();
-        $friend->setName('Put a name');
 
         $form = $this->createFormBuilder($friend)
-                ->add('name', 'text')
+                ->add('name','text', array(
+                'attr' => array('placeholder' => 'Nouvel ami'),
+            ))
                 ->getForm();
         if ($request->getMethod() == 'POST') {
             $form->bindRequest($request);
@@ -44,6 +48,7 @@ class FriendController extends Controller
 
         return $this->render('CookbookCoreBundle:Friend:new.html.twig', array(
                     'form' => $form->createView(),
+                    'user' => $usr
                 ));
     }
     
@@ -53,11 +58,13 @@ class FriendController extends Controller
      * @Template()
      */
     public function showAction($id) {
-
+        
+        $usr= $this->get('security.context')->getToken()->getUser();
+        
         $friend = $this->getDoctrine()
                 ->getRepository('CookbookCoreBundle:Friend')
                 ->find($id);
-        return $this->render('CookbookCoreBundle:Friend:show.html.twig', array('friend' => $friend));
+        return $this->render('CookbookCoreBundle:Friend:show.html.twig', array('friend' => $friend, 'user' => $usr));
     }
     
     

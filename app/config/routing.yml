@@ -61,6 +61,11 @@ recipe_edit:
   pattern: /recipe/edit/{id}
   defaults:  { _controller: CookbookCoreBundle:Recipe:edit }
   
+recipe_get:
+  pattern: /recipe/get/
+  defaults:  { _controller: CookbookCoreBundle:Recipe:get }
+  
+  
   
   
 categoryrecipe_new:
