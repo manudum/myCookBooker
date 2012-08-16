@@ -43,6 +43,10 @@ people_edit:
   pattern: /people/edit/{id}
   defaults:  { _controller: CookbookCoreBundle:Admin:edit }
   
+people_show:
+  pattern: /people/show/{id}
+  defaults:  { _controller: CookbookCoreBundle:Admin:show }
+  
 people_new:
   pattern: /people/new/
   defaults:  { _controller: CookbookCoreBundle:Admin:new }

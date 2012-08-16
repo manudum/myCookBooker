@@ -22,10 +22,11 @@ class FormatRecipeController extends Controller
 
         // create a task and give it some dummy data for this example
         $formatRecipe = new FormatRecipe();
-        $formatRecipe->setName('Put a name');
 
         $form = $this->createFormBuilder($formatRecipe)
-                ->add('name', 'text')
+                ->add('name','text', array(
+                'attr' => array('placeholder' => 'Nouveau format'),
+                ))
                 ->getForm();
         if ($request->getMethod() == 'POST') {
             $form->bindRequest($request);

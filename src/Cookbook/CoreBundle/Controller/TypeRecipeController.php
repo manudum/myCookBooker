@@ -22,10 +22,11 @@ class TypeRecipeController extends Controller
 
         // create a task and give it some dummy data for this example
         $typeRecipe = new TypeRecipe();
-        $typeRecipe->setName('Put a name');
 
         $form = $this->createFormBuilder($typeRecipe)
-                ->add('name', 'text')
+                ->add('name','text', array(
+                'attr' => array('placeholder' => 'Nouveau type'),
+                ))
                 ->getForm();
         if ($request->getMethod() == 'POST') {
             $form->bindRequest($request);

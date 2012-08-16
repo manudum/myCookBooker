@@ -4,8 +4,15 @@ $(document).ready(function() {
     $( "form input.date" ).datepicker();
     $("#cookbook_corebundle_recipetype_friends").multiselect();
     eventsList = $("#cookbook_corebundle_recipetype_recipes").multiselect();
-    $('input[type=radio]').change(refreshRecipes
-    );
+    $('input[type=radio]').change(refreshRecipes);
+    $.browser.mozilla && $('input[type=radio]').each( function() {
+	this.checked = this.defaultChecked;
+    });
+    $('#categories').buttonset();
+    $('#types').buttonset();
+    $('#formats').buttonset();
+    $( "input:submit, button").button();
+    
 
 });
 

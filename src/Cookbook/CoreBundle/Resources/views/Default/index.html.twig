@@ -4,8 +4,34 @@
 
 {% include 'CookbookCoreBundle:Default:header.html.twig' %}
 
+<div class="friends">
+<h1>Mes amis</h1>
+<a class="lienAdd" href="{{ path('friend_new') }}">Ajouter un ami</a>
+                <ul id="listFriends"> 
+                    {% for friend in user.friends %}
+                                <li><a href="{{ path('friend_show', { 'id': friend.id }) }}">{{ friend.name }}</a></li>
+                    {% endfor %}
+                    </ul>
+ </div>
+
+<div class="events">
+<h1>Mes événements</h1>
+<a class="lienAdd" href="{{ path('event_new') }}">Ajouter un événements</a>
+    <ul id="listEvents"> 
+        {% for event in user.events %}
+                    <li>Le <b>{{ event.date|date("d/m/Y") }}</b> : <a href="{{ path('event_show', { 'id': event.id }) }}">{{ event.name }}</a>
+                        <br />{{ event.description }}
+                        <br />avec {% for friend in event.friends %}
+                                <a href="{{ path('friend_show', { 'id': friend.id }) }}">{{ friend.name }}</a>
+                                {% endfor %}
+                    </li>
+        {% endfor %}
+        </ul>
+<a href="{{ path('event_new') }}">Ajouter un evenement</a>
+ </div>
+
  <div class="recipes">
-Vos recettes :<br />
+<h1>Mes recettes</h1>
 <a href="{{ path('recipe_new') }}">Ajouter une recette</a>
                 <ul> 
                     {% for recipe in user.recipes %}
@@ -14,24 +40,6 @@ Vos recettes :<br />
                     </ul>
 <a href="{{ path('recipe_new') }}">Ajouter une recette</a>
  </div>
- <div class="friends">
-Vos amis :<br />
-<a href="{{ path('friend_new') }}">Ajouter un ami</a>
-                <ul> 
-                    {% for friend in user.friends %}
-                                <li><a href="{{ path('friend_show', { 'id': friend.id }) }}">{{ friend.name }}</a></li>
-                    {% endfor %}
-                    </ul>
-<a href="{{ path('friend_new') }}">Ajouter un ami</a>
- </div>
-<div class="events">
-Vos evenements :<br />
-<a href="{{ path('event_new') }}">Ajouter un evenement</a>
-                <ul> 
-                    {% for event in user.events %}
-                                <li>le {{ event.date|date("d/m/Y") }} : <a href="{{ path('event_show', { 'id': event.id }) }}">{{ event.name }}</a></li>
-                    {% endfor %}
-                    </ul>
-<a href="{{ path('event_new') }}">Ajouter un evenement</a>
- </div>
+ 
+
   {% endblock %}

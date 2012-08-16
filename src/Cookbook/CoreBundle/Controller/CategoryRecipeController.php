@@ -22,10 +22,11 @@ class CategoryRecipeController extends Controller
 
         // create a task and give it some dummy data for this example
         $categoryRecipe = new CategoryRecipe();
-        $categoryRecipe->setName('Nouvelle Catégorie');
 
         $form = $this->createFormBuilder($categoryRecipe)
-                ->add('name', 'text')
+                ->add('name','text', array(
+                'attr' => array('placeholder' => 'Nouvelle catégorie'),
+                ))
                 ->getForm();
         if ($request->getMethod() == 'POST') {
             $form->bindRequest($request);

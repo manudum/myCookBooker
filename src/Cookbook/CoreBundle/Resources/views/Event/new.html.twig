@@ -1,10 +1,11 @@
  {% extends '::base.html.twig' %}
 
 {% block body %}
-<script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/event.js') }}"></script>
 <script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/jquery-ui-1.8.22.custom.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('bundles/cookbookcore/michael-multiselect-a07f91c/js/ui.multiselect.js') }}"></script>
 <script type="text/javascript" src="{{ asset('bundles/cookbookcore/michael-multiselect-a07f91c/js/locale/ui-multiselect-fr.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/event.js') }}"></script>
+
 <script type="text/javascript">
     jQuery(function($){
    $.datepicker.regional['fr'] = {
@@ -29,14 +30,14 @@
    $.datepicker.setDefaults($.datepicker.regional['fr']);
 });
 </script>
-{% include 'CookbookCoreBundle:Default:header.html.twig' %}<form action="{{ path('event_new') }}" method="post" {{ form_enctype(form) }}>
+{% include 'CookbookCoreBundle:Default:header.html.twig' %}
 
 {{ form_errors(form) }}
 
 {% if action == 'event_new' %}
-Nouvel événement :
+<h1>Nouvel événement</h1>
 {% else %}
-   Evénement : {{ form.vars.value.name }}
+<h1>Evénement : {{ form.vars.value.name }}</h1>
 {% endif %}
 <form action="" method="post" {{ form_enctype(form) }}>
 
@@ -60,31 +61,37 @@ Nouvel événement :
 </div>
 
 <div>
-    {{ form_label(form.friends) }}
+ <h3>    {{ form_label(form.friends) }} </h3> 
     {{ form_errors(form.friends) }}
     {{ form_widget(form.friends) }}
 </div>
 
-<div>
-    {{ form_label(form.recipes) }}
-<br />
-Catégorie :
-            <input type="radio" id="category" name="category" value="" />Tous
+<div id="recipes">
+<h3>    {{ form_label(form.recipes) }} </h3>
+
+
+<div id="categories">
+  <label class="libFiltre"> Catégorie :</label>         <input type="radio" id="category0" name="category" checked="checked" value="" /><label for="category0">Tous</label>
  {% for category in categories %}
-            <input type="radio" id="category" name="category" value="{{ category.id }}" />{{ category.name }}
+            <input type="radio" id="category{{ category.id }}" name="category" value="{{ category.id }}" /><label for="category{{ category.id }}">{{ category.name }}</label>
 {% endfor %}
+</div>
 <br />
-Type :
-            <input type="radio" id="type" name="type" value="" />Tous
+
+<div id="types">
+  <label class="libFiltre">Type :    </label>       <input type="radio" id="type" name="type" checked="checked" value="" /><label for="type">Tous</label>
  {% for type in types %}
-            <input type="radio" id="type" name="type" value="{{ type.id }}" />{{ type.name }}
+            <input type="radio" id="type{{ type.id }}" name="type" value="{{ type.id }}" /><label for="type{{ type.id }}">{{ type.name }}</label>
 {% endfor %}
+</div>
 <br />
-Format :
-            <input type="radio" id="format" name="format" value="" />Tous
+
+<div id="formats">
+  <label class="libFiltre"> Format :   </label>       <input type="radio" id="format" name="format" checked="checked" value="" /><label for="format">Tous</label>
  {% for format in formats %}
-            <input type="radio" id="format" name="format" value="{{ format.id }}" />{{ format.name }}
+            <input type="radio" id="format{{ format.id }}" name="format" value="{{ format.id }}" /><label for="format{{ format.id }}">{{ format.name }}</label>
 {% endfor %}
+</div>
     {{ form_errors(form.recipes) }}
     {{ form_widget(form.recipes) }}
 </div>

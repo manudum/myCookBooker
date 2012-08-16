@@ -82,10 +82,26 @@ class EventController extends Controller
         {
             return $this->redirect($this->generateUrl('cookbook'));
         }
+        
+        $categoryRecipe = $this->getDoctrine()
+                ->getRepository('CookbookCoreBundle:CategoryRecipe')
+                ->findByPeople($usr->getId());
+        
+        $typeRecipe = $this->getDoctrine()
+                ->getRepository('CookbookCoreBundle:TypeRecipe')
+                ->findByPeople($usr->getId());
+        
+        $formatRecipe = $this->getDoctrine()
+                ->getRepository('CookbookCoreBundle:FormatRecipe')
+                ->findByPeople($usr->getId());
+        
         return $this->render('CookbookCoreBundle:Event:new.html.twig', array(
                     'form' => $form->createView(),
                     'user' => $usr,
                     'action' => 'event_edit',
+                    'categories'    => $categoryRecipe,
+                    'types'          => $typeRecipe,
+                    'formats'        => $formatRecipe,
                 ));
     }
     

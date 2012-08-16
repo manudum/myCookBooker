@@ -6,45 +6,89 @@
         Purpose of the stylesheet follows.
 */
 
+a{
+    color:#1db8fe;
+    
+    text-decoration:none;
+    
+}
+
 .header_cookbook { 
-    background-color : #FAF7F7;
-    border: 1px solid red;
+    background-color : #000;
     display: block;
     height: 30px;
 }
 
-.logo_cookbook { 
+#logo_cookbook a{
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration:none;
+	border:0;
+	margin : 0;
+	padding : 0;
+    
+}
+
+#logo_cookbook { 
     float:left;
+    
+        padding-top: 2px;
+        padding-left: 2px;
 }
 
 .user_cookbook { 
     float: right;
+    padding-top: 5px;
+    padding-right: 2px;
+}
+
+.user_cookbook a { 
+    color: #fff;
+    text-decoration:none;
 }
 
 .recipes{ 
     background-color : #FAF7F7;
-    border: 1px solid red;
     display: block;
-    width:200px;
+    width:20%;
     float:left;
 }
 
 
 .friends{ 
     background-color : #FAF7F7;
-    border: 1px solid red;
     display: block;
-    width:200px;
+    width:20%;
     float:left;
 }
 
 .events{ 
-    background-color : #FAF7F7;
-    border: 1px solid red;
+    background-color : #fff;
     display: block;
-    width:400px;
+    width:60%;
     float:left;
 }
 
+.libFiltre{
+    width:100px;
+    display: inline-block;
+}
+
+.lienAdd{
+    float:right;
+}
 
 
+ul#listFriends {font-family:helvetica,arial,sans-serif;margin:0;padding:0;width:95%;clear:both;}
+ul#listFriends li {margin:0;padding:0;list-style:none;margin:0 0 0 0;}
+ul#listFriends li a {font-weight:bold;text-decoration:none;display:block;padding:0.3em;
+      border-bottom:0.4em solid #cfcfcf;color:black;background:#FAF7F7;}
+ul#listFriends li a:hover {border-bottom:0.4em solid #000;background-color:#fff;}
+
+ul#listEvents {font-family:helvetica,arial,sans-serif;margin:0;padding:0;width:95%;clear:both;}
+ul#listEvents li {
+        margin:0;padding:2px;list-style:none;margin:5px 0 0 5px;border-bottom: 1px solid black; width:100%;
+        min-height: 30px;
+        background-color: #fff;
+                }

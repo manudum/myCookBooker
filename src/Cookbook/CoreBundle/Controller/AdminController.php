@@ -34,6 +34,17 @@ class AdminController extends Controller {
         var_dump($people);
         return $this->render('CookbookCoreBundle:People:edit.html.twig', array('people' => $people));
     }
+    
+    /**
+     * @Route("/people/show/{id}")
+     * @Template()
+     */
+    public function showAction($id) {
+
+        $usr= $this->get('security.context')->getToken()->getUser();
+        
+        return $this->render('CookbookCoreBundle:People:show.html.twig', array('user' => $usr));
+    }
 
     /**
      * @Route("/people/new")
