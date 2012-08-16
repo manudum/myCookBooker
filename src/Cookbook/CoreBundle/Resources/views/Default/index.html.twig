@@ -4,14 +4,15 @@
 
 {% include 'CookbookCoreBundle:Default:header.html.twig' %}
 
-<div class="friends">
-<h1>Mes amis</h1>
-<a class="lienAdd" href="{{ path('friend_new') }}">Ajouter un ami</a>
-                <ul id="listFriends"> 
-                    {% for friend in user.friends %}
-                                <li><a href="{{ path('friend_show', { 'id': friend.id }) }}">{{ friend.name }}</a></li>
+<div class="recipes">
+<h1>Mes recettes</h1>
+<a href="{{ path('recipe_new') }}">Ajouter une recette</a>
+                <ul> 
+                    {% for recipe in user.recipes %}
+                                <li><a href="{{ path('recipe_show', { 'id': recipe.id }) }}">{{ recipe.name }}</a></li>
                     {% endfor %}
                     </ul>
+<a href="{{ path('recipe_new') }}">Ajouter une recette</a>
  </div>
 
 <div class="events">
@@ -29,17 +30,16 @@
         </ul>
 <a href="{{ path('event_new') }}">Ajouter un evenement</a>
  </div>
-
- <div class="recipes">
-<h1>Mes recettes</h1>
-<a href="{{ path('recipe_new') }}">Ajouter une recette</a>
-                <ul> 
-                    {% for recipe in user.recipes %}
-                                <li><a href="{{ path('recipe_show', { 'id': recipe.id }) }}">{{ recipe.name }}</a></li>
+<div class="friends">
+<h1>Mes amis</h1>
+<a class="lienAdd" href="{{ path('friend_new') }}"><img src="{{ asset('bundles/cookbookcore/images/plus.gif') }}" border="0" /></a>
+                <ul id="listFriends"> 
+                    {% for friend in user.friends %}
+                                <li><a href="{{ path('friend_show', { 'id': friend.id }) }}">{{ friend.name }}</a></li>
                     {% endfor %}
                     </ul>
-<a href="{{ path('recipe_new') }}">Ajouter une recette</a>
  </div>
+ 
  
 
   {% endblock %}

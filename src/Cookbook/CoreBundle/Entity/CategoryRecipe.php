@@ -4,6 +4,7 @@ namespace Cookbook\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * Cookbook\CoreBundle\Entity\Category
  *

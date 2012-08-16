@@ -7,6 +7,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Cookbook\CoreBundle\Entity\People;
 use Cookbook\CoreBundle\Entity\Recipe;
+
+use Cookbook\CoreBundle\Entity\CategoryRecipe;
 use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
@@ -21,7 +23,17 @@ class DefaultController extends Controller
     {
         $user = $this->get('security.context')->getToken()->getUser();
         //var_dump($people);
-       
+       /*
+        $category = $this->getDoctrine()
+                ->getRepository('CookbookCoreBundle:CategoryRecipe')
+                ->createQueryBuilder('c')->select('c.name, COUNT(c.name) as catCount')
+                ->leftJoin('c.recipes', 'r')
+                ->where('c.people = '.$user->getId())
+                ->groupBy('c.name')->getQuery()->getScalarResult();
+        
+        var_dump($category);*/
+    
+        
         return $this->render('CookbookCoreBundle:Default:index.html.twig', array('user' => $user));
             
     }
