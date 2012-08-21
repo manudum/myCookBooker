@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 
 /**
- * Cookbook\CoreBundle\Entity\Category
+ * Cookbook\CoreBundle\Entity\CategoryRecipe
  *
  * @ORM\Table()
  * @ORM\Entity
@@ -30,12 +30,12 @@ class CategoryRecipe
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="Recipe", mappedBy="categoryrecipe")
+     * @ORM\OneToMany(targetEntity="Recipe", mappedBy="category")
      */
     protected $recipes;
     
     /**
-     * @ORM\ManyToOne(targetEntity="People", inversedBy="categories")
+     * @ORM\ManyToOne(targetEntity="People", inversedBy="categoryrecipes")
      * @ORM\JoinColumn(name="people_id", referencedColumnName="id")
      */
     protected $people;

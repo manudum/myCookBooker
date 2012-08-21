@@ -26,7 +26,7 @@ class DefaultController extends Controller
        
         $category = $this->getDoctrine()
                 ->getRepository('CookbookCoreBundle:CategoryRecipe')
-                ->findAll();
+                ->findBy(array('people' => $user->getId()));
            /*     ->createQueryBuilder('c')->select('c.name, COUNT(c.name) as catCount')
                 ->leftJoin('c.recipes', 'r')
                 ->where('c.people = '.$user->getId())

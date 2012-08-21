@@ -5,7 +5,7 @@ namespace Cookbook\CoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Cookbook\CoreBundle\Entity\Category
+ * Cookbook\CoreBundle\Entity\TypeRecipe
  *
  * @ORM\Table()
  * @ORM\Entity
@@ -29,12 +29,12 @@ class TypeRecipe
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="Recipe", mappedBy="typerecipe")
+     * @ORM\OneToMany(targetEntity="Recipe", mappedBy="type")
      */
     protected $recipes;
     
     /**
-     * @ORM\ManyToOne(targetEntity="People", inversedBy="types")
+     * @ORM\ManyToOne(targetEntity="People", inversedBy="typerecipes")
      * @ORM\JoinColumn(name="people_id", referencedColumnName="id")
      */
     protected $people;

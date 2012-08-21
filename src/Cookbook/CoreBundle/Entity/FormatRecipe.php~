@@ -5,7 +5,7 @@ namespace Cookbook\CoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Cookbook\CoreBundle\Entity\Category
+ * Cookbook\CoreBundle\Entity\FormatRecipe
  *
  * @ORM\Table()
  * @ORM\Entity
@@ -34,7 +34,7 @@ class FormatRecipe
     protected $recipes;
     
     /**
-     * @ORM\ManyToOne(targetEntity="People", inversedBy="formats")
+     * @ORM\ManyToOne(targetEntity="People", inversedBy="formatrecipes")
      * @ORM\JoinColumn(name="people_id", referencedColumnName="id")
      */
     protected $people;

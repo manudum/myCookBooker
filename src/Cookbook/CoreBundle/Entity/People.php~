@@ -298,12 +298,15 @@ class People implements UserInterface, \Serializable
     
      public function serialize()
     {
-       
-       return serialize($this->getId());
+       return serialize(array($this->getId(),$this->getUsername(),$this->getName()));
     }
  
     public function unserialize($data)
     {
-        $this->id = unserialize($data);
+         list(
+           $this->id,
+           $this->username,
+           $this->name,
+       ) = unserialize($data);
     }
 }

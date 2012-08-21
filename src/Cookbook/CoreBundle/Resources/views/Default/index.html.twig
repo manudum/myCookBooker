@@ -10,10 +10,8 @@
                 
 <ul> 
                     {% for category in categories %}
-                                <li><a href="{{ path('recipe_show', { 'id': category.id }) }}">{{ category.name }}</a></li>
-                    {% for recipe in category.recipes %}
-                                <li><a href="{{ path('recipe_show', { 'id': recipe.id }) }}">{{ recipe.name }}</a></li>
-                    {% endfor %}
+                                <li><a href="{{ path('recipe_show', { 'id': category.id }) }}">{{ category.name }}</a>({{ category.recipes|length }})</li>
+                    
                     {% endfor %}
                     </ul>
 <ul> 
