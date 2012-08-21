@@ -5,12 +5,37 @@
     Description:
         Purpose of the stylesheet follows.
 */
-
+body {
+font-size: 11px;
+font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
+color: #333;
+line-height: 1.28;
+text-align: left;
+direction: ltr;
+margin: 0;
+padding: 0;
+}
 a{
     color:#1db8fe;
     
     text-decoration:none;
     
+}
+div{
+    
+    display: block;
+}
+
+h1{
+    padding-left: 5px;
+    
+}
+.lfloat{
+    float:left;
+}
+
+.rfloat{
+    float:right;
 }
 
 .header_cookbook { 
@@ -41,6 +66,7 @@ a{
     float: right;
     padding-top: 5px;
     padding-right: 2px;
+    font-size: 13px;
 }
 
 .user_cookbook a { 
@@ -53,6 +79,7 @@ a{
     display: block;
     width:20%;
     float:left;
+    height:100%;
 }
 
 
@@ -77,6 +104,8 @@ a{
 
 .lienAdd{
     float:right;
+    margin-top: -26px;
+    padding-right: 10px;
 }
 
 
@@ -86,9 +115,51 @@ ul#listFriends li a {font-weight:bold;text-decoration:none;display:block;padding
       border-bottom:0.4em solid #cfcfcf;color:black;background:#FAF7F7;}
 ul#listFriends li a:hover {border-bottom:0.4em solid #000;background-color:#fff;}
 
-ul#listEvents {font-family:helvetica,arial,sans-serif;margin:0;padding:0;width:95%;clear:both;}
+ul#listEvents {font-family:helvetica,arial,sans-serif;margin:0;padding:0;width:98%;clear:both;}
 ul#listEvents li {
-        margin:0;padding:2px;list-style:none;margin:5px 0 0 5px;border-bottom: 1px solid black; width:100%;
+        margin:0;padding:2px;list-style:none;margin:5px 0 10px 5px; width:100%;
         min-height: 30px;
         background-color: #fff;
-                }
+        clear: both;
+ }
+ 
+.event_recipes {font-family:helvetica,arial,sans-serif;margin:0;padding:0;width:95%;clear:both;}
+.event_recipes_li {
+        margin:0;padding:2px;list-style:none;border:0;min-height: 0;margin:5px 0 0 5px; width:100%;
+        background-color: #fff;
+        clear: both;
+ }
+ 
+ .event{
+     margin-left: 60px;
+ }
+ .event_date{
+     padding-top: 8px;
+ }
+ .event_header{
+     font-size: 13px;
+     border:1px solid #ccc;
+     border-top-left-radius: 3px;
+     border-top-right-radius: 3px;
+     border-bottom: 0;
+     padding: 6px 16px 0 16px;
+ }
+ .event_content{
+     overflow: auto;
+     border: 1px solid #ccc;
+     border-bottom: 0;
+     border-top: 0;
+     padding: 3px 16px 3px;
+ }
+ 
+ 
+ .event_footer{
+     clear: both;
+     border: 1px solid #ccc;
+     border-bottom-left-radius: 3px;
+     border-bottom-right-radius: 3px;
+     padding: 3px 16px 0;
+     background-color: #eee;
+ }
+ 
+ 

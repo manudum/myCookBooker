@@ -6,8 +6,17 @@
 
 <div class="recipes">
 <h1>Mes recettes</h1>
-<a href="{{ path('recipe_new') }}">Ajouter une recette</a>
-                <ul> 
+<a class="lienAdd" href="{{ path('recipe_new') }}"><img src="{{ asset('bundles/cookbookcore/images/plus.gif') }}" border="0" /></a>
+                
+<ul> 
+                    {% for category in categories %}
+                                <li><a href="{{ path('recipe_show', { 'id': category.id }) }}">{{ category.name }}</a></li>
+                    {% for recipe in category.recipes %}
+                                <li><a href="{{ path('recipe_show', { 'id': recipe.id }) }}">{{ recipe.name }}</a></li>
+                    {% endfor %}
+                    {% endfor %}
+                    </ul>
+<ul> 
                     {% for recipe in user.recipes %}
                                 <li><a href="{{ path('recipe_show', { 'id': recipe.id }) }}">{{ recipe.name }}</a></li>
                     {% endfor %}
@@ -17,14 +26,38 @@
 
 <div class="events">
 <h1>Mes événements</h1>
-<a class="lienAdd" href="{{ path('event_new') }}">Ajouter un événements</a>
+<a class="lienAdd" href="{{ path('event_new') }}"><img src="{{ asset('bundles/cookbookcore/images/plus.gif') }}" border="0" /></a>
     <ul id="listEvents"> 
         {% for event in user.events %}
-                    <li>Le <b>{{ event.date|date("d/m/Y") }}</b> : <a href="{{ path('event_show', { 'id': event.id }) }}">{{ event.name }}</a>
-                        <br />{{ event.description }}
-                        <br />avec {% for friend in event.friends %}
+                    <li>
+                        <div class="event_date lfloat"><b>{{ event.date|date("d/m/Y") }}</b></div>
+                        <div class="event">
+                        <div class="event_header">
+                        <a href="{{ path('event_show', { 'id': event.id }) }}">{{ event.name }}</a>
+                        </div>
+                        <div class="event_content">
+                        <div class="event_left lfloat">
+                        
+                        
+                        {{ event.description }}
+                        </div>
+                        
+                        
+                        <div class="event_right rfloat">
+                            {% for recipe in event.recipes %}
+                                {% if recipe.category %}
+                                {{ recipe.category }}
+                                {% endif %}
+                                <a href="{{ path('recipe_show', { 'id': recipe.id }) }}">{{ recipe.name }}</a><br />
+                                {% endfor %}
+                        </div>
+                        </div>
+                        <div class="event_footer">
+                        avec {% for friend in event.friends %}
                                 <a href="{{ path('friend_show', { 'id': friend.id }) }}">{{ friend.name }}</a>
                                 {% endfor %}
+                        </div>
+                        </div>
                     </li>
         {% endfor %}
         </ul>
