@@ -163,3 +163,20 @@ ul#listEvents li {
  }
  
  
+ #ingredients{ 
+    background-color : #FAF7F7;
+    display: block;
+    width:20%;
+    float:left;
+    height:100%;
+}
+
+ #wines{ 
+    background-color : #FAF7F7;
+    display: block;
+    width:20%;
+    float:left;
+    height:100%;
+}
+ 
+ 

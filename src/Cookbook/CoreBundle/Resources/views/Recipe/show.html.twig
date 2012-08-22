@@ -10,6 +10,26 @@
 <div class="content_recipe"> {{ recipe.description }}
 </div>
 
+<div id="ingredients">
+<h2>Ingrédients</h2>
+<a class="lienAdd" href="{{ path('recipe_new') }}"><img src="{{ asset('bundles/cookbookcore/images/plus.gif') }}" border="0" /></a>
+
+<ul> 
+{% for ingredient in recipe.ingredients %}
+            <li><a href="{{ path('event_show', { 'id': ingredient.id }) }}">{{ ingredient.name }}</a></li>
+{% endfor %}
+</ul>
+</div>
+
+<div id="wines">
+<h2>Vin</h2>
+<a class="lienAdd" href="{{ path('recipe_new') }}"><img src="{{ asset('bundles/cookbookcore/images/plus.gif') }}" border="0" /></a>
+<ul> 
+{% for wine in recipe.wines %}
+            <li><a href="{{ path('event_show', { 'id': wine.id }) }}">{{ wine.name }}</a>   </li>
+{% endfor %}
+</ul>
+</div>
 Servie :
 <ul> 
 {% for event in recipe.events %}

@@ -34,6 +34,13 @@ class Recipe
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     protected $description;
+    
+    /**
+     * @var string $comment
+     *
+     * @ORM\Column(name="comment", type="text", nullable=true)
+     */
+    protected $comment;
 
     /**
      * @ORM\ManyToOne(targetEntity="People", inversedBy="recipes")
@@ -63,9 +70,21 @@ class Recipe
      * @ORM\ManyToMany(targetEntity="Event", mappedBy="recipes")
      */
     private $events;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Ingredient", mappedBy="recipe")
+     */
+    protected $ingredients;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="Wine", mappedBy="recipes")
+     */
+    protected $wines;
 
     public function __construct() {
         $this->events = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->ingredients = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->wines = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     public function __toString()
@@ -91,7 +110,6 @@ class Recipe
        ) = unserialize($data);
     }
     
-    protected $wines;
     
     /**
      * Get id
@@ -291,5 +309,65 @@ class Recipe
     public function getEvents()
     {
         return $this->events;
+    }
+
+    /**
+     * Set comment
+     *
+     * @param text $comment
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+    }
+
+    /**
+     * Get comment
+     *
+     * @return text 
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+    /**
+     * Add ingredients
+     *
+     * @param Cookbook\CoreBundle\Entity\Ingredient $ingredients
+     */
+    public function addIngredient(\Cookbook\CoreBundle\Entity\Ingredient $ingredients)
+    {
+        $this->ingredients[] = $ingredients;
+    }
+
+    /**
+     * Get ingredients
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getIngredients()
+    {
+        return $this->ingredients;
+    }
+
+    /**
+     * Add wines
+     *
+     * @param Cookbook\CoreBundle\Entity\Wine $wines
+     */
+    public function addWine(\Cookbook\CoreBundle\Entity\Wine $wines)
+    {
+        $this->wines[] = $wines;
+    }
+
+    /**
+     * Get wines
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getWines()
+    {
+        return $this->wines;
     }
 }

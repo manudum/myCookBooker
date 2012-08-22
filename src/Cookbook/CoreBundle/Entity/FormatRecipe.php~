@@ -29,7 +29,7 @@ class FormatRecipe
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="Recipe", mappedBy="formatrecipe")
+     * @ORM\OneToMany(targetEntity="Recipe", mappedBy="format")
      */
     protected $recipes;
     
