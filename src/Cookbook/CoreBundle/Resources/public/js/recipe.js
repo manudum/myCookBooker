@@ -1,7 +1,7 @@
 $(document).ready(function() {
 if ( $.attrFn ) { $.attrFn.text = true; }
    //listen for the form beeing submitted
-   $("#add_categ").click(function(){
+  if ( $("#add_categ") )  $("#add_categ").click(function(){
       //get the url for the form
       var url='../../categoryrecipe/new';
    
@@ -55,7 +55,7 @@ if ( $.attrFn ) { $.attrFn.text = true; }
    
    
    
-   $("#add_format").click(function(){
+   if ( $("#add_format") ) $("#add_format").click(function(){
       //get the url for the form
       var url='../../formatrecipe/new';
    
@@ -108,7 +108,7 @@ if ( $.attrFn ) { $.attrFn.text = true; }
    });
    
    
-   $("#add_type").click(function(){
+   if ( $("#add_type") ) $("#add_type").click(function(){
       //get the url for the form
       var url='../../typerecipe/new';
    
@@ -159,6 +159,46 @@ if ( $.attrFn ) { $.attrFn.text = true; }
       //we dont what the browser to submit the form
       return false;
    });
+   
+   if ( $("#new_ingredient") ) 
+   {
+      //get the url for the form
+      var url='../../ingredient/new';
+   
+      //start send the post request
+      
+       $.get(url,{
+           other:"attributes"
+       },function(data){
+           //the response is in the data variable
+  
+              //if you want to print the error:
+              $('#new_ingredient').html(data);
+              
+                            $("#add_ingredient").click(function() {
+                                    //get the url for the form
+                                    var url=$("#ingredient_form").attr("action");
 
+                                    //start send the post request
+                                    $.post(url,
+                                        $("#ingredient_form").serialize()+'&recipe_id='+$("#recipe_id").val(),function(data){
+                                        //the response is in the data variable
+                                         $("#ingredients_list").append('<li><a href="/user/messages">'+data.name+'</a></li>');
+                                            //$('#cookbook_corebundle_recipetype_type').append('<option value="'+data.id+'" selected="selected">'+data.name+'</option>')
+                                            $('#form_name').val('');
+                                    });//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down
 
-});
+                                    //we dont what the browser to submit the form
+                                    $( this ).dialog( "close" );
+                            });
+                        
+		});
+              
+               
+           
+       }
+   });
+   
+   
+   
+

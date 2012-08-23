@@ -120,4 +120,9 @@ event_show:
 event_edit:
   pattern: /event/edit/{id}
   defaults:  { _controller: CookbookCoreBundle:Event:edit }
+  
+  
+ingredient_new:
+  pattern: /ingredient/new/
+  defaults:  { _controller: CookbookCoreBundle:Ingredient:new }
 
