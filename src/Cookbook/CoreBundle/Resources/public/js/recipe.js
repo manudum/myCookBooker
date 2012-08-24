@@ -1,5 +1,5 @@
 $(document).ready(function() {
-if ( $.attrFn ) { $.attrFn.text = true; }
+if ( $.attrFn ) {$.attrFn.text = true;}
    //listen for the form beeing submitted
   if ( $("#add_categ") )  $("#add_categ").click(function(){
       //get the url for the form
@@ -175,30 +175,62 @@ if ( $.attrFn ) { $.attrFn.text = true; }
               //if you want to print the error:
               $('#new_ingredient').html(data);
               
-                            $("#add_ingredient").click(function() {
-                                    //get the url for the form
-                                    var url=$("#ingredient_form").attr("action");
-
-                                    //start send the post request
-                                    $.post(url,
-                                        $("#ingredient_form").serialize()+'&recipe_id='+$("#recipe_id").val(),function(data){
-                                        //the response is in the data variable
-                                         $("#ingredients_list").append('<li><a href="/user/messages">'+data.name+'</a></li>');
-                                            //$('#cookbook_corebundle_recipetype_type').append('<option value="'+data.id+'" selected="selected">'+data.name+'</option>')
-                                            $('#form_name').val('');
-                                    });//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down
-
-                                    //we dont what the browser to submit the form
-                                    $( this ).dialog( "close" );
-                            });
+              $("#add_ingredient").click(addIngredient);
                         
-		});
+        });
               
                
            
        }
    });
    
+   
+   function removeIngredient(id)
+   {
+       //get the url for the form
+       var url='../../ingredient/delete/'+id;
+       $( "#dialog:ui-dialog" ).dialog( "destroy" );
+	
+		$( "#dialog-confirm" ).dialog({
+			resizable: false,
+			height:140,
+			modal: true,
+			buttons: {
+				"Supprimer l'ingrédient": function() {
+					$.get(url,{
+                                            other:"attributes"
+                                        },function(data){
+                                            $('#ingredient-'+id).remove();
+                                        });
+                                        
+                                        $( this ).dialog( "close" );
+				},
+				Annuler: function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		});
+       
+   }
+   
+   function addIngredient()
+   {
+       //get the url for the form
+        var url=$("#ingredient_form").attr("action");
+
+        //start send the post request
+        $.post(url,
+            $("#ingredient_form").serialize()+'&recipe_id='+$("#recipe_id").val(),function(data){
+            //the response is in the data variable
+                $("#ingredients_list").append('<li id="ingredient-'+data.id+'"><a href="#">'+data.name+'</a><span class="rfloat hand" onclick="removeIngredient('+data.id+'); return false;">x</span></li>');
+                //$('#cookbook_corebundle_recipetype_type').append('<option value="'+data.id+'" selected="selected">'+data.name+'</option>')
+                $('#form_name').val('');
+        });//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down
+
+        //we dont what the browser to submit the form
+        $( this ).dialog( "close" );
+       
+   }
    
    
 

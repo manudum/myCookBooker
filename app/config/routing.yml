@@ -125,4 +125,7 @@ event_edit:
 ingredient_new:
   pattern: /ingredient/new/
   defaults:  { _controller: CookbookCoreBundle:Ingredient:new }
+ingredient_delete:
+  pattern: /ingredient/delete/{id}
+  defaults:  { _controller: CookbookCoreBundle:Ingredient:delete }
 

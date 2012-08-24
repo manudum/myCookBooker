@@ -120,6 +120,16 @@ class Recipe
     {
         return $this->id;
     }
+    
+    /**
+     * Set id
+     *
+     * @param integer $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id     ;
+    }
 
     /**
      * Set name
@@ -309,5 +319,65 @@ class Recipe
     public function getEvents()
     {
         return $this->events;
+    }
+
+    /**
+     * Set comment
+     *
+     * @param text $comment
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+    }
+
+    /**
+     * Get comment
+     *
+     * @return text 
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+    /**
+     * Add ingredients
+     *
+     * @param Cookbook\CoreBundle\Entity\Ingredient $ingredients
+     */
+    public function addIngredient(\Cookbook\CoreBundle\Entity\Ingredient $ingredients)
+    {
+        $this->ingredients[] = $ingredients;
+    }
+
+    /**
+     * Get ingredients
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getIngredients()
+    {
+        return $this->ingredients;
+    }
+
+    /**
+     * Add wines
+     *
+     * @param Cookbook\CoreBundle\Entity\Wine $wines
+     */
+    public function addWine(\Cookbook\CoreBundle\Entity\Wine $wines)
+    {
+        $this->wines[] = $wines;
+    }
+
+    /**
+     * Get wines
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getWines()
+    {
+        return $this->wines;
     }
 }

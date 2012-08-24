@@ -7,7 +7,7 @@
 
 {% include 'CookbookCoreBundle:Default:header.html.twig' %}
 
-<div class="header_recipe">Recette : {{ recipe.name }}
+<div class="header_recipe"><h1>{{ recipe.name }}</h1>
 <input type="hidden" id="recipe_id" value="{{ recipe.id }}" />
 </div>
 
@@ -21,9 +21,12 @@
 
 <ul id="ingredients_list"> 
 {% for ingredient in recipe.ingredients %}
-            <li><a href="{{ path('event_show', { 'id': ingredient.id }) }}">{{ ingredient.name }}</a></li>
+            <li id="ingredient-{{ ingredient.id }}"><a href="#">{{ ingredient.name }}</a><span class="rfloat hand" onclick="removeIngredient('{{ ingredient.id }}'); return false;">x</span></li>
 {% endfor %}
 </ul>
+<div id="dialog-confirm" title="Supprimer l'ingrédient" style="display:none;">
+	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>L'ingrédient sera supprimé définitivement. Etes-vous sûr ??</p>
+</div>
 </div>
 
 <div id="wines">

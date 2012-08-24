@@ -38,6 +38,12 @@ h1{
     float:right;
 }
 
+.hand{
+    cursor: pointer;
+    
+    
+}
+
 .header_cookbook { 
     background-color : #000;
     display: block;
@@ -170,6 +176,14 @@ ul#listEvents li {
     float:left;
     height:100%;
 }
+
+
+ul#ingredients_list {font-family:helvetica,arial,sans-serif;margin:0;padding:0;width:95%;clear:both;}
+ul#ingredients_list li {margin:0;padding:0;list-style:none;margin:0 0 0 0;border-bottom:0.4em solid #cfcfcf;background:#FAF7F7;}
+ul#ingredients_list li a {font-weight:bold;text-decoration:none;display:inline-block;padding:0.3em;color:black;
+      }
+ul#ingredients_list li:hover {border-bottom:0.4em solid #000;background-color:#fff;}
+
 
  #wines{ 
     background-color : #FAF7F7;

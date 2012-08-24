@@ -69,5 +69,24 @@ class IngredientController extends Controller
         return $this->render('CookbookCoreBundle:CategoryRecipe:show.html.twig', array('categoryrecipe' => $categoryRecipe));
     }
     
+    /**
+     * @Route("/ingredient/delete/{id}")
+     * @Template()
+     */
+    public function deleteAction($id) {
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $repository = $em->getRepository('CookbookCoreBundle:Ingredient');
+
+        if ($repository->deleteIngredient($id)) {
+            return new Response(1,200,array('Content-Type'=>'application/json'));
+        }
+        else
+        {
+            return new Response(0,400,array('Content-Type'=>'application/json'));
+        }
+        
+    }
+    
     
 }
