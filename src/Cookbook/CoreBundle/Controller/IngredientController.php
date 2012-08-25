@@ -26,7 +26,7 @@ class IngredientController extends Controller
 
         $form = $this->createFormBuilder($ingredient)
                 ->add('name','text', array(
-                'attr' => array('placeholder' => 'Nouvel ingrédient'),
+                'attr' => array('placeholder' => 'Ajouter un ingrédient'),
                 ))
                 ->getForm();
         if ($request->getMethod() == 'POST') {

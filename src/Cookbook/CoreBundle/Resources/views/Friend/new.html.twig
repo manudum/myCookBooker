@@ -4,9 +4,12 @@
 
 {% include 'CookbookCoreBundle:Default:header.html.twig' %}
 
+<div id="content_header"><h1>Nouvel invité</h1></div>
+<div id="content_left">&nbsp;</div>
+<div id="content_middle">
 <form action="{{ path('friend_new') }}" method="post" {{ form_enctype(form) }}>
   {{ form_errors(form) }}
-Nouvel Ami :
+
 <div>
     {{ form_label(form.name,'Nom') }}
     {{ form_errors(form.name) }}
@@ -16,5 +19,6 @@ Nouvel Ami :
 
     <input type="submit" />
 </form>
-
+</div>
+<div id="content_left">&nbsp;</div>
  {% endblock %}

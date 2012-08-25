@@ -14,12 +14,14 @@ text-align: left;
 direction: ltr;
 margin: 0;
 padding: 0;
-background-color : #ededed;
-    
+background-color : #fff;
+width: 80%;
+margin-left: 10%;
+margin-right: 10%;
 }
 a{
     /*color:#1db8fe;*/
-    color:#0870fe;
+    color:#772126;
     text-decoration:none;
     
 }
@@ -48,9 +50,9 @@ h1{
 
 .header_cookbook { 
     position: relative;
-    background-color : #000;
+    background-color : #fff;
     display: block;
-    height: 30px;
+    height: 50px;
      z-index: 1000;
 }
 
@@ -70,9 +72,31 @@ h1{
     padding: 5px;
 }
 
+#menu{
+    float: left;
+    padding-top: 2px;
+    margin-left: 50px;
+    height: 50px;
+}
+
+.sousMenu{
+    float: left;
+    display: inline-block;
+    width: 150px;
+    border:0;
+    margin : 0;
+    padding-top : 20px;
+    text-align: center;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; 
+    font-size: 15px;
+    
+    height: 30px;
+    vertical-align: middle;
+}
+
 
 #logo_cookbook a{
-    color: #fff;
+    color: #000;
     font-size: 20px;
     font-weight: bold;
     text-decoration:none;
@@ -89,6 +113,105 @@ h1{
         padding-left: 2px;
 }
 
+#logo_cookbook img{ 
+    height: 48px;
+}
+#home{
+    background-color: #666;
+    height:400px;
+    margin-top: 5px;
+    
+    
+}
+#home_left{
+    float: left;
+    width: 72%;
+}
+#home_mess{
+    background-color: #ddd;
+    float: left;
+    height:100px;
+    margin-top: 10px;
+    margin-left: 1%;
+    width: 98%;
+    border-radius: 10px;
+}
+
+#home_mess p {
+margin: 0px;
+padding: 15px 15px 15px 15px;
+font-family: Impact, "Arial Black", sans-serif;
+font-size: 15px;
+color: #393939;
+line-height: 1.2em;
+text-align: justify;
+}
+
+.step{
+    background-color: #bbb;
+    float: left;
+    height:200px;
+    margin-top: 10px;
+    margin-left: 1%;
+    width: 32%;
+    border-radius: 10px;
+}
+
+.stepImg
+{
+    margin-top: 6%;
+    margin-left: 24%;
+    margin-bottom:10%;
+    width: 50%;
+    height: 50%;
+}
+.stepImg img
+{
+    padding-left: 1px;
+    background-color: #fff;
+    width: 85%;
+    height: 95%;
+    box-shadow: 2px 2px 2px #666666;
+    border: 5px solid #3DBEF5;
+    border-radius: 25px;
+}
+
+.stepDesc {
+    padding: 5px 0px 15px 15px;
+    display: block;
+    height: 50px;
+    overflow: hidden;
+    border-top: 1px solid white;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 2;
+}
+.stepDesc h2{
+margin: 0px;
+padding: 0px;
+font-size: 15px;
+color: #393939;
+}
+
+.stepDesc p {
+margin: 0px;
+padding: 0px;
+line-height: 1.2em;
+}
+
+#find{
+    background-color: #999;
+    float: left;
+    height:350px;
+    margin-top: 10px;
+    
+    margin-right: 1%;
+    width: 27%;
+    border-radius: 10px;
+    
+    
+}
+
 .user_cookbook { 
     float: right;
     padding-top: 5px;
@@ -97,47 +220,59 @@ h1{
 }
 
 .user_cookbook a { 
-    color: #fff;
+    color: #000;
     text-decoration:none;
 }
 
 #content_header{
     position: relative;
      text-align: center;
-     box-shadow: 0px 0px 5px #000;
-     -webkit-box-shadow: 0px 2px 15px #000;
-     -moz-box-shadow: 2px 2px 20px #000;
+     box-shadow: 0px 0px 5px #666;
+     -webkit-box-shadow: 0px 2px 15px #666;
+     -moz-box-shadow: 2px 2px 20px #666;
      z-index: 1000;
  }
  
   #content_header h1{
-     
-     background-color: #fff;
+     color: #FFF;
+     background-color: #666;
  }
 
 #content_left{
     position: relative;
-    background-color : #ededed;
+    background-color : #fff;
     display: block;
-    width:20%;
+    width:19.7%;
+    margin-left: 0.2%;
+    margin-right: 0.1%; 
     float:left;
     height:100%;
+    margin-top: -60px;
+    padding-top: 60px;
+    min-height: 1000px;
 }
 
 
 #content_right{ 
     position: relative;
-    background-color : #ededed;
+    background-color : #fff;
     display: block;
-    width:20%;
+    width: 19.7%;
+    margin-left: 0.1%;
+    margin-right: 0.2%; 
     float:left;
+    margin-top: -60px;
+    padding-top: 60px;
+    min-height: 1000px;
 }
 
 #content_middle{ 
     position: relative;
     background-color : #fff;
     display: block;
-    width:60%;
+    width: 59.8%;
+    margin-left: 0.1%;
+    margin-right: 0.1%; 
     float:left;
     margin-top: -60px;
     padding-top: 60px;
@@ -159,8 +294,8 @@ h1{
 ul#listFriends {font-family:helvetica,arial,sans-serif;margin:0;padding:0;width:95%;clear:both;}
 ul#listFriends li {margin:0;padding:0;list-style:none;margin:0 0 0 0;}
 ul#listFriends li a {font-weight:bold;text-decoration:none;display:block;padding:0.3em;
-      border-bottom:0.4em solid #cfcfcf;color:black;background:#ededed;}
-ul#listFriends li a:hover {border-bottom:0.4em solid #000;background-color:#fff;}
+      border-bottom:0.4em solid #cfcfcf;color:black;background:#EDFEED;}
+ul#listFriends li a:hover {border-bottom:0.4em solid #772126;background-color:#fff;}
 
 ul#listEvents {font-family:helvetica,arial,sans-serif;margin:0;padding:0;width:98%;clear:both;}
 ul#listEvents li {
@@ -240,7 +375,7 @@ ul#ingredients_list li a {font-weight: bold;text-decoration:none;display:inline-
 ul#ingredients_list li span {color:black;
                              padding-right: 5px;padding:0.3em;
       }
-ul#ingredients_list li:hover {border-bottom:0.4em solid #000;background-color:#fff;}
+ul#ingredients_list li:hover {border-bottom:0.4em solid #772126;background-color:#fff;}
 
 
  

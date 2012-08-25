@@ -4,72 +4,46 @@
 
 {% include 'CookbookCoreBundle:Default:header.html.twig' %}
 
-<div class="recipes">
-<h1>Mes recettes</h1>
-<a class="lienAdd" href="{{ path('recipe_new') }}"><img src="{{ asset('bundles/cookbookcore/images/plus.gif') }}" border="0" /></a>
-                
-<ul> 
-                    {% for category in categories %}
-                                <li><a href="{{ path('recipe_show', { 'id': category.id }) }}">{{ category.name }}</a>({{ category.recipes|length }})</li>
-                    
-                    {% endfor %}
-                    </ul>
-<ul> 
-                    {% for recipe in user.recipes %}
-                                <li><a href="{{ path('recipe_show', { 'id': recipe.id }) }}">{{ recipe.name }}</a></li>
-                    {% endfor %}
-                    </ul>
-<a href="{{ path('recipe_new') }}">Ajouter une recette</a>
- </div>
+<div id="home">
+<div id="home_left">
+<div id="home_mess">
+<p>Juste des repas de tous les jours, un dîner en amoureux ou un dîner entre amis : un outil pour répertorier toutes nos recettes, tous nos talents et réussites culinaires plus ou moins simples qu'on avait peut être un peu oublié...</p>
+</div>
+<div class="step">
+<div class="stepImg">
+<img src="{{ asset('bundles/cookbookcore/images/spoon.png') }}" />
+</div>
+<div class="stepDesc">
+<h2>Ajouter une recette</h2>
+<p>Créer votre propre livre de recette</p>
+</div>
 
-<div class="events">
-<h1>Mes événements</h1>
-<a class="lienAdd" href="{{ path('event_new') }}"><img src="{{ asset('bundles/cookbookcore/images/plus.gif') }}" border="0" /></a>
-    <ul id="listEvents"> 
-        {% for event in user.events %}
-                    <li>
-                        <div class="event_date lfloat"><b>{{ event.date|date("d/m/Y") }}</b></div>
-                        <div class="event">
-                        <div class="event_header">
-                        <a href="{{ path('event_show', { 'id': event.id }) }}">{{ event.name }}</a>
-                        </div>
-                        <div class="event_content">
-                        <div class="event_left lfloat">
-                        
-                        
-                        {{ event.description }}
-                        </div>
-                        
-                        
-                        <div class="event_right rfloat">
-                            {% for recipe in event.recipes %}
-                                {% if recipe.category %}
-                                {{ recipe.category }}
-                                {% endif %}
-                                <a href="{{ path('recipe_show', { 'id': recipe.id }) }}">{{ recipe.name }}</a><br />
-                                {% endfor %}
-                        </div>
-                        </div>
-                        <div class="event_footer">
-                        avec {% for friend in event.friends %}
-                                <a href="{{ path('friend_show', { 'id': friend.id }) }}">{{ friend.name }}</a>
-                                {% endfor %}
-                        </div>
-                        </div>
-                    </li>
-        {% endfor %}
-        </ul>
-<a href="{{ path('event_new') }}">Ajouter un evenement</a>
- </div>
-<div class="friends">
-<h1>Mes amis</h1>
-<a class="lienAdd" href="{{ path('friend_new') }}"><img src="{{ asset('bundles/cookbookcore/images/plus.gif') }}" border="0" /></a>
-                <ul id="listFriends"> 
-                    {% for friend in user.friends %}
-                                <li><a href="{{ path('friend_show', { 'id': friend.id }) }}">{{ friend.name }}</a></li>
-                    {% endfor %}
-                    </ul>
- </div>
+</div>
+<div class="step">
+<div class="stepImg">
+<img src="{{ asset('bundles/cookbookcore/images/friend.png') }}" />
+</div>
+<div class="stepDesc">
+<h2>Ajouter un invité</h2>
+<p>Vous pourrez ainsi retrouver facilement ce qu'ils aiment et quoi leur faire à manger</p>
+</div>
+</div>
+<div class="step">
+<div class="stepImg">
+<img src="{{ asset('bundles/cookbookcore/images/event.png') }}" />
+</div>
+<div class="stepDesc">
+<h2>Ajouter un événement</h2>
+<p>Créer votre propre livre de recette</p>
+</div>
+</div>
+</div>
+<div id="find">
+
+</div>
+
+
+</div>
  
  
 

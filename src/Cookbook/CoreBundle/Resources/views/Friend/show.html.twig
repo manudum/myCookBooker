@@ -3,9 +3,12 @@
  {% block body %}
 
 {% include 'CookbookCoreBundle:Default:header.html.twig' %}
-
-<div class="header_friend">Ami : {{ friend.name }}
+<div id="content_header"><h1>{{ friend.name }}</h1>
+<input type="hidden" id="recipe_id" value="{{ friend.id }}" />
 </div>
+
+<div id="content_left">&nbsp;</div>
+<div id="content_middle">
 Evénements :
 <ul> 
 {% for event in friend.events %}
@@ -13,4 +16,6 @@ Evénements :
 {% endfor %}
 </ul>
  un ami de  {{ friend.people.name }}
+</div>
+<div id="content_right">&nbsp;</div>
  {% endblock %}

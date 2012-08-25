@@ -3,8 +3,13 @@
  {% block body %}
 {% include 'CookbookCoreBundle:Default:header.html.twig' %}
 
-<div class="header_event">Evenement : {{ event.name }}
 </div>
+<div id="content_header"><h1>{{ event.name }}</h1>
+<input type="hidden" id="recipe_id" value="{{ event.id }}" />
+</div>
+
+<div id="content_left">&nbsp;</div>
+<div id="content_middle">
 
 <div class="content_event"> {{ event.description }}
 </div>
@@ -27,4 +32,6 @@ Recette :
 
  une evenement de  {{ event.people.name }}
 <a href="{{ path('event_edit', { 'id': event.id }) }}">modifer</a>
+</div>
+<div id="content_right">&nbsp;</div>
  {% endblock %}

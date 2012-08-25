@@ -27,7 +27,7 @@ class FriendController extends Controller
 
         $form = $this->createFormBuilder($friend)
                 ->add('name','text', array(
-                'attr' => array('placeholder' => 'Nouvel ami'),
+                'attr' => array('placeholder' => 'Nouvel invité'),
             ))
                 ->getForm();
         if ($request->getMethod() == 'POST') {

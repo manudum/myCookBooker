@@ -64,7 +64,10 @@ class RecipeController extends Controller
         // On exécute le traitement du formulaire. S'il retourne true, alors le formulaire a bien été traité
         if( $formHandler->process() )
         {
-            return $this->redirect($this->generateUrl('cookbook'));
+            $response = $this->forward('CookbookCoreBundle:Recipe:show', array(
+                'id'  => $id
+            ));
+            return $response;
         }
         return $this->render('CookbookCoreBundle:Recipe:new.html.twig', array(
                     'form' => $form->createView(),

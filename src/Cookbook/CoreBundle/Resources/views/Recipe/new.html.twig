@@ -10,12 +10,16 @@
 
 {% include 'CookbookCoreBundle:Default:header.html.twig' %}
 
-
+<div id="content_header">
 {% if action == 'recipe_new' %}
-Nouvelle recette :
+<h1>Nouvelle recette</h1>
 {% else %}
-   Recette : {{ form.vars.value.name }}
+<h1> {{ form.vars.value.name }}</h1>
 {% endif %}
+</div>
+
+<div id="content_left">&nbsp;</div>
+<div id="content_middle">
 <form action="" method="post" {{ form_enctype(form) }}>
 
 {{ form_errors(form) }}
@@ -51,4 +55,8 @@ Nouvelle recette :
 <div id="new_cat"></div>
 <div id="new_format"></div>
 <div id="new_type"></div>
+</div>
+
+<div id="content_right">&nbsp;</div>
+
 {% endblock %}
