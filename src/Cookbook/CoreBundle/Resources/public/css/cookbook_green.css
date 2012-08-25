@@ -101,7 +101,7 @@ textarea{
     margin : 0;
     padding-top : 20px;
     text-align: center;
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; 
+    font-family: "Georgia",Times, "Time New Roman", serif; 
     font-size: 15px;
     cursor: pointer;
     height: 30px;
@@ -157,7 +157,7 @@ textarea{
     font-family: "Arial Bold","Arial Bold", Gadget, sans-serif; 
     font-size: 15px;
     color: #393939;
-    line-height: 1.2em;
+    line-height: 1.3em;
     text-align: justify;
 }
 
@@ -281,7 +281,6 @@ text-align: center;
 
 #content_left{
     position: relative;
-    background-color : #fff;
     display: block;
     width:19.7%;
     margin-left: 0.2%;
@@ -293,7 +292,6 @@ text-align: center;
 
 #content_right{ 
     position: relative;
-    background-color : #fff;
     display: block;
     width: 19.7%;
     margin-left: 0.1%;
@@ -303,7 +301,6 @@ text-align: center;
 
 #content_middle{ 
     position: relative;
-    background-color : #fff;
     display: block;
     width: 59.8%;
     margin-left: 0.1%;
