@@ -1,16 +1,16 @@
 
 <div class="header_cookbook">
-<div id="logo_cookbook"><img src="{{ asset('bundles/cookbookcore/images/logo.png') }}" /></div>
+<div id="logo_cookbook"><a href="{{ path('cookbook') }}"><img src="{{ asset('bundles/cookbookcore/images/logo.png') }}" border="0" /></a></div>
 <div id="menu">
-    <div class="sousMenu">
-RECETTES
-    </div>
-<div class="sousMenu">
+    <a href="{{ path('recipe_list') }}"><div id="menuRecipe" class="sousMenu">
+PLATS
+    </div></a>
+<a href="{{ path('event_list') }}"><div id="menuEvent" class="sousMenu">
 EVENEMENTS
-    </div>
-<div class="sousMenu">
+    </div></a>
+<a href="{{ path('recipe_list') }}"><div id="menuFriend" class="sousMenu">
 INVITES
-    </div>
+    </div></a>
 </div>
 <div class="user_cookbook"><a href="{{ path('people_show', { 'id': user.id }) }}">{{ user.name }}</a></div>
 

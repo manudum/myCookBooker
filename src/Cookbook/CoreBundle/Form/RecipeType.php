@@ -12,7 +12,7 @@ class RecipeType extends AbstractType
     {
        $builder
             ->add('name','text', array(
-                'attr' => array('placeholder' => 'Nouvelle recette'),
+                'attr' => array('placeholder' => 'Nouveau plat', 'style' => 'width:100%;'),
             ))
             ->add('type', 'entity', array(
                     'class' => 'CookbookCoreBundle:TypeRecipe',
@@ -21,8 +21,9 @@ class RecipeType extends AbstractType
                         ->where('q.people = '.$options['user_id'])
                         ->orderBy('q.name');
                     },
-                    'empty_value' => 'Choose an option',
-                    'required' => false,
+                    'empty_value' => 'Choisir une valeur',
+                    'required' => false, 
+                    'expanded' => true, 
                 ))
             ->add('category', 'entity', array(
                     'class' => 'CookbookCoreBundle:CategoryRecipe',
@@ -31,8 +32,9 @@ class RecipeType extends AbstractType
                         ->where('q.people = '.$options['user_id'])
                         ->orderBy('q.name');
                     },
-                    'empty_value' => 'Choose an option',
+                    'empty_value' => 'Choisir une valeur',
                     'required' => false,
+                    'expanded' => true, 
                 ))
             ->add('format', 'entity', array(
                     'class' => 'CookbookCoreBundle:FormatRecipe',
@@ -41,10 +43,11 @@ class RecipeType extends AbstractType
                         ->where('q.people = '.$options['user_id'])
                         ->orderBy('q.name');
                     },
-                    'empty_value' => 'Choose an option',
+                    'empty_value' => 'Choisir une valeur',
                     'required' => false,
+                    'expanded' => true, 
                 ))
-            ->add('description', 'textarea', array('required' => false,))
+            ->add('description', 'textarea', array('required' => false, "attr" => array("cols" => "60", "rows" => "10")))
         ;
     }
 

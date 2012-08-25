@@ -60,6 +60,10 @@ recipe_new:
 recipe_show:
   pattern: /recipe/show/{id}
   defaults:  { _controller: CookbookCoreBundle:Recipe:show }
+  
+recipe_list:
+  pattern: /recipe/list/
+  defaults:  { _controller: CookbookCoreBundle:Recipe:list }
 
 recipe_edit:
   pattern: /recipe/edit/{id}
@@ -112,6 +116,10 @@ friend_show:
 event_new:
   pattern: /event/new/
   defaults:  { _controller: CookbookCoreBundle:Event:new }
+  
+event_list:
+  pattern: /event/list/
+  defaults:  { _controller: CookbookCoreBundle:Event:list }
   
 event_show:
   pattern: /event/show/{id}

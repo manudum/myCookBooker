@@ -89,7 +89,7 @@ class Recipe
     
     public function __toString()
     {
-        return $this->category.' - '.$this->name;
+        return $this->name;
     }
     
     public function __toArray()

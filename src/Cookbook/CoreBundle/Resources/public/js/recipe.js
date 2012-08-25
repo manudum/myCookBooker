@@ -1,7 +1,7 @@
 $(document).ready(function() {
 if ( $.attrFn ) {$.attrFn.text = true;}
    //listen for the form beeing submitted
-  if ( $("#add_categ") )  $("#add_categ").click(function(){
+  if ( $("#add_categ").length )  $("#add_categ").click(function(){
       //get the url for the form
       var url='../../categoryrecipe/new';
    
@@ -55,7 +55,7 @@ if ( $.attrFn ) {$.attrFn.text = true;}
    
    
    
-   if ( $("#add_format") ) $("#add_format").click(function(){
+   if ( $("#add_format").length ) $("#add_format").click(function(){
       //get the url for the form
       var url='../../formatrecipe/new';
    
@@ -108,7 +108,7 @@ if ( $.attrFn ) {$.attrFn.text = true;}
    });
    
    
-   if ( $("#add_type") ) $("#add_type").click(function(){
+   if ( $("#add_type").length ) $("#add_type").click(function(){
       //get the url for the form
       var url='../../typerecipe/new';
    
@@ -160,7 +160,7 @@ if ( $.attrFn ) {$.attrFn.text = true;}
       return false;
    });
    
-   if ( $("#new_ingredient") ) 
+   if ( $("#new_ingredient").length ) 
    {
       //get the url for the form
       var url='../../ingredient/new';
@@ -182,6 +182,12 @@ if ( $.attrFn ) {$.attrFn.text = true;}
                
            
        }
+       
+       
+       
+    if ( $("#categories").length ) $('#categories').buttonset();
+    if ( $("#types").length ) $('#types').buttonset();
+    if ( $("#formats").length ) $('#formats').buttonset(); 
    });
    
    
@@ -209,9 +215,9 @@ if ( $.attrFn ) {$.attrFn.text = true;}
 					$( this ).dialog( "close" );
 				}
 			}
-		});
-       
-   }
+		});  
+
+}
    
    function addIngredient()
    {

@@ -12,7 +12,7 @@ class EventType extends AbstractType
     {
         $builder
             ->add('name','text', array(
-                'attr' => array('placeholder' => 'Nouvel événement'),
+                'attr' => array('placeholder' => 'Nouvel évènement', 'style' => 'width:100%;'),
             ))
             ->add('date', 'date', array(
                 'widget' => 'single_text',
@@ -20,7 +20,7 @@ class EventType extends AbstractType
                 'format' => 'dd/MM/yyyy',
                 'attr' => array('class' => 'date'),
                 ))
-            ->add('description', 'textarea', array('required' => false,))
+            ->add('description', 'textarea', array('required' => false,"attr" => array("cols" => "80", "rows" => "6")))
             ->add('friends', 'entity', array(
                 'attr' => array('style' => 'width: 600px;height:100px;'),
                 'class' => 'CookbookCoreBundle:Friend',

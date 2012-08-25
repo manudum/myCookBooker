@@ -7,9 +7,13 @@
 <input type="hidden" id="recipe_id" value="{{ friend.id }}" />
 </div>
 
-<div id="content_left">&nbsp;</div>
+<div id="content_left">
+<div class="stepImg">
+<img src="{{ asset('bundles/cookbookcore/images/friend.png') }}" />
+</div>
+</div>
 <div id="content_middle">
-Evénements :
+Evènements :
 <ul> 
 {% for event in friend.events %}
             <li><a href="{{ path('event_show', { 'id': event.id }) }}">{{ event.name }}</a> le {{ event.date|date("d/m/Y") }}</li>

@@ -7,44 +7,59 @@
 <div id="home">
 <div id="home_left">
 <div id="home_mess">
-<p>Juste des repas de tous les jours, un dîner en amoureux ou un dîner entre amis : un outil pour répertorier toutes nos recettes, tous nos talents et réussites culinaires plus ou moins simples qu'on avait peut être un peu oublié...</p>
-</div>
-<div class="step">
+<p>Simple repas de tous les jours, dîner en amoureux ou dîner entre amis :
+<br /> <img src="{{ asset('bundles/cookbookcore/images/logo.png') }}" border="0" height="20"  style="margin-bottom: -4px;"/> est un outil pour trouver des idées de repas répertoriant vos  réussites culinaires plus ou moins simples que vous aviez peut-être un peu oublié...
+<br />Vous pourrez, pour un invité donné, lui servir un de vos plats qu'il ne connaît pas en adéquation avec ses goûts.</div>
+<div id="stepRecipe" class="step hand">
 <div class="stepImg">
 <img src="{{ asset('bundles/cookbookcore/images/spoon.png') }}" />
 </div>
 <div class="stepDesc">
-<h2>Ajouter une recette</h2>
-<p>Créer votre propre livre de recette</p>
+<h2>Ajouter un plat</h2>
+<p>Pour répertorier vos petits plats avec leurs recettes</p>
 </div>
 
 </div>
-<div class="step">
+<div id="stepEvent" class="step hand">
+<div class="stepImg">
+<img src="{{ asset('bundles/cookbookcore/images/event.png') }}" />
+</div>
+<div class="stepDesc">
+<h2>Ajouter un évènement</h2>
+<p>Pour archiver les repas (date, invités, plats)</p>
+</div>
+</div>
+<div id="stepFriend" class="step hand">
 <div class="stepImg">
 <img src="{{ asset('bundles/cookbookcore/images/friend.png') }}" />
 </div>
 <div class="stepDesc">
 <h2>Ajouter un invité</h2>
-<p>Vous pourrez ainsi retrouver facilement ce qu'ils aiment et quoi leur faire à manger</p>
-</div>
-</div>
-<div class="step">
-<div class="stepImg">
-<img src="{{ asset('bundles/cookbookcore/images/event.png') }}" />
-</div>
-<div class="stepDesc">
-<h2>Ajouter un événement</h2>
-<p>Créer votre propre livre de recette</p>
+<p>Pour retrouver facilement leurs goûts</p>
 </div>
 </div>
 </div>
 <div id="find">
-
+<h2>Recherche rapide</h2>
 </div>
 
 
 </div>
- 
- 
 
-  {% endblock %}
+<script type="text/javascript">
+$(document).ready(function() {
+
+    if ( $("#stepRecipe") )  $("#stepRecipe").click(function(){
+        window.location = '{{ path('recipe_new') }}';
+    });
+    if ( $("#stepEvent") )  $("#stepEvent").click(function(){
+        window.location = '{{ path('event_new') }}';
+    });
+    if ( $("#stepFriend") )  $("#stepFriend").click(function(){
+        window.location = '{{ path('friend_new') }}';
+    });
+
+});
+</script>
+ 
+{% endblock %}

@@ -42,7 +42,10 @@ class FriendController extends Controller
                 $em->persist($friend);
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('cookbook'));
+                $response = $this->forward('CookbookCoreBundle:Friend:show', array(
+                'id'  => $id
+            ));
+            return $response;
             }
         }
 

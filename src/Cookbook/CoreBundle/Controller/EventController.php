@@ -36,7 +36,10 @@ class EventController extends Controller
         // On exécute le traitement du formulaire. S'il retourne true, alors le formulaire a bien été traité
         if( $formHandler->process() )
         {
-            return $this->redirect($this->generateUrl('cookbook'));
+            $response = $this->forward('CookbookCoreBundle:Event:show', array(
+                'id'  => $id
+            ));
+            return $response;
         }
         
         $categoryRecipe = $this->getDoctrine()
@@ -80,7 +83,10 @@ class EventController extends Controller
         // On exécute le traitement du formulaire. S'il retourne true, alors le formulaire a bien été traité
         if( $formHandler->process() )
         {
-            return $this->redirect($this->generateUrl('cookbook'));
+            $response = $this->forward('CookbookCoreBundle:Event:show', array(
+                'id'  => $id
+            ));
+            return $response;
         }
         
         $categoryRecipe = $this->getDoctrine()
@@ -118,6 +124,21 @@ class EventController extends Controller
                 ->getRepository('CookbookCoreBundle:Event')
                 ->find($id);
         return $this->render('CookbookCoreBundle:Event:show.html.twig', array('event' => $event, 'user' => $usr));
+    }
+    
+    /**
+     * @Route("/event/list")
+     * @Template()
+     */
+    public function listAction() {
+
+        $usr= $this->get('security.context')->getToken()->getUser();
+        $events = $this->getDoctrine()
+                ->getRepository('CookbookCoreBundle:Event')
+                ->findBy(array('people' => $usr->getId()));
+        return $this->render('CookbookCoreBundle:Event:list.html.twig', 
+                    array('events' => $events,
+                    'user' => $usr));
     }
     
     

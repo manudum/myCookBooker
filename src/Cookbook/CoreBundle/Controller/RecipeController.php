@@ -36,7 +36,10 @@ class RecipeController extends Controller
         // On exécute le traitement du formulaire. S'il retourne true, alors le formulaire a bien été traité
         if( $formHandler->process() )
         {
-            return $this->redirect($this->generateUrl('cookbook'));
+            $response = $this->forward('CookbookCoreBundle:Recipe:show', array(
+                'id'  => $id
+            ));
+            return $response;
         }
         
         return $this->render('CookbookCoreBundle:Recipe:new.html.twig', array(
@@ -90,6 +93,25 @@ class RecipeController extends Controller
         return $this->render('CookbookCoreBundle:Recipe:show.html.twig', 
                     array('recipe' => $recipe,
                     'user' => $usr,));
+    }
+    
+    /**
+     * @Route("/recipe/list")
+     * @Template()
+     */
+    public function listAction() {
+
+        $usr= $this->get('security.context')->getToken()->getUser();
+        $recipes = $this->getDoctrine()
+                ->getRepository('CookbookCoreBundle:Recipe')
+                ->findBy(array('people' => $usr->getId()));
+        $category = $this->getDoctrine()
+                ->getRepository('CookbookCoreBundle:CategoryRecipe')
+                ->findBy(array('people' => $usr->getId()));
+        return $this->render('CookbookCoreBundle:Recipe:list.html.twig', 
+                    array('recipes' => $recipes,
+                    'user' => $usr,
+            'categories' => $category));
     }
     
     /**

@@ -35,44 +35,48 @@
 {{ form_errors(form) }}
 <div id="content_header">
 {% if action == 'event_new' %}
-<h1>Nouvel événement</h1>
+<h1>Nouvel évènement</h1>
 {% else %}
-<h1>Evénement : {{ form.vars.value.name }}</h1>
+<h1>Evènement : {{ form.vars.value.name }}</h1>
 {% endif %}
 </div>
-<div id="content_left">&nbsp;</div>
+<div id="content_left">
+<div class="stepImg">
+<img src="{{ asset('bundles/cookbookcore/images/event.png') }}" />
+</div>
+</div>
 <div id="content_middle">
 <form action="" method="post" {{ form_enctype(form) }}>
 
 
-<div>
+<table>
+<tr>
+<td>
     {{ form_label(form.name, 'Nom') }}
     {{ form_errors(form.name) }}
+</td><td>
     {{ form_widget(form.name) }}
-</div>
-
-<div>
+</td></tr><tr><td>
     {{ form_label(form.date) }}
     {{ form_errors(form.date) }}
+</td><td>
     {{ form_widget(form.date) }}
-</div>
-
-<div>
+</td></tr><tr><td>
     {{ form_label(form.description) }}
     {{ form_errors(form.description) }}
+</td><td>
     {{ form_widget(form.description) }}
-</div>
-
-<div>
- <h3>    {{ form_label(form.friends) }} </h3> 
+</td></tr><tr><td>
+    {{ form_label(form.friends, 'Invités') }}
     {{ form_errors(form.friends) }}
+</td><td>
     {{ form_widget(form.friends) }}
-</div>
-
-<div id="recipes">
-<h3>    {{ form_label(form.recipes) }} </h3>
+</td></tr><tr><td>
 
 
+{{ form_label(form.recipes,'Plats') }}
+
+</td><td>
 <div id="categories">
   <label class="libFiltre"> Catégorie :</label>         <input type="radio" id="category0" name="category" checked="checked" value="" /><label for="category0">Tous</label>
  {% for category in categories %}
@@ -95,13 +99,14 @@
             <input type="radio" id="format{{ format.id }}" name="format" value="{{ format.id }}" /><label for="format{{ format.id }}">{{ format.name }}</label>
 {% endfor %}
 </div>
+<br />
     {{ form_errors(form.recipes) }}
     {{ form_widget(form.recipes) }}
-</div>
+</td></tr></table>
 
 {{ form_rest(form) }}
 
-<input type="submit" />
+<input type="submit" id="submit" value="{% if action == 'event_new' %}{{ 'Ajouter'|trans }}{% else %}{{ 'Modifier'|trans }}{% endif %}" name="submit" />
 </form>
 </div>
 <div id="content_right">&nbsp;</div>

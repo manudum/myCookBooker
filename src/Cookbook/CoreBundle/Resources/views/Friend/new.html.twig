@@ -5,7 +5,11 @@
 {% include 'CookbookCoreBundle:Default:header.html.twig' %}
 
 <div id="content_header"><h1>Nouvel invité</h1></div>
-<div id="content_left">&nbsp;</div>
+<div id="content_left">
+<div class="stepImg">
+<img src="{{ asset('bundles/cookbookcore/images/friend.png') }}" />
+</div>
+</div>
 <div id="content_middle">
 <form action="{{ path('friend_new') }}" method="post" {{ form_enctype(form) }}>
   {{ form_errors(form) }}

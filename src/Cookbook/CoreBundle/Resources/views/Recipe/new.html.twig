@@ -12,44 +12,65 @@
 
 <div id="content_header">
 {% if action == 'recipe_new' %}
-<h1>Nouvelle recette</h1>
+<h1>Nouveau plat</h1>
 {% else %}
 <h1> {{ form.vars.value.name }}</h1>
 {% endif %}
 </div>
 
-<div id="content_left">&nbsp;</div>
+<div id="content_left">
+<div class="stepImg">
+<img src="{{ asset('bundles/cookbookcore/images/spoon.png') }}" />
+</div>
+</div>
 <div id="content_middle">
 <form action="" method="post" {{ form_enctype(form) }}>
 
 {{ form_errors(form) }}
-
-<div>
-    {{ form_label(form.name) }}
+<table>
+<tr>
+<td>
+    {{ form_label(form.name,'Nom du plat') }}
     {{ form_errors(form.name) }}
+</td><td>
     {{ form_widget(form.name) }}
-</div>
+</td>
+</tr>
 
-<div>
-    {{ form_label(form.category) }}
+<tr><td>
+    {{ form_label(form.category, 'Catégorie') }}
     {{ form_errors(form.category) }}
-    {{ form_widget(form.category) }}<a href="#" id="add_categ">Ajouter une category</a>
-</div>
+</td><td>
+    <div id="categories" class="inline">{{ form_widget(form.category) }}</div><a href="#" id="add_categ">Ajouter une category</a>
+</td>
+</tr>
 
-<div>
-    {{ form_label(form.type) }}
+<tr><td>
+    {{ form_label(form.type, 'Type') }}
     {{ form_errors(form.type) }}
-    {{ form_widget(form.type) }}<a href="#" id="add_type">Ajouter un type</a>
-</div>
+</td><td>
+    <div id="types" class="inline">{{ form_widget(form.type) }}</div><a href="#" id="add_type">Ajouter un type</a>
+</td>
+</tr>
 
-<div>
-    {{ form_label(form.format) }}
+<tr><td>
+    {{ form_label(form.format, 'Format') }}
     {{ form_errors(form.format) }}
-    {{ form_widget(form.format) }}<a href="#" id="add_format">Ajouter un format</a>
-</div>
+</td><td>
+    <div id="formats" class="inline">{{ form_widget(form.format) }}</div><a href="#" id="add_format">Ajouter un format</a>
+</td>
+</tr>
+<tr><td>
+    {{ form_label(form.description,'Recette') }}
+    {{ form_errors(form.description) }}
+</td><td>
+    {{ form_widget(form.description) }}
+</td>
+</tr>
+</table>
 {{ form_rest(form) }}
 
-<input type="submit" />
+<input type="submit" id="submit" value="{% if action == 'recipe_new' %}{{ 'Ajouter'|trans }}{% else %}{{ 'Modifier'|trans }}{% endif %}" name="submit" />
 </form>
 
 <div id="new_cat"></div>
