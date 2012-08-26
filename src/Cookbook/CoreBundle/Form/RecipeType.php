@@ -33,7 +33,7 @@ class RecipeType extends AbstractType
                         ->orderBy('q.name');
                     },
                     'empty_value' => 'Choisir une valeur',
-                    'required' => false,
+                    'required' => true,
                     'expanded' => true, 
                 ))
             ->add('format', 'entity', array(

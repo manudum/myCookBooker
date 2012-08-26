@@ -41,6 +41,40 @@
 </div>
 <div id="find">
 <h2>Recherche rapide</h2>
+<table><tr><td>
+  <label class="libFiltre"> Catégorie</label> 
+</td><td>
+    <select id="category" name="category">
+        <option value="" selected="selected"><label for="category0">Tous</label></option>
+ {% for category in categories %}
+        <option value="{{ category.id }}"><label for="category{{ category.id }}">{{ category.name }}</label></option>
+{% endfor %}
+</select>
+</td>
+</tr><tr>
+<td>
+  <label class="libFiltre"> Type</label> 
+</td><td>
+    <select id="type" name="type">
+        <option value="" selected="selected"><label for="type0">Tous</label></option>
+ {% for type in types %}
+        <option value="{{ type.id }}"><label for="type{{ type.id }}">{{ type.name }}</label></option>
+{% endfor %}
+</select>
+</td>
+</tr><tr>
+<td>
+
+  <label class="libFiltre"> Format</label> 
+</td><td>
+    <select id="format" name="format">
+        <option value="" selected="selected"><label for="format0">Tous</label></option>
+ {% for format in formats %}
+        <option value="{{ format.id }}"><label for="format{{ format.id }}">{{ format.name }}</label></option>
+{% endfor %}
+</td>
+</tr></table>
+<div id="recipes"></div>
 </div>
 
 
@@ -59,7 +93,34 @@ $(document).ready(function() {
         window.location = '{{ path('friend_new') }}';
     });
 
+    $('#category').change(refreshRecipes); 
+    $('#format').change(refreshRecipes); 
+    $('#type').change(refreshRecipes); 
+
+    if ($('#category').val() || $('#format').val() || $('#type').val()){
+        refreshRecipes();
+    }
+
 });
+
+function refreshRecipes()
+{
+    //get the url for the form
+    var url='../recipe/get';
+
+    //start send the post request
+    $.post(url,{
+           category:$('#category').attr('value'),
+           type:$('#type').attr('value'),
+           format:$('#format').attr('value')
+       },function(data){
+        //the response is in the data variable
+            $('#recipes').html(data);
+            
+    }, 'html');//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down
+
+
+}
 </script>
  
 {% endblock %}

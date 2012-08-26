@@ -29,6 +29,7 @@ class EventController extends Controller
         
         // create a task and give it some dummy data for this example
         $event = new Event();
+        $event->setDate(new \DateTime);
         $form = $this->createForm(new EventType, $event, array('user_id' => $usr->getId()));
 
         $formHandler = new EventHandler($form, $this->get('request'), $this->getDoctrine()->getEntityManager(), $usr);
@@ -37,7 +38,7 @@ class EventController extends Controller
         if( $formHandler->process() )
         {
             $response = $this->forward('CookbookCoreBundle:Event:show', array(
-                'id'  => $id
+                'id'  => $event->getId()
             ));
             return $response;
         }

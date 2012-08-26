@@ -30,7 +30,8 @@ function refreshRecipes()
         //the response is in the data variable
             eventsList.multiselect("refreshAvailableList",data);
             
-    });//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down
+    },
+    'json');//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down
 
 
 }

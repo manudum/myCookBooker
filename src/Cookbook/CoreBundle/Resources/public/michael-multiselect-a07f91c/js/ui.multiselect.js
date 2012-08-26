@@ -158,8 +158,8 @@ $.widget("ui.multiselect", {
   },
   _getJsonNode: function(option) {
 		var node = $('<li class="ui-state-default ui-element" title="'+option.name+'"><span class="ui-icon"/>'+option.name+'<a href="#" class="action"><span class="ui-corner-all ui-icon"/></a></li>').hide();
-		node.data('optionLink', $("#"+this.id+"[value='"+option.id+"']"));
-		return node;
+		node.data('optionLink', $("#"+this.id+" [value="+option.id+"]"));
+                return node;
 	},
 	_populateLists: function(options) {
 		this.selectedList.children('.ui-element').remove();

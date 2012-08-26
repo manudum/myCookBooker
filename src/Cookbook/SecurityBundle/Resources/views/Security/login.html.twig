@@ -1,18 +1,18 @@
-<link rel="stylesheet" href="{{ asset('bundles/cookbookcore/css/cookbook.css') }}" type="text/css" media="all" />
+<link rel="stylesheet" href="{{ asset('bundles/cookbookcore/css/cookbook_green.css') }}" type="text/css" media="all" />
 
 {% if error %}
     <div>{{ error.message }}</div>
 {% endif %}
 <div class="login_cookbook">
 <div class="header_cookbook">
-<div id="logo_cookbook"><a href="{{ path('cookbook') }}">My cookbook</a></div>
+<div id="logo_cookbook"><a href="{{ path('cookbook') }}"><img src="{{ asset('bundles/cookbookcore/images/logo.png') }}" border="0" /></a></div>
 </div>
 <div>
 <form action="{{ path('login_check') }}" method="post">
-    <label for="username">Username:</label>
+    <label for="username">login</label>
     <input type="text" id="username" name="_username" value="{{ last_username }}" />
-<br />
-    <label for="password">Password:</label>
+<br /><br />
+    <label for="password">Mot de passe</label>
     <input type="password" id="password" name="_password" />
 
     {#
@@ -20,6 +20,6 @@
         <input type="hidden" name="_target_path" value="/account" />
     #}
     <br />
-    <button type="submit">login</button>
+    <button type="submit">Se connecter</button>
 </form>
 </div></div>

@@ -50,7 +50,7 @@ class Recipe
     
     /**
      * @ORM\ManyToOne(targetEntity="CategoryRecipe", inversedBy="recipes")
-     * @ORM\JoinColumn(name="categoryrecipe_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="categoryrecipe_id", referencedColumnName="id")
      */
     protected $category; //entree plat dessert
     

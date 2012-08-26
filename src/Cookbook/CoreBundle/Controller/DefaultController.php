@@ -21,23 +21,27 @@ class DefaultController extends Controller
      */
     public function showAction()
     {
-        $user = $this->get('security.context')->getToken()->getUser();
+        $usr = $this->get('security.context')->getToken()->getUser();
         //var_dump($people);
        
-        $category = $this->getDoctrine()
+        $categoryRecipe = $this->getDoctrine()
                 ->getRepository('CookbookCoreBundle:CategoryRecipe')
-                ->findBy(array('people' => $user->getId()));
-           /*     ->createQueryBuilder('c')->select('c.name, COUNT(c.name) as catCount')
-                ->leftJoin('c.recipes', 'r')
-                ->where('c.people = '.$user->getId())
-                ->groupBy('c.name')->getQuery()->getScalarResult();
+                ->findByPeople($usr->getId());
         
-        var_dump($category);*/
+        $typeRecipe = $this->getDoctrine()
+                ->getRepository('CookbookCoreBundle:TypeRecipe')
+                ->findByPeople($usr->getId());
+        
+        $formatRecipe = $this->getDoctrine()
+                ->getRepository('CookbookCoreBundle:FormatRecipe')
+                ->findByPeople($usr->getId());
     
         
         return $this->render('CookbookCoreBundle:Default:index.html.twig', 
-                array('user' => $user,
-            'categories' => $category));
+                array('user' => $usr,
+                    'categories'    => $categoryRecipe,
+                    'types'          => $typeRecipe,
+                    'formats'        => $formatRecipe,));
             
     }
     //plus utilisé

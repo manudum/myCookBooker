@@ -37,7 +37,7 @@ class RecipeController extends Controller
         if( $formHandler->process() )
         {
             $response = $this->forward('CookbookCoreBundle:Recipe:show', array(
-                'id'  => $id
+                'id'  => $recipe->getId()
             ));
             return $response;
         }
@@ -126,19 +126,26 @@ class RecipeController extends Controller
         $filter= array_filter($filter);
         $recipes = $this->getDoctrine()
                 ->getRepository('CookbookCoreBundle:Recipe')
-                ->findBy(array_merge($filter, array('people' => $usr->getId())));
+                ->findBy(array_merge($filter, array('people' => $usr->getId())), array('name'=>'ASC'));
+        // only do something when the client accepts "text/html" as response format
+        if ( false !== strpos($request->headers->get('Accept'), 'text/html')) {
+            return $this->render('CookbookCoreBundle:Recipe:listHome.html.twig', 
+                    array('recipes' => $recipes,));
+        }
         
-        $jsons = array();
-        foreach ($recipes as $recipe) {
-            $json = $recipe->__toArray();
-            $jsons[]=$json;
+        if (false !== strpos($request->headers->get('Accept'), 'application/json')) {
+            $jsons = array();
+            foreach ($recipes as $recipe) {
+                $json = $recipe->__toArray();
+                $jsons[]=$json;
+            }
+
+            $response = new Response(json_encode($jsons));
+            $response->headers->set('Content-Type', 'application/json');
+            return $response;
         }
         
         
-        
-        $response = new Response(json_encode($jsons));
-        $response->headers->set('Content-Type', 'application/json');
-        return $response;
     }
     
     
