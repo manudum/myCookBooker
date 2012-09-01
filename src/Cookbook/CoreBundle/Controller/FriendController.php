@@ -64,11 +64,32 @@ class FriendController extends Controller
         
         $usr= $this->get('security.context')->getToken()->getUser();
         
-        $friend = $this->getDoctrine()
-                ->getRepository('CookbookCoreBundle:Friend')
+        $repository = $this->getDoctrine()->getRepository('CookbookCoreBundle:Friend');
+
+        $friend = $repository
                 ->find($id);
-        return $this->render('CookbookCoreBundle:Friend:show.html.twig', array('friend' => $friend, 'user' => $usr));
+        
+        $em = $this->getDoctrine()->getEntityManager();
+        $query = $em->createQuery('Select cf, e from CookbookCoreBundle:Friend cf JOIN cf.events e  JOIN e.friends f where f.id = :user_id and cf.id != f.id');
+        $query->setParameters(array('user_id' => $id));
+        $mutualfriends = $query->getResult();
+        
+        $query2 = $em->createQuery('Select kr, e from CookbookCoreBundle:Recipe kr JOIN kr.events e  JOIN e.friends f where f.id = :user_id');
+        $query2->setParameters(array('user_id' => $id));
+        $knownRecipies= $query2->getResult();
+        return $this->render('CookbookCoreBundle:Friend:show.html.twig', array('friend' => $friend, 'user' => $usr, 'mutualFriends' => $mutualfriends, 'knownRecipies' => $knownRecipies));
     }
     
+    /**
+     * @Route("/friend/list")
+     * @Template()
+     */
+    public function listAction() {
+
+        $usr= $this->get('security.context')->getToken()->getUser();
+        return $this->render('CookbookCoreBundle:Friend:list.html.twig', 
+                    array(
+                    'user' => $usr));
+    }
     
 }

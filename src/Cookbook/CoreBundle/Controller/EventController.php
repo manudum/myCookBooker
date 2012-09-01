@@ -134,12 +134,8 @@ class EventController extends Controller
     public function listAction() {
 
         $usr= $this->get('security.context')->getToken()->getUser();
-        $events = $this->getDoctrine()
-                ->getRepository('CookbookCoreBundle:Event')
-                ->findBy(array('people' => $usr->getId()));
         return $this->render('CookbookCoreBundle:Event:list.html.twig', 
-                    array('events' => $events,
-                    'user' => $usr));
+                    array('user' => $usr));
     }
     
     

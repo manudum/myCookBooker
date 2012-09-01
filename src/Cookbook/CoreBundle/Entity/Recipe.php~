@@ -2,7 +2,8 @@
 
 namespace Cookbook\CoreBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;    
+use Doctrine\ORM\Mapping as ORM; 
+use Symfony\Component\Validator\Constraints as Assert;   
 
 /**
  * Cookbook\CoreBundle\Entity\Recipe
@@ -27,6 +28,13 @@ class Recipe
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+    
+     /**
+     * @var string $image
+     * @Assert\File( maxSize = "1024k", mimeTypesMessage = "Please upload a valid Image")
+     * @ORM\Column(name="image", type="string", length=255)
+     */
+    private $image;
     
     /**
      * @var string $description
@@ -150,7 +158,27 @@ class Recipe
     {
         return $this->name;
     }
-
+    
+    /**
+     * Set image
+     *
+     * @param string $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+ 
+    /**
+     * Get image
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+    
     /**
      * Set people
      *

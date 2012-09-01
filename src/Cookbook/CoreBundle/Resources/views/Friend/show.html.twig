@@ -19,6 +19,35 @@ Evènements :
             <li><a href="{{ path('event_show', { 'id': event.id }) }}">{{ event.name }}</a> le {{ event.date|date("d/m/Y") }}</li>
 {% endfor %}
 </ul>
+
+Déjà invité avec :
+
+<ul> 
+{% for friend in mutualFriends %}
+            <li><a href="{{ path('friend_show', { 'id': friend.id }) }}">{{ friend.name }}</a>
+                <ul> 
+                {% for event in friend.events %}
+                            <li><a href="{{ path('event_show', { 'id': event.id }) }}">{{ event.name }}</a> le {{ event.date|date("d/m/Y") }}</li>
+                {% endfor %}
+                </ul>
+            </li>
+{% endfor %}
+</ul>
+
+
+A déjà mangé :
+<ul> 
+{% for recipe in knownRecipies %}
+            <li><a href="{{ path('recipe_show', { 'id': recipe.id }) }}">{{ recipe.name }}</a>
+                <ul> 
+                {% for event in recipe.events %}
+                            <li><a href="{{ path('event_show', { 'id': event.id }) }}">{{ event.name }}</a> le {{ event.date|date("d/m/Y") }}</li>
+                {% endfor %}
+                </ul>
+            </li>
+{% endfor %}
+</ul>
+
  un ami de  {{ friend.people.name }}
 </div>
 <div id="content_right">&nbsp;</div>

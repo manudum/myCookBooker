@@ -112,6 +112,10 @@ friend_show:
   pattern: /friend/show/{id}
   defaults:  { _controller: CookbookCoreBundle:Friend:show }
   
+friend_list:
+  pattern: /friend/list/
+  defaults:  { _controller: CookbookCoreBundle:Friend:list }
+  
   
 event_new:
   pattern: /event/new/

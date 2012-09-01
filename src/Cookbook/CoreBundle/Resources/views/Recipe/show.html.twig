@@ -19,6 +19,7 @@
 
 </div>
 <div id="content_middle">
+<img src="{{ asset('uploads/recipies/' ~ recipe.id ~'/picture/' ~ recipe.image)}}" alt="photo" width="150" />
 <h3>Recette</h3>
 <div id="content_recipe"> 
 {{ recipe.description|nl2br }}

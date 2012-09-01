@@ -17,7 +17,14 @@
 <div class="events">
 <a class="lienAdd" href="{{ path('event_new') }}"><img src="{{ asset('bundles/cookbookcore/images/plus.gif') }}" border="0" /></a>
     <ul id="listEvents"> 
+        {% set month = '' %}
         {% for event in user.events %}
+            {% if month !=  event.date|date("m") %}
+            {% set month = event.date|date("m") %}
+                <li>
+                    <h2>{{ event.date|date("F Y") }}</h2>
+                </li>
+            {% endif %}
                     <li>
                         <div class="event_date lfloat"><b>{{ event.date|date("d/m/Y") }}</b></div>
                         <div class="event">
