@@ -160,6 +160,43 @@ if ( $.attrFn ) {$.attrFn.text = true;}
       return false;
    });
    
+   if ( $("#picture_recipe").length )  $("#picture_recipe").click(function(){
+      //get the url for the form
+      var url= location.href+ '../../../..' + '/recipe/upload/' + $("#recipe_id").val();
+      //$('#upload_picture').show();
+      //start send the post request
+      $('#upload_iframe').attr('src', url).dialog({autoOpen: true,
+          title : 'Ajouter une photo',
+            maxWidth:500,
+            maxHeight: 200,
+            width: 500,
+            height: 200,
+            modal: true
+        });
+      
+      $('#upload_iframe').load(function() 
+        {
+            if ($("#upload_iframe").contents().find("#upload_submit").length) {
+                $("#upload_iframe").contents().find("#upload_submit").click(function()
+                {
+                    $("#upload_iframe").contents().find("#upload_form").submit();
+                    return false;
+
+                });
+            } else {
+                 var img = $("#upload_iframe").contents().find('body').html();
+                 $('#picture_recipe').attr('src', img);
+                 $('#picture_recipe').removeClass( "opacity20" );
+                 $('#upload_iframe').dialog("close");
+                 $('#content_recipe').focus();
+            }
+            
+        });
+
+       
+      return false;
+   });
+   
    if ( $("#new_ingredient").length ) 
    {
       //get the url for the form

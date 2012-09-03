@@ -79,6 +79,43 @@ class RecipeController extends Controller
                 ));
     }
     
+    /**
+     * @Route("/recipe/upload/{id}")
+     * @Template()
+     */
+    public function uploadAction($id) {
+        
+        // create a task and give it some dummy data for this example
+        $recipe = $this->getDoctrine()
+                ->getRepository('CookbookCoreBundle:Recipe')
+                ->find($id);
+        $form = $this->createFormBuilder($recipe)
+            ->add('image','file',array('required' => true))
+            ->getForm()
+        ;
+        
+        $view = $form->createView();
+
+        if ($this->getRequest()->getMethod() === 'POST') {
+            $form->bindRequest($this->getRequest());
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getEntityManager();
+
+                $em->persist($recipe);
+                $em->flush();
+                $request = $this->getRequest();
+                $baseurl = $request->getScheme() . '://' . $request->getHttpHost() . $request->getBasePath();
+                $return = $baseurl.'/uploads/recipies/'.$recipe->getId().'/picture/'.$recipe->getImage();
+          
+                return new Response($return,200,array('Content-Type'=>'text/html'));
+            }
+        }
+        
+        return $this->render('CookbookCoreBundle:Recipe:upload.html.twig', array(
+                    'form' => $view
+                ));
+    }
+    
     
     /**
      * @Route("/recipe/show/{id}")

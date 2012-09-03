@@ -48,7 +48,7 @@ class RecipeType extends AbstractType
                     'expanded' => true, 
                 ))
             ->add('description', 'textarea', array('required' => false, "attr" => array("cols" => "60", "rows" => "10")))
-            ->add('image')
+            
         ;
     }
 

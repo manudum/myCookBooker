@@ -19,17 +19,24 @@
 
 </div>
 <div id="content_middle">
-<img src="{{ asset('uploads/recipies/' ~ recipe.id ~'/picture/' ~ recipe.image)}}" alt="photo" width="150" />
 <h3>Recette</h3>
+{% if recipe.image != '' %}
+<img id="picture_recipe" src="{{ asset('uploads/recipies/' ~ recipe.id ~'/picture/' ~ recipe.image)}}" alt="photo" />
+{% else %}
+<img id="picture_recipe" class="opacity20" src="{{ asset('bundles/cookbookcore/images/spoon.png') }}" />
+{% endif %}
+
 <div id="content_recipe"> 
 {{ recipe.description|nl2br }}
 </div>
+<div class="div_info">
 <h3>Déjà servie</h3>
 <ul> 
 {% for event in recipe.events %}
             <li><a href="{{ path('event_show', { 'id': event.id }) }}">{{ event.name }}</a> le {{ event.date|date("d/m/Y") }}</li>
 {% endfor %}
 </ul>
+</div>
  un plat de  {{ recipe.people.name }}
 <a href="{{ path('recipe_edit', { 'id': recipe.id }) }}">modifer</a>
 </div>
@@ -58,5 +65,5 @@
 </ul>
 </div>
 </div>
-
+<div id="upload_picture" style="display: none;border: 1px solid red"><iframe id="upload_iframe"></iframe></div>
  {% endblock %}

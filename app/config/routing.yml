@@ -69,6 +69,10 @@ recipe_edit:
   pattern: /recipe/edit/{id}
   defaults:  { _controller: CookbookCoreBundle:Recipe:edit }
   
+recipe_upload:
+  pattern: /recipe/upload/{id}
+  defaults:  { _controller: CookbookCoreBundle:Recipe:upload }  
+  
 recipe_get:
   pattern: /recipe/get/
   defaults:  { _controller: CookbookCoreBundle:Recipe:get }

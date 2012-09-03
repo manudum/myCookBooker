@@ -65,6 +65,10 @@ textarea{
     
 }
 
+.opacity20{
+    opacity: 0.2;
+}
+
 .header_cookbook { 
     position: relative;
     background-color : #fff;
@@ -451,11 +455,30 @@ ul#listFriends li {
     margin:0;
 }
 
+.div_info{
+    clear:both;
+}
+
+#picture_recipe{
+    float: right;
+    width:20%;
+    margin: 0.2%;
+    padding: 0.1%;
+    
+}
+
 #content_recipe{
-    margin: 5px;
-    padding: 5px;
+    margin: 0.2%;
+    padding: 0.1%;
     border: 2px solid #ccc;
     border-radius: 5px;
+    float: right;
+    width: 78%;
+    min-height: 100px;
+}
+
+#upload_iframe{
+    width: 450px !important;
 }
 
 ul#ingredients_list {font-family:helvetica,arial,sans-serif;
