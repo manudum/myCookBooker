@@ -27,6 +27,13 @@ class FormatRecipe
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+    
+    /**
+     *
+     * @ORM\Column(name="showorder", type="integer", nullable=true)
+     */
+    protected $showorder;
+    
 
     /**
      * @ORM\OneToMany(targetEntity="Recipe", mappedBy="format")
@@ -119,5 +126,45 @@ class FormatRecipe
     public function getPeople()
     {
         return $this->people;
+    }
+
+    /**
+     * Set order
+     *
+     * @param integer $order
+     */
+    public function setOrder($order)
+    {
+        $this->order = $order;
+    }
+
+    /**
+     * Get order
+     *
+     * @return integer 
+     */
+    public function getOrder()
+    {
+        return $this->order;
+    }
+
+    /**
+     * Set showorder
+     *
+     * @param integer $showorder
+     */
+    public function setShoworder($showorder)
+    {
+        $this->showorder = $showorder;
+    }
+
+    /**
+     * Get showorder
+     *
+     * @return integer 
+     */
+    public function getShoworder()
+    {
+        return $this->showorder;
     }
 }

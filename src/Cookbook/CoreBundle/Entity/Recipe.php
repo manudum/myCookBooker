@@ -140,7 +140,7 @@ class Recipe
      */
     public function uploadImage() {
         // the file property can be empty if the field is not required
-        if (null === $this->image) {
+        if (null === $this->image || $this->image == "") {
             return;
         }
         if(!$this->id){

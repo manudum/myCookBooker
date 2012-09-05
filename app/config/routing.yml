@@ -84,6 +84,14 @@ categoryrecipe_new:
   pattern: /categoryrecipe/new/
   defaults:  { _controller: CookbookCoreBundle:CategoryRecipe:new }
   
+categoryrecipe_list:
+  pattern: /categoryrecipe/list/
+  defaults:  { _controller: CookbookCoreBundle:CategoryRecipe:list }
+
+categoryrecipe_reorder:
+  pattern: /categoryrecipe/reorder/
+  defaults:  { _controller: CookbookCoreBundle:CategoryRecipe:reorder }
+  
 categoryrecipe_show:
   pattern: /categoryrecipe/show/{id}
   defaults:  { _controller: CookbookCoreBundle:CategoryRecipe:show }

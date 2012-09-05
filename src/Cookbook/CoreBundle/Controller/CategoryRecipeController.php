@@ -67,5 +67,31 @@ class CategoryRecipeController extends Controller
         return $this->render('CookbookCoreBundle:CategoryRecipe:show.html.twig', array('categoryrecipe' => $categoryRecipe));
     }
     
+    /**
+     * @Route("/categoryrecipe/list")
+     * @Template()
+     */
+    public function listAction() {
+
+        $usr= $this->get('security.context')->getToken()->getUser();
+        $categories = $this->getDoctrine()
+                ->getRepository('CookbookCoreBundle:CategoryRecipe')
+                ->findBy(array('people' => $usr->getId()));
+        return $this->render('CookbookCoreBundle:CategoryRecipe:list.html.twig', 
+                    array('categories' => $categories,
+                    'user' => $usr));
+    }
+    
+    /**
+     * @Route("/categoryrecipe/reorder")
+     * @Template()
+     */
+    public function reorderAction(Request $request) {
+
+        $filter = $request->request->all();
+        $filter= array_filter($filter);
+        print_r($filter['order'] );
+    }
+    
     
 }

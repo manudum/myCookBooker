@@ -1,0 +1,50 @@
+ {% extends '::base.html.twig' %}
+
+ {% block body %}
+<script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/jquery-ui-1.8.22.custom.min.js') }}"></script>
+
+{% include 'CookbookCoreBundle:Default:header.html.twig' %}
+
+<div id="content_header"><h1>Mes Catégories</h1>
+</div>
+
+
+<div id="content_left">
+<div class="stepImg">
+<img src="{{ asset('bundles/cookbookcore/images/setting.png') }}" />
+</div>
+</div>
+<div id="content_middle">
+<div class="categories">
+<a class="lienAdd" href="{{ path('categoryrecipe_new') }}"><img src="{{ asset('bundles/cookbookcore/images/plus.gif') }}" border="0" /></a>
+    <ul id="listCategories"> 
+        {% for category in categories %}
+                    <li class="ui-state-default" id="order_{{ category.id }}">
+                            <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+                        <a href="{{ path('categoryrecipe_show', { 'id': category.id }) }}">{{ category.name }}</a>
+                       
+                    </li>
+        {% endfor %}
+        </ul>
+<a href="{{ path('friend_new') }}">Ajouter un invité</a>
+ </div>
+</div>
+<div id="content_right">
+</div>
+<script>
+$(function() {
+		$( "#listCategories" ).sortable({
+                    stop: function(event, ui) {
+                        console.log($( this ).sortable( "serialize"));
+                        var param = $( this ).sortable( "serialize");
+                        $.post('../../categoryrecipe/reorder',
+                                        param,function(data){
+                                        //the response is in the data variable
+                                            console.log('done');
+                                    });
+                    }
+                 });
+		$( "#listCategories" ).disableSelection();
+	});
+        </script>
+ {% endblock %}
