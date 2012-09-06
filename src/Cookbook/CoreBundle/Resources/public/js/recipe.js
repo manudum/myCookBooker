@@ -29,7 +29,11 @@ if ( $.attrFn ) {$.attrFn.text = true;}
                                     $.post(url,
                                         $("#cat_form").serialize(),function(data){
                                         //the response is in the data variable
-                                            $('#cookbook_corebundle_recipetype_category').append('<option value="'+data.id+'" selected="selected">'+data.name+'</option>')
+                                            if ($('#cookbook_corebundle_recipetype_category').length) $('#cookbook_corebundle_recipetype_category').append('<option value="'+data.id+'" selected="selected">'+data.name+'</option>');
+                                            if ($('#listCategories').length) {
+                                                $('#listCategories').append('<li class="ui-state-default" id="order_'+data.id+'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><span id="order_span_'+data.id+'" onclick="editCategory('+data.id+');">'+data.name+'</span><span class="rfloat hand" onclick="removeCategory('+data.id+'); return false;">x</span></li>');
+                                                reorderCategory();
+                                            }
                                             $('#new_cat').html();
                                     });//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down
 
@@ -83,8 +87,11 @@ if ( $.attrFn ) {$.attrFn.text = true;}
                                     $.post(url,
                                         $("#format_form").serialize(),function(data){
                                         //the response is in the data variable
-                                            $('#cookbook_corebundle_recipetype_format').append('<option value="'+data.id+'" selected="selected">'+data.name+'</option>')
-                                            $('#new_format').html();
+                                            if ($('#cookbook_corebundle_recipetype_format').length) $('#cookbook_corebundle_recipetype_format').append('<option value="'+data.id+'" selected="selected">'+data.name+'</option>');
+                                            if ($('#listFormats').length) {
+                                                $('#listFormats').append('<li class="ui-state-default" id="order_'+data.id+'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><span id="order_span_'+data.id+'" onclick="editFormat('+data.id+')">'+data.name+'</span><span class="rfloat hand" onclick="removeFormat('+data.id+'); return false;">x</span></li>');
+                                                reorderFormat();
+                                            }$('#new_format').html();
                                     });//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down
 
                                     //we dont what the browser to submit the form
@@ -227,28 +234,14 @@ if ( $.attrFn ) {$.attrFn.text = true;}
     
     if ($( "#listFormats" ).length) {
     $( "#listFormats" ).sortable({
-                    stop: function(event, ui) {
-                        var param = $( this ).sortable( "serialize");
-                        $.post('../../formatrecipe/reorder',
-                                        param,function(data){
-                                        //the response is in the data variable
-                                            //console.log('done');
-                                    });
-                    }
+                    stop: reorderFormat
                  });
 		$( "#listFormats" ).disableSelection();
     }
     
     if ($( "#listCategories" ).length) {
         $( "#listCategories" ).sortable({
-                    stop: function(event, ui) {
-                        var param = $( this ).sortable( "serialize");
-                        $.post('../../categoryrecipe/reorder',
-                                        param,function(data){
-                                        //the response is in the data variable
-                                            //console.log('done');
-                                    });
-                    }
+                    stop: reorderCategory
                  });
 		$( "#listCategories" ).disableSelection();
     }
@@ -336,6 +329,186 @@ function editType(id) {
                                             }
                                             
                                             $('#new_type').html();
+                                    });//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down
+
+                                    //we dont what the browser to submit the form
+                                    $( this ).dialog( "close" );
+                            },
+                            "Annuler": function() {
+                                        $( this ).dialog( "close" );
+                            }
+                        },
+			close: function() {
+				//allFields.val( "" ).removeClass( "ui-state-error" );
+			}
+		});
+              
+               
+           
+       });//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down
+
+}
+
+function removeFormat(id)
+   {
+       //get the url for the form
+       var url='../../formatrecipe/delete/'+id;
+       $( "#dialog:ui-dialog" ).dialog( "destroy" );
+	
+		$( "#dialog-confirm" ).dialog({
+			resizable: false,
+			height:140,
+			modal: true,
+			buttons: {
+				"Supprimer le format": function() {
+					$.get(url,{
+                                            other:"attributes"
+                                        },function(data){
+                                            $('#order_'+id).remove();
+                                            reorderFormat();
+                                        });
+                                        
+                                        $( this ).dialog( "close" );
+				},
+				Annuler: function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		}); 
+   }
+   
+function reorderFormat() {
+    var param = $( "#listFormats" ).sortable( "serialize");
+    $.post('../../formatrecipe/reorder',
+                    param,function(data){
+                    //the response is in the data variable
+                        //console.log('done');
+                });
+}
+
+function editFormat(id) {
+    //get the url for the form
+      var url='../../formatrecipe/edit/'+id;
+   
+      //start send the post request
+      
+       $.get(url,{
+           other:"attributes"
+       },function(data){
+           //the response is in the data variable
+  
+              //if you want to print the error:
+              $('#new_format').html(data);
+              $('#new_format').dialog({
+			autoOpen: true,
+			height: 300,
+			width: 350,
+			modal: true,
+                        title: "Modification Format",
+                        buttons: {
+                            "Modifier": function() {
+                                    //get the url for the form
+                                    var url=$("#format_form").attr("action");
+
+                                    //start send the post request
+                                    $.post(url,
+                                        $("#format_form").serialize(),function(data){
+                                        //the response is in the data variable
+                                            if ($('#listFormats').length) {
+                                                $('#order_span_'+id).html(data.name);
+                                            }
+                                            
+                                            $('#new_format').html();
+                                    });//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down
+
+                                    //we dont what the browser to submit the form
+                                    $( this ).dialog( "close" );
+                            },
+                            "Annuler": function() {
+                                        $( this ).dialog( "close" );
+                            }
+                        },
+			close: function() {
+				//allFields.val( "" ).removeClass( "ui-state-error" );
+			}
+		});
+              
+               
+           
+       });//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down
+
+}
+
+function removeCategory(id)
+   {
+       //get the url for the form
+       var url='../../categoryrecipe/delete/'+id;
+       $( "#dialog:ui-dialog" ).dialog( "destroy" );
+	
+		$( "#dialog-confirm" ).dialog({
+			resizable: false,
+			height:140,
+			modal: true,
+			buttons: {
+				"Supprimer le category": function() {
+					$.get(url,{
+                                            other:"attributes"
+                                        },function(data){
+                                            $('#order_'+id).remove();
+                                            reorderCategory();
+                                        });
+                                        
+                                        $( this ).dialog( "close" );
+				},
+				Annuler: function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		}); 
+   }
+   
+function reorderCategory() {
+    var param = $( "#listCategories" ).sortable( "serialize");
+    $.post('../../categoryrecipe/reorder',
+                    param,function(data){
+                    //the response is in the data variable
+                        //console.log('done');
+                });
+}
+
+function editCategory(id) {
+    //get the url for the form
+      var url='../../categoryrecipe/edit/'+id;
+   
+      //start send the post request
+      
+       $.get(url,{
+           other:"attributes"
+       },function(data){
+           //the response is in the data variable
+  
+              //if you want to print the error:
+              $('#new_cat').html(data);
+              $('#new_cat').dialog({
+			autoOpen: true,
+			height: 300,
+			width: 350,
+			modal: true,
+                        title: "Modification Categorie",
+                        buttons: {
+                            "Modifier": function() {
+                                    //get the url for the form
+                                    var url=$("#cat_form").attr("action");
+
+                                    //start send the post request
+                                    $.post(url,
+                                        $("#cat_form").serialize(),function(data){
+                                        //the response is in the data variable
+                                            if ($('#listCategories').length) {
+                                                $('#order_span_'+id).html(data.name);
+                                            }
+                                            
+                                            $('#new_cat').html();
                                     });//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down
 
                                     //we dont what the browser to submit the form

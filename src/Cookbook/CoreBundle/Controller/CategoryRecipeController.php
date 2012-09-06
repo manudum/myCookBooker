@@ -51,9 +51,54 @@ class CategoryRecipeController extends Controller
 
         return $this->render('CookbookCoreBundle:CategoryRecipe:new.html.twig', array(
                     'form' => $form->createView(),
+                    'action' => 'categoryrecipe_new',
                 ));
     }
     
+    /**
+     * @Route("/categoryrecipe/edit/{id}")
+     * @Template()
+     */
+    public function editAction($id, Request $request) {
+
+        // create a task and give it some dummy data for this example
+        $usr= $this->get('security.context')->getToken()->getUser();
+        // create a task and give it some dummy data for this example
+        $categoryRecipe = $this->getDoctrine()
+                ->getRepository('CookbookCoreBundle:CategoryRecipe')
+                ->find($id);
+
+        $form = $this->createFormBuilder($categoryRecipe)
+                ->add('name','text', array(
+                'attr' => array('placeholder' => 'Nouvelle catégorie'),
+                ))
+                ->getForm();
+        if ($request->getMethod() == 'POST') {
+            $form->bindRequest($request);
+
+            if ($form->isValid()) {
+                $people = $this->get('security.context')->getToken()->getUser();
+        
+                // perform some action, such as saving the task to the database
+                $em = $this->getDoctrine()->getEntityManager();
+                $em->persist($categoryRecipe);
+                $em->flush();
+
+                if(!$request->isXmlHttpRequest())
+                {
+                    return $this->redirect($this->generateUrl('cookbook'));
+                } else {
+                    $return = json_encode(array('id' => $categoryRecipe->getId(), 'name' => $categoryRecipe->getName()));
+                    return new Response($return,200,array('Content-Type'=>'application/json'));
+                }
+            }
+        }
+
+        return $this->render('CookbookCoreBundle:CategoryRecipe:new.html.twig', array(
+                    'form' => $form->createView(),
+                    'action' => 'categoryrecipe_edit',
+                ));
+    }
     
     /**
      * @Route("/categoryrecipe/show/{id}")
@@ -106,5 +151,23 @@ class CategoryRecipeController extends Controller
 
     }
     
+    /**
+     * @Route("/categoryrecipe/delete/{id}")
+     * @Template()
+     */
+    public function deleteAction($id) {
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $repository = $em->getRepository('CookbookCoreBundle:CategoryRecipe');
+
+        if ($repository->deleteCategoryRecipe($id)) {
+            return new Response(1,200,array('Content-Type'=>'application/json'));
+        }
+        else
+        {
+            return new Response(0,500,array('Content-Type'=>'application/json'));
+        }
+        
+    }
     
 }

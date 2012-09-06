@@ -1,6 +1,9 @@
  {% extends '::base.html.twig' %}
 
  {% block body %}
-    <a href="{{ path('logout') }}">Log out</a>
- {{user.name}}
+    {{user.name}}<a href="{{ path('logout') }}">&nbsp;Log out</a><br /><br />
+    <a href="{{ path('categoryrecipe_list') }}">Gérer les catégories</a><br /><br />
+    <a href="{{ path('typerecipe_list') }}">Gérer les types</a><br /><br />
+    <a href="{{ path('formatrecipe_list') }}">Gérer les formats</a><br /><br />
+    
  {% endblock %}

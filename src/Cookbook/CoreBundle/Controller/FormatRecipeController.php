@@ -44,7 +44,7 @@ class FormatRecipeController extends Controller
                 {
                     return $this->redirect($this->generateUrl('cookbook'));
                 } else {
-                    $return = json_encode(array('id' => $formatRecipe->getId(), 'name' =>$formatRecipe->getName()));
+                    $return = json_encode(array('id' => $formatRecipe->getId(), 'name' => $formatRecipe->getName()));
                     return new Response($return,200,array('Content-Type'=>'application/json'));
                 }
             }
@@ -52,6 +52,52 @@ class FormatRecipeController extends Controller
 
         return $this->render('CookbookCoreBundle:FormatRecipe:new.html.twig', array(
                     'form' => $form->createView(),
+                    'action' => 'formatrecipe_new',
+                ));
+    }
+    
+    /**
+     * @Route("/formatrecipe/edit/{id}")
+     * @Template()
+     */
+    public function editAction($id, Request $request) {
+
+        // create a task and give it some dummy data for this example
+        $usr= $this->get('security.context')->getToken()->getUser();
+        // create a task and give it some dummy data for this example
+        $formatRecipe = $this->getDoctrine()
+                ->getRepository('CookbookCoreBundle:FormatRecipe')
+                ->find($id);
+
+        $form = $this->createFormBuilder($formatRecipe)
+                ->add('name','text', array(
+                'attr' => array('placeholder' => 'Nouveau format'),
+                ))
+                ->getForm();
+        if ($request->getMethod() == 'POST') {
+            $form->bindRequest($request);
+
+            if ($form->isValid()) {
+                $people = $this->get('security.context')->getToken()->getUser();
+        
+                // perform some action, such as saving the task to the database
+                $em = $this->getDoctrine()->getEntityManager();
+                $em->persist($formatRecipe);
+                $em->flush();
+
+                if(!$request->isXmlHttpRequest())
+                {
+                    return $this->redirect($this->generateUrl('cookbook'));
+                } else {
+                    $return = json_encode(array('id' => $formatRecipe->getId(), 'name' => $formatRecipe->getName()));
+                    return new Response($return,200,array('Content-Type'=>'application/json'));
+                }
+            }
+        }
+
+        return $this->render('CookbookCoreBundle:FormatRecipe:new.html.twig', array(
+                    'form' => $form->createView(),
+                    'action' => 'formatrecipe_edit',
                 ));
     }
     
@@ -107,5 +153,22 @@ class FormatRecipeController extends Controller
 
     }
     
-    
+    /**
+     * @Route("/formatrecipe/delete/{id}")
+     * @Template()
+     */
+    public function deleteAction($id) {
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $repository = $em->getRepository('CookbookCoreBundle:FormatRecipe');
+
+        if ($repository->deleteFormatRecipe($id)) {
+            return new Response(1,200,array('Content-Type'=>'application/json'));
+        }
+        else
+        {
+            return new Response(0,500,array('Content-Type'=>'application/json'));
+        }
+        
+    }
 }

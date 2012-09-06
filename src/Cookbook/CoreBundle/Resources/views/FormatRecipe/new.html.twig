@@ -1,4 +1,6 @@
-<form id="format_form" action="{{ path('formatrecipe_new') }}" method="post" {{ form_enctype(form) }}>
+<form id="format_form" action="{% if action == 'formatrecipe_new' %}{{ path('formatrecipe_new') }}{% else %}
+{{ path('formatrecipe_edit', { 'id': form.vars.value.id }) }} }}
+{% endif %}" method="post" {{ form_enctype(form) }}>
    {{ form_errors(form) }}
 
 <div>

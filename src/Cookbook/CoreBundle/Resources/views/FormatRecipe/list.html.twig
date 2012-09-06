@@ -22,7 +22,8 @@
         {% for format in formats %}
                     <li class="ui-state-default" id="order_{{ format.id }}">
                             <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
-                        <a href="{{ path('formatrecipe_show', { 'id': format.id }) }}">{{ format.name }}</a>
+                    <span id="order_span_{{ format.id }}" onclick="editFormat({{ format.id }})">{{ format.name }}</span>
+                    <span class="rfloat hand" onclick="removeFormat({{ format.id }}); return false;">x</span>
                        
                     </li>
         {% endfor %}
@@ -32,4 +33,7 @@
 <div id="content_right">
 </div>
 <div id="new_format"></div>
+<div id="dialog-confirm" title="Supprimer le format" style="display:none;">
+	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Le format sera supprimé définitivement. Etes-vous sûr ??</p>
+</div>
  {% endblock %}
