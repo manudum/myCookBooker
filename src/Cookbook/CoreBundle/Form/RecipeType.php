@@ -19,7 +19,7 @@ class RecipeType extends AbstractType
                     'query_builder' => function(EntityRepository $repository) use($options) {
                     return $repository->createQueryBuilder('q')
                         ->where('q.people = '.$options['user_id'])
-                        ->orderBy('q.name');
+                        ->orderBy('q.showorder');
                     },
                     'empty_value' => 'Choisir une valeur',
                     'required' => false, 
@@ -30,7 +30,7 @@ class RecipeType extends AbstractType
                     'query_builder' => function(EntityRepository $repository) use($options){
                     return $repository->createQueryBuilder('q')
                         ->where('q.people = '.$options['user_id'])
-                        ->orderBy('q.name');
+                        ->orderBy('q.showorder');
                     },
                     'empty_value' => 'Choisir une valeur',
                     'required' => true,
@@ -41,7 +41,7 @@ class RecipeType extends AbstractType
                     'query_builder' => function(EntityRepository $repository) use($options){
                     return $repository->createQueryBuilder('q')
                         ->where('q.people = '.$options['user_id'])
-                        ->orderBy('q.name');
+                        ->orderBy('q.showorder');
                     },
                     'empty_value' => 'Choisir une valeur',
                     'required' => false,

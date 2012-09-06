@@ -68,5 +68,44 @@ class FormatRecipeController extends Controller
         return $this->render('CookbookCoreBundle:FormatRecipe:show.html.twig', array('formatrecipe' => $formatRecipe));
     }
     
+    /**
+     * @Route("/formatrecipe/list")
+     * @Template()
+     */
+    public function listAction() {
+
+        $usr= $this->get('security.context')->getToken()->getUser();
+        $formats = $this->getDoctrine()
+                ->getRepository('CookbookCoreBundle:FormatRecipe')
+                ->findBy(array('people' => $usr->getId()),array('showorder'=> 'ASC'));
+        return $this->render('CookbookCoreBundle:FormatRecipe:list.html.twig', 
+                    array('formats' => $formats,
+                    'user' => $usr));
+    }
+    
+    /**
+     * @Route("/formatrecipe/reorder")
+     * @Template()
+     */
+    public function reorderAction(Request $request) {
+
+        $usr= $this->get('security.context')->getToken()->getUser();
+        $filter = $request->request->get('order');
+        //$filter= array_filter($filter);
+        $formats = $this->getDoctrine()
+                ->getRepository('CookbookCoreBundle:FormatRecipe')
+                ->findBy(array('people' => $usr->getId()));
+        $em = $this->getDoctrine()->getEntityManager();
+            
+        foreach ($formats as $format){
+            $format->setShoworder(array_search($format->getId(),$filter));
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($format);
+            $em->flush();
+        }
+        return new Response('ok',200,array('Content-Type'=>'application/json'));
+
+    }
+    
     
 }

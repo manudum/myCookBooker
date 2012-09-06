@@ -442,10 +442,18 @@ ul#listFriends li {
  
  
  
- #listCategories { list-style-type: none; margin: 0; padding: 0; width: 60%; }
-	#listCategories li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
-	#listCategories li span { position: absolute; margin-left: -1.3em; }
- 
+#listCategories { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+#listCategories li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
+#listCategories li span { position: absolute; margin-left: -1.3em; }
+
+#listFormats { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+#listFormats li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
+#listFormats li span { position: absolute; margin-left: -1.3em; }
+
+#listTypes { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+#listTypes li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
+#listTypes li span:first-of-type { position: absolute; margin-left: -1.3em; }
+
 
 
 

@@ -136,7 +136,12 @@ if ( $.attrFn ) {$.attrFn.text = true;}
                                     $.post(url,
                                         $("#type_form").serialize(),function(data){
                                         //the response is in the data variable
-                                            $('#cookbook_corebundle_recipetype_type').append('<option value="'+data.id+'" selected="selected">'+data.name+'</option>')
+                                            if ($('#cookbook_corebundle_recipetype_type').length) $('#cookbook_corebundle_recipetype_type').append('<option value="'+data.id+'" selected="selected">'+data.name+'</option>');
+                                            if ($('#listTypes').length) {
+                                                $('#listTypes').append('<li class="ui-state-default" id="order_'+data.id+'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span><span id="order_span_'+data.id+'" onclick="editType('+data.id+')">'+data.name+'</span><span class="rfloat hand" onclick="removeType('+data.id+'); return false;">x</span></li>');
+                                                reorderType();
+                                            }
+                                            
                                             $('#new_type').html();
                                     });//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down
 
@@ -219,14 +224,137 @@ if ( $.attrFn ) {$.attrFn.text = true;}
                
            
        }
-       
-       
-       
+    
+    if ($( "#listFormats" ).length) {
+    $( "#listFormats" ).sortable({
+                    stop: function(event, ui) {
+                        var param = $( this ).sortable( "serialize");
+                        $.post('../../formatrecipe/reorder',
+                                        param,function(data){
+                                        //the response is in the data variable
+                                            //console.log('done');
+                                    });
+                    }
+                 });
+		$( "#listFormats" ).disableSelection();
+    }
+    
+    if ($( "#listCategories" ).length) {
+        $( "#listCategories" ).sortable({
+                    stop: function(event, ui) {
+                        var param = $( this ).sortable( "serialize");
+                        $.post('../../categoryrecipe/reorder',
+                                        param,function(data){
+                                        //the response is in the data variable
+                                            //console.log('done');
+                                    });
+                    }
+                 });
+		$( "#listCategories" ).disableSelection();
+    }
+    
+    if($( "#listTypes" ).length){
+            $( "#listTypes" ).sortable({
+                    stop: reorderType
+                 });
+		$( "#listTypes" ).disableSelection();
+    }
+    
+    
     if ( $("#categories").length ) $('#categories').buttonset();
     if ( $("#types").length ) $('#types').buttonset();
     if ( $("#formats").length ) $('#formats').buttonset(); 
    });
    
+   function removeType(id)
+   {
+       //get the url for the form
+       var url='../../typerecipe/delete/'+id;
+       $( "#dialog:ui-dialog" ).dialog( "destroy" );
+	
+		$( "#dialog-confirm" ).dialog({
+			resizable: false,
+			height:140,
+			modal: true,
+			buttons: {
+				"Supprimer le type": function() {
+					$.get(url,{
+                                            other:"attributes"
+                                        },function(data){
+                                            $('#order_'+id).remove();
+                                            reorderType();
+                                        });
+                                        
+                                        $( this ).dialog( "close" );
+				},
+				Annuler: function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		}); 
+   }
+   
+function reorderType() {
+    var param = $( "#listTypes" ).sortable( "serialize");
+    $.post('../../typerecipe/reorder',
+                    param,function(data){
+                    //the response is in the data variable
+                        //console.log('done');
+                });
+}
+
+function editType(id) {
+    //get the url for the form
+      var url='../../typerecipe/edit/'+id;
+   
+      //start send the post request
+      
+       $.get(url,{
+           other:"attributes"
+       },function(data){
+           //the response is in the data variable
+  
+              //if you want to print the error:
+              $('#new_type').html(data);
+              $('#new_type').dialog({
+			autoOpen: true,
+			height: 300,
+			width: 350,
+			modal: true,
+                        title: "Modification Type",
+                        buttons: {
+                            "Modifier": function() {
+                                    //get the url for the form
+                                    var url=$("#type_form").attr("action");
+
+                                    //start send the post request
+                                    $.post(url,
+                                        $("#type_form").serialize(),function(data){
+                                        //the response is in the data variable
+                                            if ($('#listTypes').length) {
+                                                $('#order_span_'+id).html(data.name);
+                                            }
+                                            
+                                            $('#new_type').html();
+                                    });//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down
+
+                                    //we dont what the browser to submit the form
+                                    $( this ).dialog( "close" );
+                            },
+                            "Annuler": function() {
+                                        $( this ).dialog( "close" );
+                            }
+                        },
+			close: function() {
+				//allFields.val( "" ).removeClass( "ui-state-error" );
+			}
+		});
+              
+               
+           
+       });//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down
+
+}
    
    function removeIngredient(id)
    {
@@ -274,6 +402,8 @@ if ( $.attrFn ) {$.attrFn.text = true;}
         $( this ).dialog( "close" );
        
    }
+   
+
    
    
 

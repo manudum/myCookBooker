@@ -6,7 +6,7 @@
 
 {% include 'CookbookCoreBundle:Default:header.html.twig' %}
 
-<div id="content_header"><h1>Mes Catégories</h1>
+<div id="content_header"><h1>Mes Formats</h1>
 </div>
 
 
@@ -17,12 +17,12 @@
 </div>
 <div id="content_middle">
 <div class="categories">
-<a class="lienAdd" id="add_category" href="{{ path('categoryrecipe_new') }}"><img src="{{ asset('bundles/cookbookcore/images/plus.gif') }}" border="0" /></a>
-    <ul id="listCategories"> 
-        {% for category in categories %}
-                    <li class="ui-state-default" id="order_{{ category.id }}">
+<a class="lienAdd" id="add_format" href="{{ path('formatrecipe_new') }}"><img src="{{ asset('bundles/cookbookcore/images/plus.gif') }}" border="0" /></a>
+    <ul id="listFormats"> 
+        {% for format in formats %}
+                    <li class="ui-state-default" id="order_{{ format.id }}">
                             <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
-                        <a href="{{ path('categoryrecipe_show', { 'id': category.id }) }}">{{ category.name }}</a>
+                        <a href="{{ path('formatrecipe_show', { 'id': format.id }) }}">{{ format.name }}</a>
                        
                     </li>
         {% endfor %}
@@ -31,6 +31,5 @@
 </div>
 <div id="content_right">
 </div>
-<div id="new_cat"></div>
-
+<div id="new_format"></div>
  {% endblock %}

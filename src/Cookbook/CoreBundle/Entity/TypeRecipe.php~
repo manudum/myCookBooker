@@ -25,6 +25,7 @@ class TypeRecipe
      * @var string $name
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Entity(repositoryClass="Cookbook\CoreBundle\Entity\TypeRecipeRepository")
      */
     private $name;
     

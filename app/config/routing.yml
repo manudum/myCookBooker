@@ -105,6 +105,22 @@ typerecipe_show:
   pattern: /typerecipe/show/{id}
   defaults:  { _controller: CookbookCoreBundle:TypeRecipe:show }
   
+typerecipe_edit:
+  pattern: /typerecipe/edit/{id}
+  defaults:  { _controller: CookbookCoreBundle:TypeRecipe:edit }
+  
+typerecipe_list:
+  pattern: /typerecipe/list/
+  defaults:  { _controller: CookbookCoreBundle:TypeRecipe:list }
+
+typerecipe_reorder:
+  pattern: /typerecipe/reorder/
+  defaults:  { _controller: CookbookCoreBundle:TypeRecipe:reorder }
+  
+typerecipe_delete:
+  pattern: /typerecipe/delete/{id}
+  defaults:  { _controller: CookbookCoreBundle:TypeRecipe:delete }
+  
   
 formatrecipe_new:
   pattern: /formatrecipe/new/
@@ -113,6 +129,14 @@ formatrecipe_new:
 formatrecipe_show:
   pattern: /formatrecipe/show/{id}
   defaults:  { _controller: CookbookCoreBundle:FormatRecipe:show }
+  
+formatrecipe_list:
+  pattern: /formatrecipe/list/
+  defaults:  { _controller: CookbookCoreBundle:FormatRecipe:list }
+
+formatrecipe_reorder:
+  pattern: /formatrecipe/reorder/
+  defaults:  { _controller: CookbookCoreBundle:FormatRecipe:reorder }
   
   
   

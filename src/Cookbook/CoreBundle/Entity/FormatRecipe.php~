@@ -147,4 +147,24 @@ class FormatRecipe
     {
         return $this->order;
     }
+
+    /**
+     * Set showorder
+     *
+     * @param integer $showorder
+     */
+    public function setShoworder($showorder)
+    {
+        $this->showorder = $showorder;
+    }
+
+    /**
+     * Get showorder
+     *
+     * @return integer 
+     */
+    public function getShoworder()
+    {
+        return $this->showorder;
+    }
 }

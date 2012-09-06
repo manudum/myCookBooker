@@ -83,7 +83,7 @@ class IngredientController extends Controller
         }
         else
         {
-            return new Response(0,400,array('Content-Type'=>'application/json'));
+            return new Response(0,500,array('Content-Type'=>'application/json'));
         }
         
     }

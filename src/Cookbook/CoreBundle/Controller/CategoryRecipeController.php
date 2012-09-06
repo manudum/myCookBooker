@@ -76,7 +76,7 @@ class CategoryRecipeController extends Controller
         $usr= $this->get('security.context')->getToken()->getUser();
         $categories = $this->getDoctrine()
                 ->getRepository('CookbookCoreBundle:CategoryRecipe')
-                ->findBy(array('people' => $usr->getId()));
+                ->findBy(array('people' => $usr->getId()),array('showorder'=> 'ASC'));
         return $this->render('CookbookCoreBundle:CategoryRecipe:list.html.twig', 
                     array('categories' => $categories,
                     'user' => $usr));
@@ -88,9 +88,22 @@ class CategoryRecipeController extends Controller
      */
     public function reorderAction(Request $request) {
 
-        $filter = $request->request->all();
-        $filter= array_filter($filter);
-        print_r($filter['order'] );
+        $usr= $this->get('security.context')->getToken()->getUser();
+        $filter = $request->request->get('order');
+        //$filter= array_filter($filter);
+        $categories = $this->getDoctrine()
+                ->getRepository('CookbookCoreBundle:CategoryRecipe')
+                ->findBy(array('people' => $usr->getId()));
+        $em = $this->getDoctrine()->getEntityManager();
+            
+        foreach ($categories as $category){
+            $category->setShoworder(array_search($category->getId(),$filter));
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($category);
+            $em->flush();
+        }
+        return new Response('ok',200,array('Content-Type'=>'application/json'));
+
     }
     
     

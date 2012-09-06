@@ -1,0 +1,39 @@
+ {% extends '::base.html.twig' %}
+
+ {% block body %}
+<script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/jquery-ui-1.8.22.custom.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/recipe.js') }}"></script>
+
+{% include 'CookbookCoreBundle:Default:header.html.twig' %}
+
+<div id="content_header"><h1>Mes Types</h1>
+</div>
+
+
+<div id="content_left">
+<div class="stepImg">
+<img src="{{ asset('bundles/cookbookcore/images/setting.png') }}" />
+</div>
+</div>
+<div id="content_middle">
+<div class="categories">
+<a class="lienAdd" id="add_type" href="{{ path('typerecipe_new') }}"><img src="{{ asset('bundles/cookbookcore/images/plus.gif') }}" border="0" /></a>
+    <ul id="listTypes"> 
+        {% for type in types %}
+                    <li class="ui-state-default" id="order_{{ type.id }}">
+                            <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+                    <span id="order_span_{{ type.id }}" onclick="editType({{ type.id }})">{{ type.name }}</span>
+                    <span class="rfloat hand" onclick="removeType({{ type.id }}); return false;">x</span>
+                       
+                    </li>
+        {% endfor %}
+        </ul>
+ </div>
+</div>
+<div id="content_right">
+</div>
+<div id="new_type"></div>
+<div id="dialog-confirm" title="Supprimer le type" style="display:none;">
+	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Le type sera supprimé définitivement. Etes-vous sûr ??</p>
+</div>
+ {% endblock %}
