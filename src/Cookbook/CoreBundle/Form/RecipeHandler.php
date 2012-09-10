@@ -28,7 +28,6 @@ class RecipeHandler
         if( $this->request->getMethod() == 'POST' )
         {
             $this->form->bindRequest($this->request);
-
             if( $this->form->isValid() )
             {
                 $this->onSuccess($this->form->getData());

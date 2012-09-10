@@ -32,7 +32,6 @@ class Recipe
     
      /**
      * @var string $image
-     * @Assert\File( maxSize = "1024k", mimeTypesMessage = "Please upload a valid Image")
      * @ORM\Column(name="image", type="string", length=255, nullable=true)
      */
     private $image;
@@ -89,6 +88,30 @@ class Recipe
      * @ORM\ManyToMany(targetEntity="Wine", mappedBy="recipes")
      */
     protected $wines;
+    
+    /**
+     *
+     * @ORM\Column(name="preparetime", type="integer", nullable=true)
+     */
+    protected $preparetime;
+    
+    /**
+     *
+     * @ORM\Column(name="cooktime", type="integer", nullable=true)
+     */
+    protected $cooktime;
+    
+    /**
+     *
+     * @ORM\Column(name="servings", type="integer", nullable=true)
+     */
+    protected $servings;
+    
+    /**
+     *
+     * @ORM\Column(name="difficulty", type="integer", nullable=true)
+     */
+    protected $difficulty;
 
     public function __construct() {
         $this->events = new \Doctrine\Common\Collections\ArrayCollection();
@@ -140,7 +163,7 @@ class Recipe
      */
     public function uploadImage() {
         // the file property can be empty if the field is not required
-        if (null === $this->image || $this->image == "") {
+        if (null === $this->image || $this->image == "" || (!is_object($this->image))) {
             return;
         }
         if(!$this->id){
@@ -463,5 +486,85 @@ class Recipe
     public function getWines()
     {
         return $this->wines;
+    }
+
+    /**
+     * Set preparetime
+     *
+     * @param integer $preparetime
+     */
+    public function setPreparetime($preparetime)
+    {
+        $this->preparetime = $preparetime;
+    }
+
+    /**
+     * Get preparetime
+     *
+     * @return integer 
+     */
+    public function getPreparetime()
+    {
+        return $this->preparetime;
+    }
+
+    /**
+     * Set cooktime
+     *
+     * @param integer $cooktime
+     */
+    public function setCooktime($cooktime)
+    {
+        $this->cooktime = $cooktime;
+    }
+
+    /**
+     * Get cooktime
+     *
+     * @return integer 
+     */
+    public function getCooktime()
+    {
+        return $this->cooktime;
+    }
+
+    /**
+     * Set servings
+     *
+     * @param integer $servings
+     */
+    public function setServings($servings)
+    {
+        $this->servings = $servings;
+    }
+
+    /**
+     * Get servings
+     *
+     * @return integer 
+     */
+    public function getServings()
+    {
+        return $this->servings;
+    }
+
+    /**
+     * Set difficulty
+     *
+     * @param integer $difficulty
+     */
+    public function setDifficulty($difficulty)
+    {
+        $this->difficulty = $difficulty;
+    }
+
+    /**
+     * Get difficulty
+     *
+     * @return integer 
+     */
+    public function getDifficulty()
+    {
+        return $this->difficulty;
     }
 }

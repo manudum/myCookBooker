@@ -47,6 +47,21 @@ class RecipeType extends AbstractType
                     'required' => false,
                     'expanded' => true, 
                 ))
+            ->add('preparetime', 'integer', array(
+                'attr' => array('style' => 'width:100px;'),
+            ))
+            ->add('cooktime', 'integer', array(
+                'attr' => array('style' => 'width:100px;'),
+            ))
+            ->add('difficulty','choice', array(
+                'choices'   => array(
+                    '1'   => '1',
+                    '2' => '2',
+                    '3'   => '3',
+                ),
+                'multiple'  => false,
+                'expanded' => true,
+            ))
             ->add('description', 'textarea', array('required' => false, "attr" => array("cols" => "60", "rows" => "10")))
             
         ;

@@ -39,6 +39,11 @@ input[type=text]{
     border: 1px solid #3DBEF5;
 }
 
+input[type=number]{
+    border: 1px solid #3DBEF5;
+    text-align: right;
+}
+
 input[type=password]{
     border: 1px solid #3DBEF5;
 }
@@ -455,7 +460,20 @@ ul#listFriends li {
 #listTypes li span:first-of-type { position: absolute; margin-left: -1.3em; }
 
 
+#difficulties label{
+    display: none;
+}
 
+#difficulties div:first-child{
+    font-size: 13px;
+    padding: 2px;
+    padding-top: 1px;
+}
+
+#table_info_recipe tr{
+    height : 30px;
+    font-size: 13px;
+}
 
 
 #ingredients input[type=text]{ 

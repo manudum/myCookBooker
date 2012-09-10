@@ -89,6 +89,30 @@ class Recipe
      * @ORM\ManyToMany(targetEntity="Wine", mappedBy="recipes")
      */
     protected $wines;
+    
+    /**
+     *
+     * @ORM\Column(name="preparetime", type="integer", nullable=true)
+     */
+    protected $preparetime;
+    
+    /**
+     *
+     * @ORM\Column(name="cooktime", type="integer", nullable=true)
+     */
+    protected $cooktime;
+    
+    /**
+     *
+     * @ORM\Column(name="servings", type="integer", nullable=true)
+     */
+    protected $servings;
+    
+    /**
+     *
+     * @ORM\Column(name="difficulty", type="integer", nullable=true)
+     */
+    protected $difficulty;
 
     public function __construct() {
         $this->events = new \Doctrine\Common\Collections\ArrayCollection();

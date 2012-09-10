@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Cookbook\CoreBundle\Entity\TypeRecipe
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Cookbook\CoreBundle\Entity\TypeRecipeRepository")
  */
 class TypeRecipe
 {
@@ -25,7 +25,6 @@ class TypeRecipe
      * @var string $name
      *
      * @ORM\Column(name="name", type="string", length=255)
-     * @ORM\Entity(repositoryClass="Cookbook\CoreBundle\Entity\TypeRecipeRepository")
      */
     private $name;
     

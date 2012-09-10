@@ -6,6 +6,7 @@
 {% block body %}
 <script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/recipe.js') }}"></script>
 <script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/jquery-ui-1.8.22.custom.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/cookbookcore/star-rating/jquery.rating.pack.js') }}"></script>
 
 
 {% include 'CookbookCoreBundle:Default:header.html.twig' %}
@@ -58,6 +59,27 @@
     {{ form_errors(form.format) }}
 </td><td>
     <div id="formats" class="inline">{{ form_widget(form.format) }}</div><a href="#" id="add_format">Ajouter un format</a>
+</td>
+</tr>
+<tr><td>
+    {{ form_label(form.difficulty, 'Difficulté') }}
+    {{ form_errors(form.difficulty) }}
+</td><td>
+    <div id="difficulties" class="inline">{{ form_widget(form.difficulty) }}</div>
+</td>
+</tr>
+<tr><td>
+    {{ form_label(form.preparetime, 'Temps de préparation') }}
+    {{ form_errors(form.preparetime) }}
+</td><td>
+    {{ form_widget(form.preparetime) }} min.
+</td>
+</tr>
+<tr><td>
+    {{ form_label(form.cooktime, 'Temps de cuisson') }}
+    {{ form_errors(form.cooktime) }}
+</td><td>
+    {{ form_widget(form.cooktime) }} min.
 </td>
 </tr>
 <tr><td>

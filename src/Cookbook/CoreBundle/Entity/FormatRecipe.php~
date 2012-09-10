@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Cookbook\CoreBundle\Entity\FormatRecipe
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Cookbook\CoreBundle\Entity\FormatRecipeRepository")
  */
 class FormatRecipe
 {

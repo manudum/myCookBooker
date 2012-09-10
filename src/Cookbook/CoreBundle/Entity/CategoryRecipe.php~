@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Cookbook\CoreBundle\Entity\CategoryRecipe
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Cookbook\CoreBundle\Entity\CategoryRecipeRepository")
  */
 class CategoryRecipe
 {

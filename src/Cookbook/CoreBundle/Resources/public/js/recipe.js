@@ -257,6 +257,8 @@ if ( $.attrFn ) {$.attrFn.text = true;}
     if ( $("#categories").length ) $('#categories').buttonset();
     if ( $("#types").length ) $('#types').buttonset();
     if ( $("#formats").length ) $('#formats').buttonset(); 
+    if ( $("#difficulties").length ) $('#difficulties input').rating(); 
+    
    });
    
    function removeType(id)

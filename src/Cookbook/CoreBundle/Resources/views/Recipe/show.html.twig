@@ -3,6 +3,7 @@
  {% block body %}
 <script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/recipe.js') }}"></script>
 <script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/jquery-ui-1.8.22.custom.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/cookbookcore/star-rating/jquery.rating.pack.js') }}"></script>
 
 
 {% include 'CookbookCoreBundle:Default:header.html.twig' %}
@@ -15,6 +16,26 @@
 <div id="content_left">
 <div class="stepImg">
 <img src="{{ asset('bundles/cookbookcore/images/spoon.png') }}" />
+<table id="table_info_recipe">
+    <tr>
+        <td>Difficulté</td>
+        <td>
+<div id="difficulties">
+{% for i in range(1, 3) %}
+   <input type="radio" {% if recipe.difficulty == i  %} checked="checked" {% endif %} disabled="disabled" />
+{% endfor %}
+</div>
+         </td>
+      </tr>
+      <tr>
+          <td>Temps de préparation</td>
+          <td>{{ recipe.preparetime }}&nbsp;min.</td>
+      </tr>
+      <tr>
+          <td>Temps de cuisson</td>
+          <td>{{ recipe.cooktime }}&nbsp;min.</td>
+      </tr>
+    </table>
 </div>
 
 </div>
