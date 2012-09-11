@@ -5,7 +5,6 @@
 <script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/jquery-ui-1.8.22.custom.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('bundles/cookbookcore/star-rating/jquery.rating.pack.js') }}"></script>
 
-
 {% include 'CookbookCoreBundle:Default:header.html.twig' %}
 
 <div id="content_header"><h1>{{ recipe.name }}</h1>
@@ -49,7 +48,12 @@
 
 <div id="content_recipe"> 
 {{ recipe.description|nl2br }}
-</div>
+</div><input type="button" value="Ajouter un Post-It" id="btn-addNote" />
+<div id="board">
+    <ul>
+    
+  </ul>
+		</div>
 <div class="div_info">
 <h3>Déjà servie</h3>
 <ul> 

@@ -259,6 +259,21 @@ if ( $.attrFn ) {$.attrFn.text = true;}
     if ( $("#formats").length ) $('#formats').buttonset(); 
     if ( $("#difficulties").length ) $('#difficulties input').rating(); 
     
+    
+    if ( $("#btn-addNote").length ) 
+    {
+       $('#btn-addNote').click(function(){
+           //creation d'un posit en base
+           // recup de l'id
+           // ajouter function suppression
+           //aajouter event de modif'
+           $('#board ul').append('<li><div><h2 contenteditable="true">Title #1</h2><p contenteditable="true">Text Content #1</p></div></li>');
+           
+       });
+    }
+    
+    
+    
    });
    
    function removeType(id)
