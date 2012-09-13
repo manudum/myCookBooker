@@ -57,17 +57,7 @@ class IngredientController extends Controller
     }
     
     
-    /**
-     * @Route("/ingredient/show/{id}")
-     * @Template()
-     */
-    public function showAction($id) {
-
-        $categoryRecipe = $this->getDoctrine()
-                ->getRepository('CookbookCoreBundle:CategoryRecipe')
-                ->find($id);
-        return $this->render('CookbookCoreBundle:CategoryRecipe:show.html.twig', array('categoryrecipe' => $categoryRecipe));
-    }
+   
     
     /**
      * @Route("/ingredient/delete/{id}")

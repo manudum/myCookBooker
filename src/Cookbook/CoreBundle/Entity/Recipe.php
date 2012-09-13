@@ -85,6 +85,11 @@ class Recipe
     protected $ingredients;
     
     /**
+     * @ORM\OneToMany(targetEntity="PostItRecipe", mappedBy="recipe")
+     */
+    protected $postits;
+    
+    /**
      * @ORM\ManyToMany(targetEntity="Wine", mappedBy="recipes")
      */
     protected $wines;
@@ -116,6 +121,7 @@ class Recipe
     public function __construct() {
         $this->events = new \Doctrine\Common\Collections\ArrayCollection();
         $this->ingredients = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->postits = new \Doctrine\Common\Collections\ArrayCollection();
         $this->wines = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
@@ -566,5 +572,25 @@ class Recipe
     public function getDifficulty()
     {
         return $this->difficulty;
+    }
+
+    /**
+     * Add postits
+     *
+     * @param Cookbook\CoreBundle\Entity\PostItRecipe $postits
+     */
+    public function addPostItRecipe(\Cookbook\CoreBundle\Entity\PostItRecipe $postits)
+    {
+        $this->postits[] = $postits;
+    }
+
+    /**
+     * Get postits
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getPostits()
+    {
+        return $this->postits;
     }
 }

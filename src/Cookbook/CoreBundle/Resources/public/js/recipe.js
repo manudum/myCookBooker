@@ -262,14 +262,7 @@ if ( $.attrFn ) {$.attrFn.text = true;}
     
     if ( $("#btn-addNote").length ) 
     {
-       $('#btn-addNote').click(function(){
-           //creation d'un posit en base
-           // recup de l'id
-           // ajouter function suppression
-           //aajouter event de modif'
-           $('#board ul').append('<li><div><h2 contenteditable="true">Title #1</h2><p contenteditable="true">Text Content #1</p></div></li>');
-           
-       });
+       $('#btn-addNote').click(addPostIt);
     }
     
     
@@ -586,6 +579,53 @@ function editCategory(id) {
                 $("#ingredients_list").append('<li id="ingredient-'+data.id+'"><a href="#">'+data.name+'</a><span class="rfloat hand" onclick="removeIngredient('+data.id+'); return false;">x</span></li>');
                 //$('#cookbook_corebundle_recipetype_type').append('<option value="'+data.id+'" selected="selected">'+data.name+'</option>')
                 $('#form_name').val('');
+        });//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down
+
+        //we dont what the browser to submit the form
+        $( this ).dialog( "close" );
+       
+   }
+   
+   
+   function removePostIt(id)
+   {
+       //get the url for the form
+       var url='../../postitrecipe/delete/'+id;
+       $( "#dialog:ui-dialog" ).dialog( "destroy" );
+	
+		$( "#dialog-confirm" ).dialog({
+			resizable: false,
+			height:140,
+			modal: true,
+			buttons: {
+				"Supprimer ce post-it": function() {
+					$.get(url,{
+                                            other:"attributes"
+                                        },function(data){
+                                            $('#postit-'+id).remove();
+                                        });
+                                        
+                                        $( this ).dialog( "close" );
+				},
+				Annuler: function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		});  
+
+}
+   
+   function addPostIt()
+   {
+       //get the url for the form
+        var url='../../postitrecipe/new';
+
+        //start send the post request
+        $.post(url,
+            'recipe_id='+$("#recipe_id").val(),function(data){
+            //the response is in the data variable
+                $('#board ul').append('<li id="postit-'+data.id+'"><div id="'+data.id+'"><h2 contenteditable="true">'+data.title+'</h2><span class="rfloat hand" onclick="removePostIt('+ data.id +'); return false;">x</span><p contenteditable="true">'+data.comment+'</p></div></li>');
+           
         });//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down
 
         //we dont what the browser to submit the form

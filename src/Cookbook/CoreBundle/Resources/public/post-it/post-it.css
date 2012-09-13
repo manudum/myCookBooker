@@ -27,10 +27,12 @@
 #board ul li h2{
   font-size:140%;
   font-weight:bold;
+  float: left;
 }
 #board ul li p{
   font-family:"Reenie Beanie",arial,sans-serif;
   font-size:125%;
+  clear: both;
 }
 #board ul li div{
   -webkit-transform: rotate(-6deg);

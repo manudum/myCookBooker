@@ -192,4 +192,12 @@ ingredient_new:
 ingredient_delete:
   pattern: /ingredient/delete/{id}
   defaults:  { _controller: CookbookCoreBundle:Ingredient:delete }
+  
+  
+postitrecipe_new:
+  pattern: /postitrecipe/new/
+  defaults:  { _controller: CookbookCoreBundle:PostItRecipe:new }
+postitrecipe_delete:
+  pattern: /postitrecipe/delete/{id}
+  defaults:  { _controller: CookbookCoreBundle:PostItRecipe:delete }
 
