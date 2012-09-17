@@ -618,20 +618,42 @@ function editCategory(id) {
    function addPostIt()
    {
        //get the url for the form
-        var url='../../postitrecipe/new';
+        var url='../../postitrecipe/new/';
 
         //start send the post request
         $.post(url,
             'recipe_id='+$("#recipe_id").val(),function(data){
             //the response is in the data variable
-                $('#board ul').append('<li id="postit-'+data.id+'"><div id="'+data.id+'"><h2 contenteditable="true">'+data.title+'</h2><span class="rfloat hand" onclick="removePostIt('+ data.id +'); return false;">x</span><p contenteditable="true">'+data.comment+'</p></div></li>');
+                $('#board ul').append('<li id="postit-'+data.id+'"><div><h2 contenteditable="true" onblur="changePostItTitle('+data.id+');">'+data.title+'</h2><span class="rfloat hand" onclick="removePostIt('+ data.id +'); return false;">x</span><p contenteditable="true" onblur="changePostItContent('+data.id+');">'+data.comment+'</p></div></li>');
            
         });//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down
 
-        //we dont what the browser to submit the form
-        $( this ).dialog( "close" );
        
    }
+   
+    function changePostItTitle(id, content){
+        //get the url for the form
+        var url='../../postitrecipe/changetitle/';
+
+        //start send the post request
+        $.post(url,
+            'id='+id+'&title='+$(content).html(),function(data){
+            return true;
+              
+        });//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down   
+    }
+    
+    function changePostItContent(id, content){
+        //get the url for the form
+        var url='../../postitrecipe/changecontent/';
+        console.debug(this);
+        //start send the post request
+        $.post(url,
+            'id='+id+'&content='+$(content).html(),function(data){
+            //the response is in the data variable
+              
+        });//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down   
+    }
    
 
    

@@ -66,5 +66,48 @@ class PostItRecipeController extends Controller
         
     }
     
+    /**
+     * @Route("/postitrecipe/changeTitle")
+     * @Template()
+     */
+    public function changeTitleAction(Request $request) {
+
+        $id = $request->request->get('id');
+        $title = $request->request->get('title');
+
+        //$filter= array_filter($filter);
+        $postit = $this->getDoctrine()
+                ->getRepository('CookbookCoreBundle:PostItRecipe')
+                ->find($id);
+        $postit->setTitle($title);
+        $em = $this->getDoctrine()->getEntityManager();
+        $em->persist($postit);
+        $em->flush();
+        return new Response('ok',200,array('Content-Type'=>'application/json'));
+        
+    }
+    
+    /**
+     * @Route("/postitrecipe/changeContent")
+     * @Template()
+     */
+    public function changeContentAction(Request $request) {
+
+        $id = $request->request->get('id');
+        $content = $request->request->get('content');
+
+        //$filter= array_filter($filter);
+        $postit = $this->getDoctrine()
+                ->getRepository('CookbookCoreBundle:PostItRecipe')
+                ->find($id);
+            
+        $postit->setComment($content);
+        $em = $this->getDoctrine()->getEntityManager();
+        $em->persist($postit);
+        $em->flush();
+        return new Response('ok',200,array('Content-Type'=>'application/json'));
+        
+    }
+    
     
 }

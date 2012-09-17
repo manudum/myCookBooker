@@ -52,7 +52,7 @@
 <div id="board">
     <ul>
         {% for postit in recipe.postits %}
-            <li id="postit-{{ postit.id }}"><div id="{{ postit.id }}"><h2 contenteditable="true">{{ postit.title }}</h2><span class="rfloat hand" onclick="removePostIt('{{ postit.id }}'); return false;">x</span><p contenteditable="true">{{ postit.comment }}</p></div></li>
+            <li id="postit-{{ postit.id }}"><div><h2 contenteditable="true" onblur="changePostItTitle({{ postit.id }},this);">{{ postit.title }}</h2><span class="rfloat hand" onclick="removePostIt({{ postit.id }}); return false;">x</span><p contenteditable="true" onblur="changePostItContent({{ postit.id }},this);">{{ postit.comment }}</p></div></li>
         {% endfor %}
   </ul>
 		</div>
