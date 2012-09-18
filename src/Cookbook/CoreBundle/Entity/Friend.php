@@ -48,6 +48,11 @@ class Friend
     {
         return $this->name;
     }
+    
+    public function __toArray()
+    {
+       return array('id'=>$this->getId(),'name' => $this->getName());
+    }
     /**
      * Get id
      *

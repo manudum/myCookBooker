@@ -1,0 +1,12 @@
+ 
+<form id="friend_form" action="{{ path('friend_new') }}" method="post" {{ form_enctype(form) }}>
+  {{ form_errors(form) }}
+
+<div>
+    {{ form_label(form.name,'Nom') }}
+    {{ form_errors(form.name) }}
+    {{ form_widget(form.name) }}
+</div>
+{{ form_rest(form) }}
+
+</form>

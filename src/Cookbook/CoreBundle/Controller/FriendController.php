@@ -41,18 +41,32 @@ class FriendController extends Controller
                 $em = $this->getDoctrine()->getEntityManager();
                 $em->persist($friend);
                 $em->flush();
-
-                $response = $this->forward('CookbookCoreBundle:Friend:show', 
+                if ( false !== strpos($request->headers->get('Accept'), 'text/html')) {
+                    $response = $this->redirect($this->generateUrl('friend_show', 
                         array('id'  => $friend->getId()
-            ));
-            return $response;
+                    )));
+                }
+                
+                if (false !== strpos($request->headers->get('Accept'), 'application/json')) {
+                    $jsons = array();
+                    $jsons[]=$friend->__toArray();
+                    $response = new Response(json_encode($jsons));
+                    $response->headers->set('Content-Type', 'application/json');
+                }
+                return $response;
             }
         }
-
-        return $this->render('CookbookCoreBundle:Friend:new.html.twig', array(
+        if ($request->isXmlHttpRequest()) {
+            return $this->render('CookbookCoreBundle:Friend:new.html_ajax.twig', array(
                     'form' => $form->createView(),
-                    'user' => $usr
+                    'user' => $usr,
                 ));
+        } else {
+            return $this->render('CookbookCoreBundle:Friend:new.html.twig', array(
+                    'form' => $form->createView(),
+                    'user' => $usr,
+                ));
+        }
     }
     
     

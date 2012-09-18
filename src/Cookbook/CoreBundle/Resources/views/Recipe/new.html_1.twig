@@ -46,6 +46,50 @@
 </td>
 </tr>
 
+<tr><td>
+    {{ form_label(form.type, 'Type') }}
+    {{ form_errors(form.type) }}
+</td><td>
+    <div id="types" class="inline">{{ form_widget(form.type) }}</div><a href="#" id="add_type">Ajouter un type</a>
+</td>
+</tr>
+
+<tr><td>
+    {{ form_label(form.format, 'Format') }}
+    {{ form_errors(form.format) }}
+</td><td>
+    <div id="formats" class="inline">{{ form_widget(form.format) }}</div><a href="#" id="add_format">Ajouter un format</a>
+</td>
+</tr>
+<tr><td>
+    {{ form_label(form.difficulty, 'Difficulté') }}
+    {{ form_errors(form.difficulty) }}
+</td><td>
+    <div id="difficulties" class="inline">{{ form_widget(form.difficulty) }}</div>
+</td>
+</tr>
+<tr><td>
+    {{ form_label(form.preparetime, 'Temps de préparation') }}
+    {{ form_errors(form.preparetime) }}
+</td><td>
+    {{ form_widget(form.preparetime) }} min.
+</td>
+</tr>
+<tr><td>
+    {{ form_label(form.cooktime, 'Temps de cuisson') }}
+    {{ form_errors(form.cooktime) }}
+</td><td>
+    {{ form_widget(form.cooktime) }} min.
+</td>
+</tr>
+<tr><td>
+    {{ form_label(form.description,'Recette') }}
+    {{ form_errors(form.description) }}
+</td><td>
+    {{ form_widget(form.description) }}
+</td>
+</tr>
+
 </table>
 {{ form_rest(form) }}
 
@@ -53,6 +97,8 @@
 </form>
 
 <div id="new_cat"></div>
+<div id="new_format"></div>
+<div id="new_type"></div>
 </div>
 
 <div id="content_right"></div>

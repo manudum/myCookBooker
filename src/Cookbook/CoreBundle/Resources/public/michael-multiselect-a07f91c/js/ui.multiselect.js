@@ -35,7 +35,7 @@ $.widget("ui.multiselect", {
 		animated: 'fast',
 		show: 'slideDown',
 		hide: 'slideUp',
-		dividerLocation: 0.6,
+		dividerLocation: 0.5,
 		nodeComparator: function(node1,node2) {
 			var text1 = node1.text(),
 			    text2 = node2.text();
@@ -137,6 +137,25 @@ $.widget("ui.multiselect", {
 
 		$.Widget.prototype.destroy.apply(this, arguments);
 	},
+        addNewSelected: function(json) {
+            
+            var that = this;
+		var items = json.map(function(i) {
+	      
+              that.element.append('<option value="'+i.id+'">'+i.name+'</option>');
+              var item = that._getJsonNode(i).appendTo(that.availableList).show();
+
+			that._applyItemState(item, false);
+			item.data('idx', i);
+                        that._setSelected(item, true);
+			that.count += 1;
+			return item[0];
+                });
+		
+		// update count
+		this._updateCount();
+		that._filter.apply(this.availableContainer.find('input.search'), [that.availableList]);
+        },
         refreshAvailableList: function(json) {
 		this.availableList.children('.ui-element').remove();
 		this.count = 0;

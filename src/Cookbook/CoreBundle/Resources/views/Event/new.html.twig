@@ -7,28 +7,7 @@
 <script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/event.js') }}"></script>
 
 <script type="text/javascript">
-    jQuery(function($){
-   $.datepicker.regional['fr'] = {
-      closeText: 'Fermer',
-      prevText: '<Préc',
-      nextText: 'Suiv>',
-      currentText: 'Courant',
-      monthNames: ['Janvier','Février','Mars','Avril','Mai','Juin',
-      'Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
-      monthNamesShort: ['Jan','Fév','Mar','Avr','Mai','Jun',
-      'Jul','Aoû','Sep','Oct','Nov','Déc'],
-      dayNames: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
-      dayNamesShort: ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],
-      dayNamesMin: ['Di','Lu','Ma','Me','Je','Ve','Sa'],
-      weekHeader: 'Sm',
-      //dateFormat: 'dd/mm/yy',
-                dateFormat: 'dd/mm/yy',
-      firstDay: 1,
-      isRTL: false,
-      showMonthAfterYear: false,
-      yearSuffix: ''};
-   $.datepicker.setDefaults($.datepicker.regional['fr']);
-});
+    
 </script>
 {% include 'CookbookCoreBundle:Default:header.html.twig' %}
 
@@ -56,28 +35,38 @@
     {{ form_errors(form.name) }}
 </td><td>
     {{ form_widget(form.name) }}
+        </td><td>&nbsp;
 </td></tr><tr><td>
     {{ form_label(form.date) }}
     {{ form_errors(form.date) }}
 </td><td>
     {{ form_widget(form.date) }}
+         </td><td>&nbsp;
 </td></tr><tr><td>
     {{ form_label(form.description) }}
     {{ form_errors(form.description) }}
 </td><td>
     {{ form_widget(form.description) }}
+         </td><td>&nbsp;
 </td></tr><tr><td>
     {{ form_label(form.friends, 'Invités') }}
     {{ form_errors(form.friends) }}
 </td><td>
     {{ form_widget(form.friends) }}
+    </td><td>
+        L'invité&nbsp;n'est&nbsp;pas dans la liste : ajoutez le <br />
+        <img class="hand" src="{{ asset('bundles/cookbookcore/images/plus.gif') }}" border="0" />
 </td></tr><tr><td>
 
 
 {{ form_label(form.recipes,'Plats') }}
 
 </td><td>
-<div id="categories">
+
+    {{ form_errors(form.recipes) }}
+    {{ form_widget(form.recipes) }}
+    <br />
+    <div id="categories">
   <label class="libFiltre"> Catégorie :</label>         <input type="radio" id="category0" name="category" checked="checked" value="" /><label for="category0">Tous</label>
  {% for category in categories %}
             <input type="radio" id="category{{ category.id }}" name="category" value="{{ category.id }}" /><label for="category{{ category.id }}">{{ category.name }}</label>
@@ -100,8 +89,7 @@
 {% endfor %}
 </div>
 <br />
-    {{ form_errors(form.recipes) }}
-    {{ form_widget(form.recipes) }}
+ </td><td>&nbsp;
 </td></tr></table>
 
 {{ form_rest(form) }}
@@ -109,5 +97,5 @@
 <input type="submit" id="submit" value="{% if action == 'event_new' %}{{ 'Ajouter'|trans }}{% else %}{{ 'Modifier'|trans }}{% endif %}" name="submit" />
 </form>
 </div>
-<div id="content_right">&nbsp;</div>
+<div id="new"></div>
 {% endblock %}

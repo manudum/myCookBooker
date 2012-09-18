@@ -20,9 +20,9 @@ class EventType extends AbstractType
                 'format' => 'dd/MM/yyyy',
                 'attr' => array('class' => 'date'),
                 ))
-            ->add('description', 'textarea', array('required' => false,"attr" => array("cols" => "80", "rows" => "6")))
+            ->add('description', 'textarea', array('required' => false,"attr" => array("cols" => "65", "rows" => "6")))
             ->add('friends', 'entity', array(
-                'attr' => array('style' => 'width: 600px;height:100px;'),
+                'attr' => array('style' => 'width: 500px;height:100px;'),
                 'class' => 'CookbookCoreBundle:Friend',
                 'query_builder' => function(EntityRepository $repository) use($options) {
                 return $repository->createQueryBuilder('q')
@@ -34,7 +34,7 @@ class EventType extends AbstractType
                 'multiple' => true,
             ))
             ->add('recipes', 'entity', array(
-                'attr' => array('style' => 'width: 600px;height:100px;'),
+                'attr' => array('style' => 'width: 500px;height:100px;'),
                 'class' => 'CookbookCoreBundle:Recipe',
                 'query_builder' => function(EntityRepository $repository) use($options) {
                 return $repository->createQueryBuilder('q')

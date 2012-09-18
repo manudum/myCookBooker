@@ -36,17 +36,17 @@ class RecipeController extends Controller
         // On exécute le traitement du formulaire. S'il retourne true, alors le formulaire a bien été traité
         if( $formHandler->process() )
         {
-            $response = $this->forward('CookbookCoreBundle:Recipe:show', array(
+            $response = $this->redirect($this->generateUrl('recipe_show', array(
                 'id'  => $recipe->getId()
-            ));
+            )));
             return $response;
         }
         
         return $this->render('CookbookCoreBundle:Recipe:new.html.twig', array(
-                    'form' => $form->createView(),
-                    'action' => 'recipe_new',
-                    'user' => $usr,
-                ));
+                'form' => $form->createView(),
+                'action' => 'recipe_new',
+                'user' => $usr,
+            ));
     }
     
     /**
@@ -142,13 +142,23 @@ class RecipeController extends Controller
         $recipes = $this->getDoctrine()
                 ->getRepository('CookbookCoreBundle:Recipe')
                 ->findBy(array('people' => $usr->getId()));
-        $category = $this->getDoctrine()
+        $categoryRecipe = $this->getDoctrine()
                 ->getRepository('CookbookCoreBundle:CategoryRecipe')
-                ->findBy(array('people' => $usr->getId()));
+                ->findByPeople($usr->getId());
+        
+        $typeRecipe = $this->getDoctrine()
+                ->getRepository('CookbookCoreBundle:TypeRecipe')
+                ->findByPeople($usr->getId());
+        
+        $formatRecipe = $this->getDoctrine()
+                ->getRepository('CookbookCoreBundle:FormatRecipe')
+                ->findByPeople($usr->getId());
         return $this->render('CookbookCoreBundle:Recipe:list.html.twig', 
                     array('recipes' => $recipes,
+                    'types'          => $typeRecipe,
+                    'formats'        => $formatRecipe,
                     'user' => $usr,
-            'categories' => $category));
+            'categories' => $categoryRecipe));
     }
     
     /**
