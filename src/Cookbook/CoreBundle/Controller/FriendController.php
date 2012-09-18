@@ -42,8 +42,8 @@ class FriendController extends Controller
                 $em->persist($friend);
                 $em->flush();
 
-                $response = $this->forward('CookbookCoreBundle:Friend:show', array(
-                'id'  => $id
+                $response = $this->forward('CookbookCoreBundle:Friend:show', 
+                        array('id'  => $friend->getId()
             ));
             return $response;
             }
