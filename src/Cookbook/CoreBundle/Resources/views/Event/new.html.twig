@@ -54,7 +54,7 @@
 </td><td>
     {{ form_widget(form.friends) }}
     </td><td>
-        L'invité&nbsp;n'est&nbsp;pas dans la liste : ajoutez le <br />
+        L'invité&nbsp;n'est&nbsp;pas dans la liste ? Ajoutez le :<br />
         <img class="hand" id="addFriend" src="{{ asset('bundles/cookbookcore/images/plus.gif') }}" border="0" />
 </td></tr><tr><td>
 
@@ -65,8 +65,16 @@
 
     {{ form_errors(form.recipes) }}
     {{ form_widget(form.recipes) }}
-    <br />
-    <div id="categories">
+    
+ </td><td>     
+     Le&nbsp;plat&nbsp;n'est&nbsp;pas dans la liste ? Ajoutez le :<br />
+        <img class="hand" id="addRecipe" src="{{ asset('bundles/cookbookcore/images/plus.gif') }}" border="0" />
+</td></tr>
+<tr>
+    <td></td>
+    <td>
+    Pour trouver plus facilement vos plats, utilisez les filtres ci-dessous
+    <div id="categories_recipe">
   <label class="libFiltre"> Catégorie :</label>         <input type="radio" id="category0" name="category" checked="checked" value="" /><label for="category0">Tous</label>
  {% for category in categories %}
             <input type="radio" id="category{{ category.id }}" name="category" value="{{ category.id }}" /><label for="category{{ category.id }}">{{ category.name }}</label>
@@ -74,7 +82,7 @@
 </div>
 <br />
 
-<div id="types">
+<div id="types_recipe">
   <label class="libFiltre">Type :    </label>       <input type="radio" id="type" name="type" checked="checked" value="" /><label for="type">Tous</label>
  {% for type in types %}
             <input type="radio" id="type{{ type.id }}" name="type" value="{{ type.id }}" /><label for="type{{ type.id }}">{{ type.name }}</label>
@@ -82,15 +90,19 @@
 </div>
 <br />
 
-<div id="formats">
+<div id="formats_recipe">
   <label class="libFiltre"> Format :   </label>       <input type="radio" id="format" name="format" checked="checked" value="" /><label for="format">Tous</label>
  {% for format in formats %}
             <input type="radio" id="format{{ format.id }}" name="format" value="{{ format.id }}" /><label for="format{{ format.id }}">{{ format.name }}</label>
 {% endfor %}
 </div>
-<br />
- </td><td>&nbsp;
-</td></tr></table>
+<br /></td>
+    <td></td>
+</tr>
+
+
+
+</table>
 
 {{ form_rest(form) }}
 

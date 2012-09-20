@@ -1,4 +1,4 @@
-var eventsList, friendsList;
+var recipiesList, friendsList;
 
 jQuery(function($){
    $.datepicker.regional['fr'] = {
@@ -27,14 +27,14 @@ $(document).ready(function() {
     if ( $.attrFn ) {$.attrFn.text = true;}
     $( "form input.date" ).datepicker();
     friendsList = $("#cookbook_corebundle_recipetype_friends").multiselect();
-    eventsList = $("#cookbook_corebundle_recipetype_recipes").multiselect();
+    recipiesList = $("#cookbook_corebundle_recipetype_recipes").multiselect();
     $('input[type=radio]').change(refreshRecipes);
     $.browser.mozilla && $('input[type=radio]').each( function() {
 	this.checked = this.defaultChecked;
     });
-    $('#categories').buttonset();
-    $('#types').buttonset();
-    $('#formats').buttonset();
+    $('#categories_recipe').buttonset();
+    $('#types_recipe').buttonset();
+    $('#formats_recipe').buttonset();
     $( "input:submit, button").button();
     if ( $("#addFriend").length ) $('#addFriend').click(function(){
       //get the url for the form
@@ -59,12 +59,74 @@ $(document).ready(function() {
                             "Ajouter": function() {
                                     //get the url for the form
                                     var url=$("#friend_form").attr("action");
+                                    
+                                    $("#friend_form").submit(function(){
+                                        if(!this.checkValidity || this.checkValidity()){
+
+                                        $.post(url,
+                                        $("#friend_form").serialize(),function(data){
+                                            //the response is in the data variable
+                                                 friendsList.multiselect("addNewSelected",data);
+                                                $('#new').html();
+                                        }, 'json');//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down
+
+                                        //we dont what the browser to submit the form
+                                       // $( this ).dialog( "close" );
+                                        }
+                                        return false;
+                                    });
+                                    $("#friend_form").submit();
+                                    //start send the post request
+                                    
+                            },
+                            "Annuler": function() {
+                                        $( this ).dialog( "close" );
+                            }
+                        },
+			close: function() {
+				//allFields.val( "" ).removeClass( "ui-state-error" );
+			}
+		});
+              
+               
+           
+       });//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down
+
+      //we dont what the browser to submit the form
+      return false;
+   });
+   
+   if ( $("#addRecipe").length ) $('#addRecipe').click(function(){
+      //get the url for the form
+      var url='../../recipe/new';
+   
+      //start send the post request
+      
+       $.get(url,{
+           other:"attributes"
+       },function(data){
+           //the response is in the data variable
+  
+              //if you want to print the error:
+              $('#new').html(data);
+              if ( $("#categories").length ) $('#categories').buttonset();
+    
+              $('#new').dialog({
+			autoOpen: true,
+			height: 300,
+			width: 350,
+			modal: true,
+                        title: "Nouveau plat",
+                        buttons: {
+                            "Ajouter": function() {
+                                    //get the url for the form
+                                    var url=$("#recipe_form").attr("action");
 
                                     //start send the post request
                                     $.post(url,
-                                        $("#friend_form").serialize(),function(data){
+                                        $("#recipe_form").serialize(),function(data){
                                         //the response is in the data variable
-                                             friendsList.multiselect("addNewSelected",data);
+                                             recipiesList.multiselect("addNewSelected",data);
                                             $('#new').html();
                                     }, 'json');//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down
 
@@ -86,7 +148,7 @@ $(document).ready(function() {
 
       //we dont what the browser to submit the form
       return false;
-   })
+   });
     
 
 });
@@ -103,7 +165,7 @@ function refreshRecipes()
            format:$('input[type=radio][name=format]:checked').attr('value')
        },function(data){
         //the response is in the data variable
-            eventsList.multiselect("refreshAvailableList",data);
+            recipiesList.multiselect("refreshAvailableList",data);
             
     },
     'json');//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down

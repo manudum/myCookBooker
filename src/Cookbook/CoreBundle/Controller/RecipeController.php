@@ -36,17 +36,35 @@ class RecipeController extends Controller
         // On exécute le traitement du formulaire. S'il retourne true, alors le formulaire a bien été traité
         if( $formHandler->process() )
         {
-            $response = $this->redirect($this->generateUrl('recipe_show', array(
-                'id'  => $recipe->getId()
-            )));
+            if ( false !== strpos($request->headers->get('Accept'), 'text/html')) {
+                $response = $this->redirect($this->generateUrl('recipe_show', 
+                    array('id'  => $recipe->getId()
+                )));
+            }
+
+            if (false !== strpos($request->headers->get('Accept'), 'application/json')) {
+                $jsons = array();
+                $jsons[]=$recipe->__toArray();
+                $response = new Response(json_encode($jsons));
+                $response->headers->set('Content-Type', 'application/json');
+            }
+            
             return $response;
         }
         
-        return $this->render('CookbookCoreBundle:Recipe:new.html.twig', array(
+        if ($request->isXmlHttpRequest()) {
+            return $this->render('CookbookCoreBundle:Recipe:new.html_ajax.twig', array(
                 'form' => $form->createView(),
                 'action' => 'recipe_new',
                 'user' => $usr,
             ));
+        } else {
+            return $this->render('CookbookCoreBundle:Recipe:new.html.twig', array(
+                'form' => $form->createView(),
+                'action' => 'recipe_new',
+                'user' => $usr,
+            ));
+        }
     }
     
     /**
