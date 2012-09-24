@@ -74,6 +74,12 @@ textarea{
     opacity: 0.2;
 }
 
+button.action{
+    width: 150px;
+    display: block;
+    margin-bottom: 5px;
+}
+
 .header_cookbook { 
     position: relative;
     background-color : #fff;

@@ -98,6 +98,25 @@ class RecipeController extends Controller
     }
     
     /**
+     * @Route("/recipe/delete/{id}")
+     * @Template()
+     */
+    public function deleteAction($id) {
+        
+        
+        $repository = $this->getDoctrine()->getRepository('CookbookCoreBundle:Recipe');
+
+        $recipe = $repository
+                ->find($id);
+        
+        $em = $this->getDoctrine()->getEntityManager();
+        $em->remove($recipe);
+        $em->flush();
+        return $this->redirect($this->generateUrl('recipe_list'));
+    }
+    
+    
+    /**
      * @Route("/recipe/upload/{id}")
      * @Template()
      */

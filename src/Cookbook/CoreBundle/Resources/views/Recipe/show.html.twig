@@ -79,6 +79,12 @@
 <a href="{{ path('recipe_edit', { 'id': recipe.id }) }}">modifer</a>
 </div>
 <div id="content_right">
+    <a href="{{ path('recipe_edit', { 'id': recipe.id }) }}"><button class="hand action" id="btnMod">Modifer</button></a>
+ 
+ <a href="{{ path('recipe_delete', { 'id': recipe.id }) }}" onclick="removeRecipe(this);return false;" ><button class="hand action" id="btnSuppr">Supprimer</button></a>
+<div id="del" title="Supprimer ce plat" style="display:none;">
+	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Cet plat sera supprimé définitivement. Etes-vous sûr ??</p>
+</div>
 <div id="ingredients">
 <h3>Ingrédients</h3>
 <div id="new_ingredient">
@@ -89,7 +95,7 @@
             <li id="ingredient-{{ ingredient.id }}"><a href="#">{{ ingredient.name }}</a><span class="rfloat hand" onclick="removeIngredient('{{ ingredient.id }}'); return false;">x</span></li>
 {% endfor %}
 </ul>
-<div id="dialog-confirm" title="Supprimer l'ingrédient" style="display:none;">
+<div id="dialog-confirm" title="Supprimer cet ingrédient" style="display:none;">
 	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>L'ingrédient sera supprimé définitivement. Etes-vous sûr ??</p>
 </div>
 </div>

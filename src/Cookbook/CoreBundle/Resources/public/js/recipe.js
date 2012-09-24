@@ -265,7 +265,16 @@ if ( $.attrFn ) {$.attrFn.text = true;}
        $('#btn-addNote').click(addPostIt);
     }
     
-    
+    if ( $("#btnMod").length ) $( "#btnMod" ).button({
+            icons: {
+                primary: "ui-icon-pencil"
+            }
+        });
+    if ( $("#btnSuppr").length ) $( "#btnSuppr" ).button({
+            icons: {
+                primary: "ui-icon-trash"
+            }
+        });
     
    });
    
@@ -654,6 +663,30 @@ function editCategory(id) {
               
         });//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down   
     }
+    
+    
+    function removeRecipe(lien)
+   {
+       //get the url for the form
+	url = lien.href;
+		$( "#del" ).dialog({
+			resizable: false,
+			height:140,
+			modal: true,
+			buttons: {
+				"Supprimer ce Plat": function() {
+                                        
+                                        $( this ).dialog( "close" );
+                                        window.location.href = url;
+                                        return true;
+				},
+				Annuler: function() {
+					$( this ).dialog( "close" );
+                                        return false;
+				}
+			}
+		}); 
+   }
    
 
    

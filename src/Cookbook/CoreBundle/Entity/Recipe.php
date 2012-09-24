@@ -80,7 +80,7 @@ class Recipe
     private $events;
     
     /**
-     * @ORM\OneToMany(targetEntity="Ingredient", mappedBy="recipe")
+     * @ORM\OneToMany(targetEntity="Ingredient", mappedBy="recipe", cascade={"remove"})
      */
     protected $ingredients;
     
@@ -200,6 +200,9 @@ class Recipe
      */
     public function removeImage()
     {
+        if (null === $this->image || $this->image == "" || (!is_object($this->image))) {
+            return;
+        }
         unlink($this->getFullImagePath());
         rmdir($this->getUploadRootDir());
     }

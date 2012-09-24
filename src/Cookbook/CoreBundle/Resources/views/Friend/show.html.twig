@@ -50,14 +50,28 @@ A déjà mangé :
 </ul>
 
  un ami de  {{ friend.people.name }}
- <a href="{{ path('friend_edit', { 'id': friend.id }) }}">modifer</a>
- <a href="{{ path('friend_delete', { 'id': friend.id }) }}" onclick="removeFriend(this);return false;" >Supprimer</a>
 </div>
-<div id="content_right">&nbsp;</div>
+<div id="content_right"> 
+ <a href="{{ path('friend_edit', { 'id': friend.id }) }}"><button class="hand action" id="btnMod">Modifer</button></a>
+ 
+ <a href="{{ path('friend_delete', { 'id': friend.id }) }}" onclick="removeFriend(this);return false;" ><button class="hand action" id="btnSuppr">Supprimer</button></a>
+</div>
 <div id="del" title="Supprimer cet invité" style="display:none;">
 	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Cet invité sera supprimé définitivement. Etes-vous sûr ??</p>
 </div>
 <script>
+$(function() {
+    $( "#btnMod" ).button({
+            icons: {
+                primary: "ui-icon-pencil"
+            }
+        });
+    $( "#btnSuppr" ).button({
+            icons: {
+                primary: "ui-icon-trash"
+            }
+        });
+});
 function removeFriend(lien)
    {
        //get the url for the form
