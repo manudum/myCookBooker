@@ -168,6 +168,13 @@ friend_list:
   pattern: /friend/list/
   defaults:  { _controller: CookbookCoreBundle:Friend:list }
   
+friend_edit:
+  pattern: /friend/edit/{id}
+  defaults:  { _controller: CookbookCoreBundle:Friend:edit }
+  
+friend_delete:
+  pattern: /friend/delete/{id}
+  defaults:  { _controller: CookbookCoreBundle:Friend:delete }
   
 event_new:
   pattern: /event/new/

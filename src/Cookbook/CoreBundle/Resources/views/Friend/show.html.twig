@@ -1,6 +1,7 @@
  {% extends '::base.html.twig' %}
 
  {% block body %}
+<script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/jquery-ui-1.8.22.custom.min.js') }}"></script>
 
 {% include 'CookbookCoreBundle:Default:header.html.twig' %}
 <div id="content_header"><h1>{{ friend.name }}</h1>
@@ -49,6 +50,37 @@ A déjà mangé :
 </ul>
 
  un ami de  {{ friend.people.name }}
+ <a href="{{ path('friend_edit', { 'id': friend.id }) }}">modifer</a>
+ <a href="{{ path('friend_delete', { 'id': friend.id }) }}" onclick="removeFriend(this);return false;" >Supprimer</a>
 </div>
 <div id="content_right">&nbsp;</div>
+<div id="del" title="Supprimer cet invité" style="display:none;">
+	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Cet invité sera supprimé définitivement. Etes-vous sûr ??</p>
+</div>
+<script>
+function removeFriend(lien)
+   {
+       //get the url for the form
+       if ( $.attrFn ) {$.attrFn.text = true;}
+	url = lien.href;
+		$( "#del" ).dialog({
+			resizable: false,
+			height:140,
+			modal: true,
+			buttons: {
+				"Supprimer cet invité": function() {
+                                        
+                                        $( this ).dialog( "close" );
+                                        window.location.href = url;
+                                        return true;
+				},
+				Annuler: function() {
+					$( this ).dialog( "close" );
+                                        return false;
+				}
+			}
+		}); 
+   }
+</script>
+
  {% endblock %}
