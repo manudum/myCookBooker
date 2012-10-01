@@ -59,6 +59,7 @@ class Recipe
     /**
      * @ORM\ManyToOne(targetEntity="CategoryRecipe", inversedBy="recipes")
      * @ORM\JoinColumn(name="categoryrecipe_id", referencedColumnName="id")
+     * @ORM\OrderBy({"showorder" = "ASC"})
      */
     protected $category; //entree plat dessert
     

@@ -46,14 +46,14 @@
  {% for category in categories %}
         <option value="{{ category.id }}"><label for="category{{ category.id }}">{{ category.name }}</label></option>
 {% endfor %}
-</select>
+</select><br>
   <label class="libFiltre"> Type</label> 
     <select id="type" name="type">
         <option value="" selected="selected"><label for="type0">Tous</label></option>
  {% for type in types %}
         <option value="{{ type.id }}"><label for="type{{ type.id }}">{{ type.name }}</label></option>
 {% endfor %}
-</select>
+</select><br>
 
   <label class="libFiltre"> Format</label> 
     <select id="format" name="format">

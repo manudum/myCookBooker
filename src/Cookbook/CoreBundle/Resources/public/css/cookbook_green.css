@@ -401,6 +401,13 @@ ul#listEvents li {
      border-bottom: 0;
      padding: 6px 16px 0 16px;
  }
+ 
+ .event_left{
+     text-align: justify;
+     width: 65%;
+     
+ }
+ 
  .event_content{
      overflow: auto;
      border: 1px solid #ccc;
