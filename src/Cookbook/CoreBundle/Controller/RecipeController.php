@@ -85,9 +85,9 @@ class RecipeController extends Controller
         // On exécute le traitement du formulaire. S'il retourne true, alors le formulaire a bien été traité
         if( $formHandler->process() )
         {
-            $response = $this->forward('CookbookCoreBundle:Recipe:show', array(
+            $response = $this->redirect($this->generateUrl('recipe_show', array(
                 'id'  => $id
-            ));
+            )));
             return $response;
         }
         return $this->render('CookbookCoreBundle:Recipe:new.html.twig', array(
@@ -95,6 +95,25 @@ class RecipeController extends Controller
                     'action' => 'recipe_edit',
                     'user' => $usr,
                 ));
+    }
+    
+     /**
+     * @Route("/recipe/changeContent/{id}")
+     * @Template()
+     */
+    public function changeContentAction($id) {
+        
+        // create a task and give it some dummy data for this example
+        $recipe = $this->getDoctrine()
+                ->getRepository('CookbookCoreBundle:Recipe')
+                ->find($id);
+        $recipe->setDescription($this->getRequest()->request->get('content'));
+        $em = $this->getDoctrine()->getEntityManager();
+           $em->persist($recipe);
+           $em->flush();
+            $return = '';
+           return new Response($return,200,array('Content-Type'=>'application/json'));
+       
     }
     
     /**

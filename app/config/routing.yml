@@ -77,6 +77,10 @@ recipe_get:
   pattern: /recipe/get/
   defaults:  { _controller: CookbookCoreBundle:Recipe:get }
   
+recipe_changeContent:
+  pattern: /recipe/changeContent/{id}
+  defaults:  { _controller: CookbookCoreBundle:Recipe:changeContent }
+  
 recipe_delete:
   pattern: /recipe/delete/{id}
   defaults:  { _controller: CookbookCoreBundle:Recipe:delete }

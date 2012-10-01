@@ -1,10 +1,12 @@
  {% extends '::base.html.twig' %}
-
  {% block body %}
 <script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/recipe.js') }}"></script>
 <script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/jquery-ui-1.8.22.custom.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('bundles/cookbookcore/star-rating/jquery.rating.pack.js') }}"></script>
-
+<!-- wysihtml5 parser rules -->
+<script src="{{ asset('bundles/cookbookcore/wysiwyg/advanced.js') }}"></script>
+<!-- Library -->
+<script src="{{ asset('bundles/cookbookcore/wysiwyg/wysihtml5-0.3.0.js') }}"></script>
 {% include 'CookbookCoreBundle:Default:header.html.twig' %}
 
 <div id="content_header"><h1>{{ recipe.name }}</h1>
@@ -51,15 +53,59 @@
 </div>
 <div id="content_middle">
 <h3>Recette</h3>
+<div id="picture_recipe" class="rfloat">
 {% if recipe.image != '' %}
-<img id="picture_recipe" src="{{ asset('uploads/recipies/' ~ recipe.id ~'/picture/' ~ recipe.image)}}" alt="photo" />
+<img id="picture" src="{{ asset('uploads/recipies/' ~ recipe.id ~'/picture/' ~ recipe.image)}}" alt="photo" />
 {% else %}
-<img id="picture_recipe" class="opacity20" src="{{ asset('bundles/cookbookcore/images/spoon.png') }}" />
+<img id="picture" class="opacity20" src="{{ asset('bundles/cookbookcore/images/spoon.png') }}" />
 {% endif %}
+<span >Changez la photo d'un simple clic !</span>
+</div>
+<form>
+    <div style="" id="toolbar" class="wysihtml5-commands-disabled">
+    <a title="CTRL+B" data-wysihtml5-command="bold" href="javascript:;" unselectable="on">bold</a> |
+    <a title="CTRL+I" data-wysihtml5-command="italic" href="javascript:;" unselectable="on" class="">italic</a> |
+    <a data-wysihtml5-command="createLink" href="javascript:;" unselectable="on">insert link</a> |
+    <a data-wysihtml5-command="insertImage" href="javascript:;" unselectable="on">insert image</a> |
+    <a data-wysihtml5-command-value="h1" data-wysihtml5-command="formatBlock" href="javascript:;" unselectable="on" class="">h1</a> |
+    <a data-wysihtml5-command-value="h2" data-wysihtml5-command="formatBlock" href="javascript:;" unselectable="on">h2</a> |
+    <a data-wysihtml5-command="insertUnorderedList" href="javascript:;" unselectable="on">insertUnorderedList</a> |
+    <a data-wysihtml5-command="insertOrderedList" href="javascript:;" unselectable="on">insertOrderedList</a> |
+    <a data-wysihtml5-command-value="red" data-wysihtml5-command="foreColor" href="javascript:;" unselectable="on" class="">red</a> |
+    <a data-wysihtml5-command-value="green" data-wysihtml5-command="foreColor" href="javascript:;" unselectable="on">green</a> |
+    <a data-wysihtml5-command-value="blue" data-wysihtml5-command="foreColor" href="javascript:;" unselectable="on">blue</a> |
+    <a data-wysihtml5-command="insertSpeech" href="javascript:;" unselectable="on" style="display: none;">speech</a>
+    <a data-wysihtml5-action="change_view" href="javascript:;" unselectable="on" class="wysihtml5-action-active">switch to html view</a>
+    
+    <div style="display: none;" data-wysihtml5-dialog="createLink">
+      <label>
+        Link:
+        <input value="http://" data-wysihtml5-dialog-field="href">
+      </label>
+      <a data-wysihtml5-dialog-action="save">OK</a>&nbsp;<a data-wysihtml5-dialog-action="cancel">Cancel</a>
+    </div>
+    
+    <div style="display: none;" data-wysihtml5-dialog="insertImage">
+      <label>
+        Image:
+        <input value="http://" data-wysihtml5-dialog-field="src">
+      </label>
+      <label>
+        Align:
+        <select data-wysihtml5-dialog-field="className">
+          <option value="">default</option>
+          <option value="wysiwyg-float-left">left</option>
+          <option value="wysiwyg-float-right">right</option>
+        </select>
+      </label>
+      <a data-wysihtml5-dialog-action="save">OK</a>&nbsp;<a data-wysihtml5-dialog-action="cancel">Cancel</a>
+    </div>
+    
+  </div>
+    <textarea id="content_recipe" placeholder="Enter your text ...">{{ recipe.description|nl2br }}</textarea></form>
 
-<div id="content_recipe"> 
-{{ recipe.description|nl2br }}
-</div><input type="button" value="Ajouter un Post-It" id="btn-addNote" />
+
+<input type="button" value="Ajouter un Post-It" id="btn-addNote" />
 <div id="board">
     <ul>
         {% for postit in recipe.postits %}
@@ -76,7 +122,6 @@
 </ul>
 </div>
  un plat de  {{ recipe.people.name }}
-<a href="{{ path('recipe_edit', { 'id': recipe.id }) }}">modifer</a>
 </div>
 <div id="content_right">
     <a href="{{ path('recipe_edit', { 'id': recipe.id }) }}"><button class="hand action" id="btnMod">Modifer</button></a>

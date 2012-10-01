@@ -197,8 +197,8 @@ if ( $.attrFn ) {$.attrFn.text = true;}
                 });
             } else {
                  var img = $("#upload_iframe").contents().find('body').html();
-                 $('#picture_recipe').attr('src', img);
-                 $('#picture_recipe').removeClass( "opacity20" );
+                 $('#picture').attr('src', img);
+                 $('#picture').removeClass( "opacity20" );
                  $('#upload_iframe').dialog("close");
                  $('#content_recipe').focus();
             }
@@ -275,8 +275,25 @@ if ( $.attrFn ) {$.attrFn.text = true;}
                 primary: "ui-icon-trash"
             }
         });
+        
+   
+    editor = new wysihtml5.Editor("content_recipe", { // id of textarea element
+      toolbar:      "toolbar", // id of toolbar element
+      parserRules:  wysihtml5ParserRules,
+      
+
+        stylesheets: ["../../../bundles/cookbookcore/wysiwyg/stylesheet.css"]
+    });
+   
+    editor.on("change", saveContentRecipe);
+
+// observe
+
+    
     
    });
+   
+   var editor;
    
    function removeType(id)
    {
@@ -594,6 +611,17 @@ function editCategory(id) {
         $( this ).dialog( "close" );
        
    }
+   
+   
+    function saveContentRecipe() { 
+        //get the url for the form
+        var url='../../recipe/changeContent/'+$("#recipe_id").val();
+
+        //start send the post request
+        $.post(url,
+            'content='+editor.getValue());//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down
+
+    };
    
    
    function removePostIt(id)
