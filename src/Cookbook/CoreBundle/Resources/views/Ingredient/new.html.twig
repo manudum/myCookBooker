@@ -4,8 +4,9 @@
 <div>
     {{ form_errors(form.name) }}
     {{ form_widget(form.name) }}
-</div>
-{{ form_rest(form) }}
 
-<input type="button" id="add_ingredient" value="ajouter" />
-</form>
+
+<a href="#" id="add_ingredient"><img src="{{ asset('bundles/cookbookcore/images/plus.gif') }}" border="0" style="margin-bottom: -7px;" /></a>
+</div>
+        {{ form_rest(form) }}
+    </form>

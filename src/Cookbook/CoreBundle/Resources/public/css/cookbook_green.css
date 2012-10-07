@@ -21,7 +21,7 @@ margin-right: 10%;
 }
 a{
     /*color:#772126;*/
-    color: #0082E4;;
+    color: #0082E4;
     text-decoration:none;
     
 }
@@ -78,6 +78,7 @@ button.action{
     width: 150px;
     display: block;
     margin-bottom: 5px;
+    float: right;
 }
 
 .header_cookbook { 
@@ -491,7 +492,7 @@ ul#listFriends li {
 
 #ingredients input[type=text]{ 
    
-    width:95%;
+    width:86%;
     font-size: 13px;
     margin-top: 6px;
 }
@@ -546,7 +547,7 @@ ul#ingredients_list li a {font-weight: bold;text-decoration:none;display:inline-
 ul#ingredients_list li span {color:black;
                              padding-right: 5px;padding:0.3em;
       }
-ul#ingredients_list li:hover {border-bottom:0.4em solid #772126;background-color:#fff;}
+ul#ingredients_list li:hover {border-bottom:0.4em solid #3DBEF5;background-color:#fff;}
 
 
 #toolbar [data-wysihtml5-action] {

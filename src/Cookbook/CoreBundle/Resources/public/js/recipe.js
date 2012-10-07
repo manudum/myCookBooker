@@ -282,10 +282,16 @@ if ( $.attrFn ) {$.attrFn.text = true;}
       parserRules:  wysihtml5ParserRules,
       
 
-        stylesheets: ["../../../bundles/cookbookcore/wysiwyg/stylesheet.css"]
+        stylesheets: ["../../../bundles/cookbookcore/wysiwyg/editor.css"]
     });
    
     editor.on("change", saveContentRecipe);
+    editor.on("focus", function(){
+       $('#toolbar').show();
+    });
+    editor.on("blur", function(){
+       $('#toolbar').hide();
+    });
 
 // observe
 
