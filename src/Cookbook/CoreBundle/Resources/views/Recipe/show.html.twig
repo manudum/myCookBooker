@@ -20,7 +20,7 @@
 <table id="table_info_recipe">
     <tr>
           <td>Catégorie</td>
-          <td>{{ recipe.category }}</td>
+          <td><div id="libCategory" class="hand">{{ recipe.category }}</div></td>
       </tr>
       <tr>
           <td>Type</td>
@@ -157,6 +157,8 @@
 {% endfor %}
 </ul>
 </div>
+</div>
+<div id="dialog-changeCategory" title="Modifier la catégorie" style="display:none;">
 </div>
 <div id="upload_picture" style="display: none;border: 1px solid red"><iframe id="upload_iframe"></iframe></div>
  {% endblock %}

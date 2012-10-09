@@ -122,9 +122,25 @@ class CategoryRecipeController extends Controller
         $categories = $this->getDoctrine()
                 ->getRepository('CookbookCoreBundle:CategoryRecipe')
                 ->findBy(array('people' => $usr->getId()),array('showorder'=> 'ASC'));
-        return $this->render('CookbookCoreBundle:CategoryRecipe:list.html.twig', 
+        $request = $this->getRequest();
+        if ( false !== strpos($request->headers->get('Accept'), 'text/html')) {
+            return $this->render('CookbookCoreBundle:CategoryRecipe:list.html.twig', 
                     array('categories' => $categories,
                     'user' => $usr));
+        }
+        
+        if (false !== strpos($request->headers->get('Accept'), 'application/json')) {
+            $jsons = array();
+            foreach ($categories as $categorie) {
+                $json = $categorie->__toArray();
+                $jsons[]=$json;
+            }
+
+            $response = new Response(json_encode($jsons));
+            $response->headers->set('Content-Type', 'application/json');
+            return $response;
+        }
+        
     }
     
     /**

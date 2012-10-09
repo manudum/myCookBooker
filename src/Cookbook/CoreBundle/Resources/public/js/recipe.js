@@ -172,6 +172,65 @@ if ( $.attrFn ) {$.attrFn.text = true;}
       return false;
    });
    
+   
+   
+   if ( $("#libCategory").length ) $("#libCategory").click(function(){
+      //get the url for the form
+      var url='../../categoryrecipe/list';
+   
+      //start send the post request
+      
+       $.get(url,{
+           other:"attributes"
+       },function(data){
+           //the response is in the data variable
+  
+              //if you want to print the error:
+             var htmlcategory = '<select id="selectCategory">';
+              data.map(function(i){
+                  htmlcategory += '<option value="'+i.id+'"';
+                  if(i.name == $("#libCategory").html()){
+                      htmlcategory += ' selected="selected"';
+                  }
+                  htmlcategory += '>'+i.name+'</li>';
+                  
+              });
+              htmlcategory += '</select>';
+              
+              
+              $("#dialog-changeCategory").html(htmlcategory); 
+              
+              $("#selectCategory").change(function(){
+                  var url='../../recipe/changeCategory/'+$("#recipe_id").val();
+                  $.post(url,
+                        'new_categ='+$(this).val(),function(data){
+                        //the response is in the data variable
+                            
+                            $("#libCategory").html($('#selectCategory option:selected').text());
+                            $("#dialog-changeCategory").dialog( "close" );
+                            
+                    });
+                  
+                    
+                  
+              });
+              
+              $('#dialog-changeCategory').dialog({
+			autoOpen: true,
+			height: 100,
+			width: 350,
+			modal: true,
+                        title: "Changer la catégorie"
+		});
+              
+               
+           
+       },'json');//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down
+
+      //we dont what the browser to submit the form
+      return false;
+   });
+   
    if ( $("#picture_recipe").length )  $("#picture_recipe").click(function(){
       //get the url for the form
       var url= location.href+ '../../../..' + '/recipe/upload/' + $("#recipe_id").val();

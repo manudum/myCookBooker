@@ -117,6 +117,27 @@ class RecipeController extends Controller
     }
     
     /**
+     * @Route("/recipe/changeCategory/{id}")
+     * @Template()
+     */
+    public function changeCategoryAction($id) {
+        
+        // create a task and give it some dummy data for this example
+        $recipe = $this->getDoctrine()
+                ->getRepository('CookbookCoreBundle:Recipe')
+                ->find($id);
+        $recipe->setCategory($this->getDoctrine()
+                ->getRepository('CookbookCoreBundle:CategoryRecipe')
+                ->find( $this->getRequest()->request->get('new_categ')));
+        $em = $this->getDoctrine()->getEntityManager();
+           $em->persist($recipe);
+           $em->flush();
+            $return = '';
+           return new Response($return,200,array('Content-Type'=>'application/json'));
+       
+    }
+    
+    /**
      * @Route("/recipe/delete/{id}")
      * @Template()
      */
