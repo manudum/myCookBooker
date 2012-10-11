@@ -138,6 +138,49 @@ class RecipeController extends Controller
     }
     
     /**
+     * @Route("/recipe/changeType/{id}")
+     * @Template()
+     */
+    public function changeTypeAction($id) {
+        
+        // create a task and give it some dummy data for this example
+        $recipe = $this->getDoctrine()
+                ->getRepository('CookbookCoreBundle:Recipe')
+                ->find($id);
+        $recipe->setType($this->getDoctrine()
+                ->getRepository('CookbookCoreBundle:TypeRecipe')
+                ->find( $this->getRequest()->request->get('new_type')));
+        $em = $this->getDoctrine()->getEntityManager();
+           $em->persist($recipe);
+           $em->flush();
+            $return = '';
+           return new Response($return,200,array('Content-Type'=>'application/json'));
+       
+    }
+    
+    /**
+     * @Route("/recipe/changeFormat/{id}")
+     * @Template()
+     */
+    public function changeFormatAction($id) {
+        
+        // create a task and give it some dummy data for this example
+        $recipe = $this->getDoctrine()
+                ->getRepository('CookbookCoreBundle:Recipe')
+                ->find($id);
+        $recipe->setFormat($this->getDoctrine()
+                ->getRepository('CookbookCoreBundle:FormatRecipe')
+                ->find( $this->getRequest()->request->get('new_format')));
+        $em = $this->getDoctrine()->getEntityManager();
+           $em->persist($recipe);
+           $em->flush();
+            $return = '';
+           return new Response($return,200,array('Content-Type'=>'application/json'));
+       
+    }
+    
+    
+    /**
      * @Route("/recipe/delete/{id}")
      * @Template()
      */

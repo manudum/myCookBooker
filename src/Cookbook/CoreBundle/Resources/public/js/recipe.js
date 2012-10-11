@@ -231,6 +231,115 @@ if ( $.attrFn ) {$.attrFn.text = true;}
       return false;
    });
    
+   
+   if ( $("#libType").length ) $("#libType").click(function(){
+      //get the url for the form
+      var url='../../typerecipe/list';
+   
+      //start send the post request
+      
+       $.get(url,{
+           other:"attributes"
+       },function(data){
+           //the response is in the data variable
+  
+              //if you want to print the error:
+             var htmltype = '<select id="selectType"><option value="">Sans</option>';
+              data.map(function(i){
+                  htmltype += '<option value="'+i.id+'"';
+                  if(i.name == $("#libType").html()){
+                      htmltype += ' selected="selected"';
+                  }
+                  htmltype += '>'+i.name+'</li>';
+                  
+              });
+              htmltype += '</select>';
+              
+              
+              $("#dialog-changeCategory").html(htmltype); 
+              
+              $("#selectType").change(function(){
+                  var url='../../recipe/changeType/'+$("#recipe_id").val();
+                  $.post(url,
+                        'new_type='+$(this).val(),function(data){
+                        //the response is in the data variable
+                            
+                            $("#libType").html($('#selectType option:selected').text());
+                            $("#dialog-changeCategory").dialog( "close" );
+                            
+                    });
+              });
+              
+              $('#dialog-changeCategory').dialog({
+			autoOpen: true,
+			height: 100,
+			width: 350,
+			modal: true,
+                        title: "Changer le Type"
+		});
+              
+               
+           
+       },'json');//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down
+
+      //we dont what the browser to submit the form
+      return false;
+   });
+   
+   if ( $("#libFormat").length ) $("#libFormat").click(function(){
+      //get the url for the form
+      var url='../../formatrecipe/list';
+   
+      //start send the post request
+      
+       $.get(url,{
+           other:"attributes"
+       },function(data){
+           //the response is in the data variable
+  
+              //if you want to print the error:
+             var htmlformat = '<select id="selectFormat"><option value="">Sans</option>';
+              data.map(function(i){
+                  htmlformat += '<option value="'+i.id+'"';
+                  if(i.name == $("#libFormat").html()){
+                      htmlformat += ' selected="selected"';
+                  }
+                  htmlformat += '>'+i.name+'</li>';
+                  
+              });
+              htmlformat += '</select>';
+              
+              
+              $("#dialog-changeCategory").html(htmlformat); 
+              
+              $("#selectFormat").change(function(){
+                  var url='../../recipe/changeFormat/'+$("#recipe_id").val();
+                  $.post(url,
+                        'new_format='+$(this).val(),function(data){
+                        //the response is in the data variable
+                            
+                            $("#libFormat").html($('#selectFormat option:selected').text());
+                            $("#dialog-changeCategory").dialog( "close" );
+                            
+                    });
+              });
+              
+              $('#dialog-changeCategory').dialog({
+			autoOpen: true,
+			height: 100,
+			width: 350,
+			modal: true,
+                        title: "Changer le Format"
+		});
+              
+               
+           
+       },'json');//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down
+
+      //we dont what the browser to submit the form
+      return false;
+   });
+   
    if ( $("#picture_recipe").length )  $("#picture_recipe").click(function(){
       //get the url for the form
       var url= location.href+ '../../../..' + '/recipe/upload/' + $("#recipe_id").val();

@@ -24,11 +24,11 @@
       </tr>
       <tr>
           <td>Type</td>
-          <td>{{ recipe.type }}</td>
+          <td><div id="libType" class="hand">{{ recipe.type | default("Sans") }}</div></td>
       </tr>
       <tr>
           <td>Format</td>
-          <td>{{ recipe.format }}</td>
+          <td><div id="libFormat" class="hand">{{ recipe.format | default("Sans") }}</div></td>
       </tr><tr>
         <td>Difficulté</td>
         <td>
@@ -41,11 +41,11 @@
       </tr>
       <tr>
           <td>Temps de préparation</td>
-          <td>{{ recipe.preparetime }}&nbsp;min.</td>
+          <td><div id="libPrepareTime" class="hand">{{ recipe.preparetime }}</div>&nbsp;min.</td>
       </tr>
       <tr>
           <td>Temps de cuisson</td>
-          <td>{{ recipe.cooktime }}&nbsp;min.</td>
+          <td><div id="libCooktime" class="hand">{{ recipe.cooktime }}</div>&nbsp;min.</td>
       </tr>
     </table>
 </div>

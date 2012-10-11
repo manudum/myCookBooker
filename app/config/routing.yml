@@ -81,9 +81,17 @@ recipe_changeContent:
   pattern: /recipe/changeContent/{id}
   defaults:  { _controller: CookbookCoreBundle:Recipe:changeContent }
   
-recipe_changeContent:
+recipe_changeCategory:
   pattern: /recipe/changeCategory/{id}
   defaults:  { _controller: CookbookCoreBundle:Recipe:changeCategory }
+  
+recipe_changeType:
+  pattern: /recipe/changeType/{id}
+  defaults:  { _controller: CookbookCoreBundle:Recipe:changeType }
+  
+recipe_changeFormat:
+  pattern: /recipe/changeFormat/{id}
+  defaults:  { _controller: CookbookCoreBundle:Recipe:changeFormat }
   
 recipe_delete:
   pattern: /recipe/delete/{id}

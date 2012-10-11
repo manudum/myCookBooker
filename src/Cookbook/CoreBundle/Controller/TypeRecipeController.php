@@ -124,9 +124,25 @@ class TypeRecipeController extends Controller
         $types = $this->getDoctrine()
                 ->getRepository('CookbookCoreBundle:TypeRecipe')
                 ->findBy(array('people' => $usr->getId()),array('showorder'=> 'ASC'));
-        return $this->render('CookbookCoreBundle:TypeRecipe:list.html.twig', 
+        
+        $request = $this->getRequest();
+        if ( false !== strpos($request->headers->get('Accept'), 'text/html')) {
+            return $this->render('CookbookCoreBundle:TypeRecipe:list.html.twig', 
                     array('types' => $types,
                     'user' => $usr));
+        }
+        
+        if (false !== strpos($request->headers->get('Accept'), 'application/json')) {
+            $jsons = array();
+            foreach ($types as $type) {
+                $json = $type->__toArray();
+                $jsons[]=$json;
+            }
+
+            $response = new Response(json_encode($jsons));
+            $response->headers->set('Content-Type', 'application/json');
+            return $response;
+        }
     }
     
     /**

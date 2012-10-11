@@ -319,7 +319,7 @@ text-align: center;
      z-index: 1000;
  }
  
-  #content_header h1{
+#content_header h1{
      color: #000;
      margin-top: 2px;
      margin-bottom: 2px;
@@ -532,6 +532,10 @@ ul#listFriends li {
     float: right;
     width: 78%;
     min-height: 200px;
+}
+
+#libPrepareTime, #libCooktime{
+    display: inline-block;
 }
 
 #upload_iframe{

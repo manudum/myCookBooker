@@ -124,9 +124,25 @@ class FormatRecipeController extends Controller
         $formats = $this->getDoctrine()
                 ->getRepository('CookbookCoreBundle:FormatRecipe')
                 ->findBy(array('people' => $usr->getId()),array('showorder'=> 'ASC'));
-        return $this->render('CookbookCoreBundle:FormatRecipe:list.html.twig', 
+        
+        $request = $this->getRequest();
+        if ( false !== strpos($request->headers->get('Accept'), 'text/html')) {
+            return $this->render('CookbookCoreBundle:FormatRecipe:list.html.twig', 
                     array('formats' => $formats,
                     'user' => $usr));
+        }
+        
+        if (false !== strpos($request->headers->get('Accept'), 'application/json')) {
+            $jsons = array();
+            foreach ($formats as $format) {
+                $json = $format->__toArray();
+                $jsons[]=$json;
+            }
+
+            $response = new Response(json_encode($jsons));
+            $response->headers->set('Content-Type', 'application/json');
+            return $response;
+        }
     }
     
     /**
