@@ -32,9 +32,9 @@
       </tr><tr>
         <td>Difficulté</td>
         <td>
-<div id="difficulties">
+<div id="difficulties" class="hand">
 {% for i in range(1, 3) %}
-   <input type="radio" {% if recipe.difficulty == i  %} checked="checked" {% endif %} disabled="disabled" />
+   <input type="radio" {% if recipe.difficulty == i  %} checked="checked" {% endif %} />
 {% endfor %}
 </div>
          </td>

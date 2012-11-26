@@ -480,8 +480,11 @@ ul#listFriends li {
 
 #difficulties div:first-child{
     font-size: 13px;
-    padding: 2px;
-    padding-top: 1px;
+}
+
+
+#difficulties div.star-rating-readonly a {
+    cursor: pointer !important;
 }
 
 #table_info_recipe tr{
@@ -557,7 +560,7 @@ ul#ingredients_list li:hover {border-bottom:0.4em solid #3DBEF5;background-color
 #toolbar [data-wysihtml5-action] {
     float: right;
 }
-#toolbar, textarea {
+#toolbar textarea {
     -moz-box-sizing: border-box;
     padding: 5px;
     width: 850px;
