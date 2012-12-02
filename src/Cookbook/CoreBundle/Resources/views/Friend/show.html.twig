@@ -1,7 +1,6 @@
  {% extends '::base.html.twig' %}
 
  {% block body %}
-<script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/jquery-ui-1.8.22.custom.min.js') }}"></script>
 
 {% include 'CookbookCoreBundle:Default:header.html.twig' %}
 <div id="content_header"><h1>{{ friend.name }}</h1>
@@ -59,6 +58,12 @@ A déjà mangé :
 <div id="del" title="Supprimer cet invité" style="display:none;">
 	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Cet invité sera supprimé définitivement. Etes-vous sûr ??</p>
 </div>
+
+
+ {% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/jquery-ui-1.8.22.custom.min.js') }}"></script>
 <script>
 $(function() {
     $( "#btnMod" ).button({
@@ -96,5 +101,4 @@ function removeFriend(lien)
 		}); 
    }
 </script>
-
  {% endblock %}

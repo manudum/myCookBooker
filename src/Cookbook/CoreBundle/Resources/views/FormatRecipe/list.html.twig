@@ -1,8 +1,6 @@
  {% extends '::base.html.twig' %}
 
  {% block body %}
-<script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/jquery-ui-1.8.22.custom.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/recipe.js') }}"></script>
 
 {% include 'CookbookCoreBundle:Default:header.html.twig' %}
 
@@ -36,4 +34,9 @@
 <div id="dialog-confirm" title="Supprimer le format" style="display:none;">
 	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Le format sera supprimé définitivement. Etes-vous sûr ??</p>
 </div>
+ {% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/jquery-ui-1.8.22.custom.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/recipe.js') }}"></script>
  {% endblock %}

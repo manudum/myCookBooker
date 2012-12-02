@@ -445,22 +445,24 @@ if ( $.attrFn ) {$.attrFn.text = true;}
         });
         
    
-    editor = new wysihtml5.Editor("content_recipe", { // id of textarea element
-      toolbar:      "toolbar", // id of toolbar element
-      parserRules:  wysihtml5ParserRules,
-      
+    if ( $("#content_recipe").length ) 
+    {
+          editor = new wysihtml5.Editor("content_recipe", { // id of textarea element
+            toolbar:      "toolbar", // id of toolbar element
+            parserRules:  wysihtml5ParserRules,
 
-        stylesheets: ["../../../bundles/cookbookcore/wysiwyg/editor.css"]
-    });
-   
-    editor.on("change", saveContentRecipe);
-    editor.on("focus", function(){
-       $('#toolbar').show();
-    });
-    editor.on("blur", function(){
-       $('#toolbar').hide();
-    });
 
+              stylesheets: ["../../../bundles/cookbookcore/wysiwyg/editor.css"]
+          });
+
+          editor.on("change", saveContentRecipe);
+          editor.on("focus", function(){
+             $('#toolbar').show();
+          });
+          editor.on("blur", function(){
+             $('#toolbar').hide();
+          });
+    }
 // observe
 
     

@@ -1,12 +1,7 @@
  {% extends '::base.html.twig' %}
 
- {% block javascript %}
-<script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/recipe.js') }}"></script>
-  {% endblock %} 
+ 
 {% block body %}
-<script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/recipe.js') }}"></script>
-<script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/jquery-ui-1.8.22.custom.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('bundles/cookbookcore/star-rating/jquery.rating.pack.js') }}"></script>
 
 
 {% include 'CookbookCoreBundle:Default:header.html.twig' %}
@@ -58,3 +53,10 @@
 <div id="content_right"></div>
 
 {% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/recipe.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/jquery-ui-1.8.22.custom.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/cookbookcore/star-rating/jquery.rating.pack.js') }}"></script>
+
+ {% endblock %}

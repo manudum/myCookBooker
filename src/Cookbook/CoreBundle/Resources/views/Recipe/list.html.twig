@@ -63,7 +63,11 @@
 {% endfor %}
     </select>
  </div>
-<script type="text/javascript">
+
+ {% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
 $(document).ready(function() {
 
     if ( $("#stepRecipe") )  $("#stepRecipe").click(function(){

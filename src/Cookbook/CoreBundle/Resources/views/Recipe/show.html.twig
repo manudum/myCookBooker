@@ -1,12 +1,6 @@
  {% extends '::base.html.twig' %}
  {% block body %}
-<script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/recipe.js') }}"></script>
-<script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/jquery-ui-1.8.22.custom.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('bundles/cookbookcore/star-rating/jquery.rating.pack.js') }}"></script>
-<!-- wysihtml5 parser rules -->
-<script src="{{ asset('bundles/cookbookcore/wysiwyg/advanced.js') }}"></script>
-<!-- Library -->
-<script src="{{ asset('bundles/cookbookcore/wysiwyg/wysihtml5-0.3.0.js') }}"></script>
+
 {% include 'CookbookCoreBundle:Default:header.html.twig' %}
 
 <div id="content_header"><h1>{{ recipe.name }}</h1>
@@ -161,4 +155,14 @@
 <div id="dialog-changeCategory" title="Modifier la catégorie" style="display:none;">
 </div>
 <div id="upload_picture" style="display: none;border: 1px solid red"><iframe id="upload_iframe"></iframe></div>
+ {% endblock %}
+ {% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/recipe.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/jquery-ui-1.8.22.custom.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/cookbookcore/star-rating/jquery.rating.pack.js') }}"></script>
+    <!-- wysihtml5 parser rules -->
+    <script src="{{ asset('bundles/cookbookcore/wysiwyg/advanced.js') }}"></script>
+    <!-- Library -->
+    <script src="{{ asset('bundles/cookbookcore/wysiwyg/wysihtml5-0.3.0.js') }}"></script>
  {% endblock %}

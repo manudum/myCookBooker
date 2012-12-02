@@ -1,14 +1,7 @@
  {% extends '::base.html.twig' %}
 
 {% block body %}
-<script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/jquery-ui-1.8.22.custom.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('bundles/cookbookcore/michael-multiselect-a07f91c/js/ui.multiselect.js') }}"></script>
-<script type="text/javascript" src="{{ asset('bundles/cookbookcore/michael-multiselect-a07f91c/js/locale/ui-multiselect-fr.js') }}"></script>
-<script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/event.js') }}"></script>
 
-<script type="text/javascript">
-    
-</script>
 {% include 'CookbookCoreBundle:Default:header.html.twig' %}
 
 {{ form_errors(form) }}
@@ -111,3 +104,11 @@
 </div>
 <div id="new"></div>
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/jquery-ui-1.8.22.custom.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/cookbookcore/michael-multiselect-a07f91c/js/ui.multiselect.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/cookbookcore/michael-multiselect-a07f91c/js/locale/ui-multiselect-fr.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/event.js') }}"></script>
+ {% endblock %}
