@@ -32,7 +32,7 @@ logout:
 
     
 home:
-  pattern: /home
+  pattern: /
   defaults:  { _controller: CookbookCoreBundle:Default:show }
   
 people:

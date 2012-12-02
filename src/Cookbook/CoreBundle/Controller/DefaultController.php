@@ -12,7 +12,7 @@ class DefaultController extends Controller
     
     
     /**
-     * @Route("/home/")
+     * @Route("/")
      * @Template()
      */
     public function showAction()
