@@ -16,7 +16,7 @@ class DefaultController extends Controller
     
     
     /**
-     * @Route("/cookbook/")
+     * @Route("/home/")
      * @Template()
      */
     public function showAction()
