@@ -1,6 +1,11 @@
  {% extends '::base.html.twig' %}
 
- 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/cookbookcore/css/smoothness/jquery-ui-1.8.22.custom.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ asset('bundles/cookbookcore/star-rating/jquery.rating.css') }}" type="text/css" media="all" />
+{% endblock %}
+    
 {% block body %}
 
 

@@ -5,10 +5,6 @@ namespace Cookbook\CoreBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Cookbook\CoreBundle\Entity\People;
-use Cookbook\CoreBundle\Entity\Recipe;
-
-use Cookbook\CoreBundle\Entity\CategoryRecipe;
 use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
