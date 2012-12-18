@@ -1,11 +1,11 @@
  {% extends '::base.html.twig' %}
 
 {% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/cookbookcore/wysiwyg/stylesheet.css') }}" type="text/css" media="all" />
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('bundles/cookbookcore/css/smoothness/jquery-ui-1.8.22.custom.css') }}" type="text/css" media="all" />
     <link rel="stylesheet" href="{{ asset('bundles/cookbookcore/post-it/post-it.css') }}" type="text/css" media="all" />
     <link rel="stylesheet" href="{{ asset('bundles/cookbookcore/star-rating/jquery.rating.css') }}" type="text/css" media="all" />
-    <link rel="stylesheet" href="{{ asset('bundles/cookbookcore/wysiwyg/stylesheet.css') }}" type="text/css" media="all" />
 {% endblock %}
     
  {% block body %}
@@ -167,11 +167,12 @@
  {% endblock %}
  {% block javascripts %}
     {{ parent() }}
-    <script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/recipe.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/jquery-ui-1.8.22.custom.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/cookbookcore/star-rating/jquery.rating.pack.js') }}"></script>
     <!-- wysihtml5 parser rules -->
     <script src="{{ asset('bundles/cookbookcore/wysiwyg/advanced.js') }}"></script>
     <!-- Library -->
-    <script src="{{ asset('bundles/cookbookcore/wysiwyg/wysihtml5-0.3.0.js') }}"></script>
+    <script src="{{ asset('bundles/cookbookcore/wysiwyg/wysihtml5-0.3.0.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/recipe.js') }}"></script>
+    
  {% endblock %}

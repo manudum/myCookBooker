@@ -535,6 +535,8 @@ ul#listFriends li {
     float: right;
     width: 78%;
     min-height: 200px;
+    font-family:helvetica,arial,sans-serif;
+    font-size: 14px;
 }
 
 #libPrepareTime, #libCookTime{
@@ -556,6 +558,25 @@ ul#ingredients_list li span {color:black;
       }
 ul#ingredients_list li:hover {border-bottom:0.4em solid #3DBEF5;background-color:#fff;}
 
+#toolbar {
+    position: relative;
+    width: 78%;
+    height: 42px;
+    display: none;
+}
+#toolbar header {
+    background: none;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: none;
+    border: 1px solid #ddd;
+    display: block;
+    font-size: 0;
+    position: relative;
+    text-align: center;
+    width: 100%;
+    z-index: 1;
+    text-decoration: line-through;
+}
 
 #toolbar [data-wysihtml5-action] {
     float: right;
@@ -600,6 +621,74 @@ ul#ingredients_list li:hover {border-bottom:0.4em solid #3DBEF5;background-color
     color: blue;
 }
 
+#toolbar [data-wysihtml5-command], [data-wysihtml5-action], .fore-color {
+    border-left: 1px solid #FFFFFF;
+    border-right: 1px solid #DDDDDD;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 12px;
+    height: 32px;
+    list-style: none outside none;
+    position: relative;
+    width: 42px;
+}
+
+#toolbar [data-wysihtml5-command]:after, [data-wysihtml5-action]:after, .fore-color:after {
+    background-repeat: no-repeat;
+    bottom: 0;
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+#toolbar [data-wysihtml5-command]:hover, [data-wysihtml5-action]:hover, .fore-color:hover {
+    background-image: -moz-linear-gradient(center bottom , #E5F0E2 0%, #FFFFFF 100%);
+}
+#toolbar [data-wysihtml5-command="bold"]:after {
+    background-image: url("../images/text_bold.png");
+    background-position: 7px center;
+}
+#toolbar [data-wysihtml5-command="italic"]:after {
+    background-image: url("../images/text_italic.png");
+    background-position: 7px center;
+}
+#toolbar [data-wysihtml5-command="insertUnorderedList"]:after {
+    background-image: url("../images/text_list_bullets.png");
+    background-position: 7px center;
+}
+#toolbar [data-wysihtml5-command="insertOrderedList"]:after {
+    background-image: url("../images/text_list_numbers.png");
+    background-position: 7px center;
+}
+#toolbar [data-wysihtml5-command="formatBlock"][data-wysihtml5-command-value="h1"]:after {
+    background-image: url("../images/text_heading_1.png");
+    background-position: 7px center;
+}
+#toolbar [data-wysihtml5-command="formatBlock"][data-wysihtml5-command-value="h2"]:after {
+    background-image: url("../images/text_heading_1.png");
+    background-position: 7px center;
+}
+#toolbar [data-wysihtml5-command="createLink"]:after {
+    background-image: url("../images/page_white_link.png");
+    background-position: 7px center;
+}
+#toolbar [data-wysihtml5-command="insertImage"]:after {
+    background-image: url("../images/insert-image.png");
+    background-position: 7px center;
+}
+#toolbar .fore-color:after {
+    background-image: url("../images/spr_toolbar_icons_r1.png");
+    background-position: -758px center;
+}
+#toolbar [data-wysihtml5-command="insertSpeech"]:after {
+    background-image: url("../images/spr_toolbar_icons_r1.png");
+    background-position: -596px center;
+}
+#toolbar [data-wysihtml5-action="change_view"]:after {
+    background-image: url("../images/spr_toolbar_icons_r1.png");
+    background-position: -686px center;
+}
 
  
  
