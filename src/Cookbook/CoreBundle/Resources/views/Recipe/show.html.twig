@@ -44,11 +44,11 @@
       </tr>
       <tr>
           <td>Temps de préparation</td>
-          <td><div id="libPrepareTime" class="hand">{{ recipe.preparetime }}</div>&nbsp;min.</td>
+          <td><div id="libPrepareTime" class="hand">{{ recipe.preparetime | default("??") }}</div>&nbsp;min.</td>
       </tr>
       <tr>
           <td>Temps de cuisson</td>
-          <td><div id="libCooktime" class="hand">{{ recipe.cooktime }}</div>&nbsp;min.</td>
+          <td><div id="libCookTime" class="hand">{{ recipe.cooktime | default("??") }}</div>&nbsp;min.</td>
       </tr>
     </table>
 </div>

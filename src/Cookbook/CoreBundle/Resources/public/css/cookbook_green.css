@@ -537,7 +537,7 @@ ul#listFriends li {
     min-height: 200px;
 }
 
-#libPrepareTime, #libCooktime{
+#libPrepareTime, #libCookTime{
     display: inline-block;
 }
 

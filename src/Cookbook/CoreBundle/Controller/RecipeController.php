@@ -179,6 +179,44 @@ class RecipeController extends Controller
        
     }
     
+    /**
+     * @Route("/recipe/changePrepareTime/{id}")
+     * @Template()
+     */
+    public function changePrepareTimeAction($id) {
+        
+        // create a task and give it some dummy data for this example
+        $recipe = $this->getDoctrine()
+                ->getRepository('CookbookCoreBundle:Recipe')
+                ->find($id);
+        $recipe->setPrepareTime($this->getRequest()->request->get('new_prepareTime'));
+        $em = $this->getDoctrine()->getEntityManager();
+           $em->persist($recipe);
+           $em->flush();
+            $return = '';
+           return new Response($return,200,array('Content-Type'=>'application/json'));
+       
+    }
+    
+    /**
+     * @Route("/recipe/changeCookTime/{id}")
+     * @Template()
+     */
+    public function changeCookTimeAction($id) {
+        
+        // create a task and give it some dummy data for this example
+        $recipe = $this->getDoctrine()
+                ->getRepository('CookbookCoreBundle:Recipe')
+                ->find($id);
+        $recipe->setCookTime($this->getRequest()->request->get('new_cookTime'));
+        $em = $this->getDoctrine()->getEntityManager();
+           $em->persist($recipe);
+           $em->flush();
+            $return = '';
+           return new Response($return,200,array('Content-Type'=>'application/json'));
+       
+    }
+    
     
     /**
      * @Route("/recipe/delete/{id}")
@@ -210,7 +248,7 @@ class RecipeController extends Controller
                 ->getRepository('CookbookCoreBundle:Recipe')
                 ->find($id);
         $form = $this->createFormBuilder($recipe)
-            ->add('image','file',array('required' => true))
+            ->add('image','file',array('required' => true, 'data_class' => null))
             ->getForm()
         ;
         

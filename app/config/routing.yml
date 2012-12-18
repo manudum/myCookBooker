@@ -93,6 +93,14 @@ recipe_changeFormat:
   pattern: /recipe/changeFormat/{id}
   defaults:  { _controller: CookbookCoreBundle:Recipe:changeFormat }
   
+recipe_changePrepareTime:
+  pattern: /recipe/changePrepareTime/{id}
+  defaults:  { _controller: CookbookCoreBundle:Recipe:changePrepareTime }
+
+recipe_changeCookTime:
+  pattern: /recipe/changeCookTime/{id}
+  defaults:  { _controller: CookbookCoreBundle:Recipe:changeCookTime }
+ 
 recipe_delete:
   pattern: /recipe/delete/{id}
   defaults:  { _controller: CookbookCoreBundle:Recipe:delete }

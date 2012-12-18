@@ -340,6 +340,84 @@ if ( $.attrFn ) {$.attrFn.text = true;}
       return false;
    });
    
+   if ( $("#libPrepareTime").length ) $("#libPrepareTime").click(function(){
+      
+  
+              //if you want to print the error:
+             var htmlPrepareTime = '<input id="inputPrepareTime" value="'+$("#libPrepareTime").html()+'" />';
+              
+              
+              
+              $("#dialog-changeCategory").html(htmlPrepareTime); 
+              
+              $("#inputPrepareTime").change(function(){
+                  var url='../../recipe/changePrepareTime/'+$("#recipe_id").val();
+                  $.post(url,
+                        'new_prepareTime='+$(this).val(),function(data){
+                        //the response is in the data variable
+                            
+                            $("#libPrepareTime").html($('#inputPrepareTime').val());
+                            $("#dialog-changeCategory").dialog( "close" );
+                            
+                    });
+                  
+                    
+                  
+              });
+              
+              $('#dialog-changeCategory').dialog({
+			autoOpen: true,
+			height: 100,
+			width: 350,
+			modal: true,
+                        title: "Changer le temps de préparation"
+		});
+              
+               
+        
+      //we dont what the browser to submit the form
+      return false;
+   });
+   
+   if ( $("#libCookTime").length ) $("#libCookTime").click(function(){
+      
+  
+              //if you want to print the error:
+             var htmlCookTime = '<input id="inputCookTime" value="'+$("#libCookTime").html()+'" />';
+              
+              
+              
+              $("#dialog-changeCategory").html(htmlCookTime); 
+              
+              $("#inputCookTime").change(function(){
+                  var url='../../recipe/changeCookTime/'+$("#recipe_id").val();
+                  $.post(url,
+                        'new_cookTime='+$(this).val(),function(data){
+                        //the response is in the data variable
+                            
+                            $("#libCookTime").html($('#inputCookTime').val());
+                            $("#dialog-changeCategory").dialog( "close" );
+                            
+                    });
+                  
+                    
+                  
+              });
+              
+              $('#dialog-changeCategory').dialog({
+			autoOpen: true,
+			height: 100,
+			width: 350,
+			modal: true,
+                        title: "Changer le temps de cuisson"
+		});
+              
+               
+        
+      //we dont what the browser to submit the form
+      return false;
+   });
+   
    if ( $("#picture_recipe").length )  $("#picture_recipe").click(function(){
       //get the url for the form
       var url= location.href+ '../../../..' + '/recipe/upload/' + $("#recipe_id").val();
