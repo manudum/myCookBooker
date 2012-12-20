@@ -537,9 +537,9 @@ if ( $.attrFn ) {$.attrFn.text = true;}
           editor.on("focus", function(){
              $('#toolbar').show();
           });
-          editor.on("blur", function(){
+          /*editor.on("blur", function(){
              $('#toolbar').hide();
-          });
+          });*/
     }
 // observe
 

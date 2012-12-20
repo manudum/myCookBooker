@@ -509,6 +509,54 @@ ul#listFriends li {
     clear:both;
 }
 
+ul#listRecipes {font-family:helvetica,arial,sans-serif;margin:0;padding:0;width:98%;clear:both;}
+ul#listRecipes li {
+        margin:0;padding:2px;list-style:none;margin:5px 0 10px 5px; width:100%;
+        min-height: 30px;
+        background-color: #fff;
+        clear: both;
+ }
+ 
+ .recipe{
+     margin-left: 60px;
+ }
+ .recipe_pic{
+     width: 10%;
+ }
+ .recipe_header{
+     font-size: 13px;
+     border:1px solid #ccc;
+     border-radius: 3px;
+     padding: 6px 16px 6px 16px;
+     min-height: 60px;
+     position: relative;
+ }
+
+ .recipe_header:hover{
+     color: #fff;
+     background-color: #3DBEF5;
+ }
+ 
+ .recipe_header:hover a{
+     color: #fff;
+ }
+ 
+.recipe_picture{
+    width:90%;
+    margin: 0.2%;
+    padding: 0.1%;
+    
+}
+
+.difficulties{
+    height: 16px;
+    width: 55px;
+    background-color: white; 
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
 #picture_recipe{
     float: right;
     width:20%;
@@ -568,7 +616,7 @@ ul#ingredients_list li:hover {border-bottom:0.4em solid #3DBEF5;background-color
     background: none;
     border-radius: 4px 4px 4px 4px;
     box-shadow: none;
-    border: 1px solid #ddd;
+    border: none;
     display: block;
     font-size: 0;
     position: relative;
@@ -601,8 +649,13 @@ ul#ingredients_list li:hover {border-bottom:0.4em solid #3DBEF5;background-color
 }
 #toolbar [data-wysihtml5-dialog] {
     border: 1px solid #666666;
-    margin: 5px 0 0;
+    margin: 10px 0 0;
     padding: 5px;
+}
+
+#toolbar .commands{
+    border:none;
+    
 }
 
 #toolbar a {
@@ -622,8 +675,8 @@ ul#ingredients_list li:hover {border-bottom:0.4em solid #3DBEF5;background-color
 }
 
 #toolbar [data-wysihtml5-command], [data-wysihtml5-action], .fore-color {
-    border-left: 1px solid #FFFFFF;
-    border-right: 1px solid #DDDDDD;
+    border-left: none;
+    border-right: none;
     cursor: pointer;
     display: inline-block;
     font-size: 12px;
@@ -631,6 +684,10 @@ ul#ingredients_list li:hover {border-bottom:0.4em solid #3DBEF5;background-color
     list-style: none outside none;
     position: relative;
     width: 42px;
+}
+
+.fore-color ul li {
+    height: 16px !important;
 }
 
 #toolbar [data-wysihtml5-command]:after, [data-wysihtml5-action]:after, .fore-color:after {
