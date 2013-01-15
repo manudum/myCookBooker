@@ -217,6 +217,25 @@ class RecipeController extends Controller
        
     }
     
+    /**
+     * @Route("/recipe/changeDifficulty/{id}")
+     * @Template()
+     */
+    public function changeDifficultyAction($id) {
+        
+        // create a task and give it some dummy data for this example
+        $recipe = $this->getDoctrine()
+                ->getRepository('CookbookCoreBundle:Recipe')
+                ->find($id);
+        $recipe->setDifficulty($this->getRequest()->request->get('new_difficulty'));
+        $em = $this->getDoctrine()->getEntityManager();
+           $em->persist($recipe);
+           $em->flush();
+            $return = '';
+           return new Response($return,200,array('Content-Type'=>'application/json'));
+       
+    }
+    
     
     /**
      * @Route("/recipe/delete/{id}")

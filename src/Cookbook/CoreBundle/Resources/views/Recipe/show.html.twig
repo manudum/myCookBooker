@@ -37,7 +37,7 @@
         <td>
 <div id="difficulties" class="hand">
 {% for i in range(1, 3) %}
-   <input type="radio" {% if recipe.difficulty == i  %} checked="checked" {% endif %} />
+   <input name="recipy_difficulty" class="auto-submit-star" value="{{ i }}" type="radio" {% if recipe.difficulty == i  %} checked="checked" {% endif %} />
 {% endfor %}
 </div>
          </td>

@@ -503,8 +503,12 @@ if ( $.attrFn ) {$.attrFn.text = true;}
     if ( $("#categories").length ) $('#categories').buttonset();
     if ( $("#types").length ) $('#types').buttonset();
     if ( $("#formats").length ) $('#formats').buttonset(); 
-    if ( $("#difficulties").length ) $('#difficulties input').rating(); 
-    
+    if ( $("#difficulties").length ) {
+       $('#difficulties input').rating({
+        callback: changeDifficulty
+        }); 
+       
+    }
     
     if ( $("#btn-addNote").length ) 
     {
@@ -937,13 +941,23 @@ function editCategory(id) {
     function changePostItContent(id, content){
         //get the url for the form
         var url='../../postitrecipe/changecontent/';
-        console.debug(this);
+        
         //start send the post request
         $.post(url,
             'id='+id+'&content='+$(content).html(),function(data){
             //the response is in the data variable
               
         });//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down   
+    }
+    
+    
+    function changeDifficulty(value, link){
+        console.debug('rate');
+        console.debug(value);
+        var url='../../recipe/changeDifficulty/'+$("#recipe_id").val();
+        $.post(url,
+              'new_difficulty='+value,null);
+        
     }
     
     
