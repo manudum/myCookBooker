@@ -90,6 +90,15 @@ button.action{
     overflow: hidden;
 }
 
+#msg {
+    background-color: green;
+    color: white;
+    padding: 0 5px;
+    position: absolute;
+    right: 11px;
+    top: 14px;
+    border-radius: 3px 3px 3px 3px;
+}
 .login_cookbook { 
     position: relative;
     background-color : #fff;

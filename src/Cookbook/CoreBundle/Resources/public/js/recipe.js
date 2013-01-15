@@ -344,7 +344,7 @@ if ( $.attrFn ) {$.attrFn.text = true;}
       
   
               //if you want to print the error:
-             var htmlPrepareTime = '<input id="inputPrepareTime" value="'+$("#libPrepareTime").html()+'" />';
+             var htmlPrepareTime = '<input id="inputPrepareTime" value="'+$("#libPrepareTime").html().replace('??', '')+'" />';
               
               
               
@@ -383,7 +383,7 @@ if ( $.attrFn ) {$.attrFn.text = true;}
       
   
               //if you want to print the error:
-             var htmlCookTime = '<input id="inputCookTime" value="'+$("#libCookTime").html()+'" />';
+             var htmlCookTime = '<input id="inputCookTime" value="'+$("#libCookTime").html().replace('??', '')+'" />';
               
               
               
@@ -547,7 +547,14 @@ if ( $.attrFn ) {$.attrFn.text = true;}
     }
 // observe
 
-    
+    $(document).ajaxSuccess(function(event, request, settings) {
+        if(settings.type=='POST'){
+            $( "#msg" ).append( "<li>Modification sauvegardée</li>" );
+            setTimeout(function() {
+                    $( "#msg" ).html('');
+              }, 3000);
+        }
+    });
     
    });
    
