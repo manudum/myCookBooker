@@ -552,7 +552,7 @@ if ( $.attrFn ) {$.attrFn.text = true;}
             $( "#msg" ).append( "<li>Modification sauvegardée</li>" );
             setTimeout(function() {
                     $( "#msg" ).html('');
-              }, 3000);
+              }, 2000);
         }
     });
     
