@@ -133,7 +133,14 @@ class Recipe
     
     public function __toArray()
     {
-       return array('id'=>$this->getId(),'name' => $this->getName());
+       return array('id' => $this->getId(),
+                    'name' => $this->getName(),
+                    'description' => $this->getDescription(),
+                    'cooktime' => $this->getCooktime(),
+                    'preparetime' => $this->getPreparetime(),
+                    'image' => $this->getImage(),
+                    'difficulty' => $this->getDifficulty()
+           );
     }
     
     public function serialize()
@@ -288,25 +295,6 @@ class Recipe
         return $this->people;
     }
 
-    /**
-     * Set decription
-     *
-     * @param text $decription
-     */
-    public function setDecription($decription)
-    {
-        $this->decription = $decription;
-    }
-
-    /**
-     * Get decription
-     *
-     * @return text 
-     */
-    public function getDecription()
-    {
-        return $this->decription;
-    }
 
     /**
      * Set category

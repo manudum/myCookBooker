@@ -2,13 +2,44 @@
 
 {% block stylesheets %}
     {{ parent() }}
-<link rel="stylesheet" href="{{ asset('bundles/cookbookcore/star-rating/jquery.rating.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ asset('bundles/cookbookcore/css/smoothness/jquery-ui-1.8.22.custom.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ asset('bundles/cookbookcore/star-rating/jquery.rating.css') }}" type="text/css" media="all" />
 {% endblock %}
 
  {% block body %}
 
 {% include 'CookbookCoreBundle:Default:header.html.twig' %}
+<script type="text/html" id="recipe_tmpl">
+    
+    <li>
+        <div class="recipe_pic lfloat">
+                        <% if (image != '') { %>
+                <img class="recipe_picture" src="../../../uploads/recipies/<%= id %>/picture/<%=image%>" alt="photo" />
+                        <% } else { %>
+                <img class="recipe_picture opacity20" src="../../../bundles/cookbookcore/images/spoon.png" />
+                        <% } %>
+            </div>
+            <a href="../../recipe/show/<%= id %>"><div class="recipe">
+                    <div class="recipe_header">
+                    <%= name %>
+                            <div class="difficulties" class="hand">
+                    <% for ( var i = 1; i < 4; i++ ) {  %>
+                                    <input type="radio"  disabled="disabled" <% if (difficulty == i) {  %> checked="checked" <% } %> />
+                    <% } %>
+                                </div>
+                            <div class="recipe_content"><%= description %></div>
+                            </div>
+                    <div class="recipe_footer">
+        <div class="lfloat">Préparation : <%= preparetime %> min</div><div class="rfloat">Cuisson : <%= cooktime %> min</div>
+        <br class="clear"/>
+                    </div>
+                    </div>
+                    </a>
 
+
+
+                </li>
+</script>
 <div id="content_header"><h1>Mes plats</h1>
 </div>
 
@@ -25,16 +56,9 @@
 
 </div>
 <div id="content_middle">
-    <div id="recipes"></div>
     <div class="recipes">
         <a class="lienAdd" href="{{ path('recipe_new') }}"><img src="{{ asset('bundles/cookbookcore/images/plus.gif') }}" border="0" /></a>
 
-        <ul> 
-                    {% for category in categories %}
-                <li><a href="{{ path('recipe_show', { 'id': category.id }) }}">{{ category.name }}</a>({{ category.recipes|length }})</li>
-
-                    {% endfor %}
-            </ul>
             <ul id="listRecipes"> 
                     {% for recipe in user.recipes %}
                     <li>
@@ -53,10 +77,17 @@
                                                     <input type="radio"  disabled="disabled" {% if recipe.difficulty == i  %} checked="checked" {% endif %} />
                                     {% endfor %}
                                                 </div>
-                                            </div></a>
-
-
+                                            <div class="recipe_content">{{ recipe.description|raw }}</div>
+                                            </div>
+                                    <div class="recipe_footer">
+                        <div class="lfloat">Préparation : {{ recipe.preparetime }} min</div><div class="rfloat">Cuisson : {{ recipe.cooktime }} min</div>
+                        <br class="clear"/>
                                     </div>
+                                    </div>
+                                    </a>
+
+
+                                    
                                 </li>
                     {% endfor %}
                             </ul>
@@ -71,14 +102,14 @@
  {% for category in categories %}
                             <option value="{{ category.id }}"><label for="category{{ category.id }}">{{ category.name }}</label></option>
 {% endfor %}
-                        </select><br>
+                        </select><hr>
                         <label class="libFiltre"> Type</label> 
                         <select id="type" name="type">
                             <option value="" selected="selected"><label for="type0">Tous</label></option>
  {% for type in types %}
                             <option value="{{ type.id }}"><label for="type{{ type.id }}">{{ type.name }}</label></option>
 {% endfor %}
-                        </select><br>
+                        </select><hr>
 
                         <label class="libFiltre"> Format</label> 
                         <select id="format" name="format">
@@ -86,14 +117,32 @@
  {% for format in formats %}
                             <option value="{{ format.id }}"><label for="format{{ format.id }}">{{ format.name }}</label></option>
 {% endfor %}
+                        </select><hr>
+
+                        <label class="libFiltre"> Pas cuisiné depuis</label> 
+                        <input id="lastcook" name="lastcook" class="date" value="" /><hr>
+
+                        <label class="libFiltre"> Invités</label> 
+                        <select id="friend0" name="friends0">
+                            <option value="" selected="selected"><label for="friend0">--</label></option>
+ {% for friend in user.friends %}
+                            <option value="{{ friend.id }}"><label for="friend{{ friend.id }}">{{ friend.name }}</label></option>
+{% endfor %}
+                        </select><br>
+                        <label class="libFiltre">&nbsp;</label> 
+                        <select id="choixfriend0" name="choixfriend0">
+                            <option value="" selected="selected"><label for="choixfriend0">A déjà mangé</label></option>
+                            <option value=""><label for="choixfriend1">N'a jamais mangé</label></option>
+ 
                         </select>
+                            
                     </div>
 
  {% endblock %}
 {% block javascripts %}
     {{ parent() }}
                     <script type="text/javascript" src="{{ asset('bundles/cookbookcore/star-rating/jquery.rating.pack.js') }}"></script>
-
+                    <script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/jquery-ui-1.8.22.custom.min.js') }}"></script>
                     <script type="text/javascript">
                 $(document).ready(function() {
 
@@ -119,6 +168,9 @@
                             $(this).children().rating();
                             });
                     }
+                    
+                    
+                    $( "input.date" ).datepicker();
 
                 });
 
@@ -134,9 +186,20 @@
                            format:$('#format').attr('value')
                        },function(data){
                         //the response is in the data variable
-                            $('#recipes').html(data);
+                            var show_recipe = tmpl("recipe_tmpl"), html = "";
+                            for ( var i = 0; i < data.length; i++ ) {
+                              html += show_recipe( data[i] );
+                            }
+                            //$('#recipes').html(tmpl("recipe_tmpl", data));
+                            $('#listRecipes').html(html);
+                            if ( $(".difficulties").length ) {
+                            $(".difficulties").each(function(i){
+                                    $(this).children().rating();
+                                    });
+                            }
+
             
-                    }, 'html');//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down
+                    }, 'json');//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down
 
 
                 }

@@ -61,6 +61,10 @@ textarea{
     float:right;
 }
 
+.clear{
+    clear: both;
+}
+
 .hand{
     cursor: pointer;
 }
@@ -520,7 +524,7 @@ ul#listFriends li {
 }
 
 ul#listRecipes {font-family:helvetica,arial,sans-serif;margin:0;padding:0;width:98%;clear:both;}
-ul#listRecipes li {
+ul#listRecipes > li {
         margin:0;padding:2px;list-style:none;margin:5px 0 10px 5px; width:100%;
         min-height: 30px;
         background-color: #fff;
@@ -549,6 +553,20 @@ ul#listRecipes li {
  
  .recipe_header:hover a{
      color: #fff;
+ }
+ 
+ .recipe_content{
+     color: #000;
+ }
+ 
+ .recipe_footer{
+     clear: both;
+     border: 1px solid #ccc;
+     border-top-width: 0px;
+     border-bottom-left-radius: 3px;
+     border-bottom-right-radius: 3px;
+     padding: 3px 16px 0;
+     background-color: #eee;
  }
  
 .recipe_picture{
