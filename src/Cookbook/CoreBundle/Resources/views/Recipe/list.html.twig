@@ -13,7 +13,7 @@
     
     <li>
         <div class="recipe_pic lfloat">
-                        <% if (image != '') { %>
+                        <% if (!image) { %>
                 <img class="recipe_picture" src="../../../uploads/recipies/<%= id %>/picture/<%=image%>" alt="photo" />
                         <% } else { %>
                 <img class="recipe_picture opacity20" src="../../../bundles/cookbookcore/images/spoon.png" />
