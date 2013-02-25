@@ -585,4 +585,57 @@ class Recipe
     {
         return $this->postits;
     }
+
+    /**
+     * Remove events
+     *
+     * @param Cookbook\CoreBundle\Entity\Event $events
+     */
+    public function removeEvent(\Cookbook\CoreBundle\Entity\Event $events)
+    {
+        $this->events->removeElement($events);
+    }
+
+    /**
+     * Remove ingredients
+     *
+     * @param Cookbook\CoreBundle\Entity\Ingredient $ingredients
+     */
+    public function removeIngredient(\Cookbook\CoreBundle\Entity\Ingredient $ingredients)
+    {
+        $this->ingredients->removeElement($ingredients);
+    }
+
+    /**
+     * Add postits
+     *
+     * @param Cookbook\CoreBundle\Entity\PostItRecipe $postits
+     * @return Recipe
+     */
+    public function addPostit(\Cookbook\CoreBundle\Entity\PostItRecipe $postits)
+    {
+        $this->postits[] = $postits;
+    
+        return $this;
+    }
+
+    /**
+     * Remove postits
+     *
+     * @param Cookbook\CoreBundle\Entity\PostItRecipe $postits
+     */
+    public function removePostit(\Cookbook\CoreBundle\Entity\PostItRecipe $postits)
+    {
+        $this->postits->removeElement($postits);
+    }
+
+    /**
+     * Remove wines
+     *
+     * @param Cookbook\CoreBundle\Entity\Wine $wines
+     */
+    public function removeWine(\Cookbook\CoreBundle\Entity\Wine $wines)
+    {
+        $this->wines->removeElement($wines);
+    }
 }

@@ -146,4 +146,14 @@ class Wine
     {
         return $this->recipes;
     }
+
+    /**
+     * Remove recipes
+     *
+     * @param Cookbook\CoreBundle\Entity\Recipe $recipes
+     */
+    public function removeRecipe(\Cookbook\CoreBundle\Entity\Recipe $recipes)
+    {
+        $this->recipes->removeElement($recipes);
+    }
 }

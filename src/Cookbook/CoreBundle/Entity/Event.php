@@ -199,4 +199,24 @@ class Event
     {
         return $this->recipes;
     }
+
+    /**
+     * Remove friends
+     *
+     * @param Cookbook\CoreBundle\Entity\Friend $friends
+     */
+    public function removeFriend(\Cookbook\CoreBundle\Entity\Friend $friends)
+    {
+        $this->friends->removeElement($friends);
+    }
+
+    /**
+     * Remove recipes
+     *
+     * @param Cookbook\CoreBundle\Entity\Recipe $recipes
+     */
+    public function removeRecipe(\Cookbook\CoreBundle\Entity\Recipe $recipes)
+    {
+        $this->recipes->removeElement($recipes);
+    }
 }

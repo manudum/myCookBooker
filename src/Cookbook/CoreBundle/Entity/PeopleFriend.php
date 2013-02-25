@@ -125,4 +125,27 @@ class PeopleFriend
     {
         return $this->friends;
     }
+
+    /**
+     * Add friends
+     *
+     * @param Cookbook\CoreBundle\Entity\People $friends
+     * @return PeopleFriend
+     */
+    public function addFriend(\Cookbook\CoreBundle\Entity\People $friends)
+    {
+        $this->friends[] = $friends;
+    
+        return $this;
+    }
+
+    /**
+     * Remove friends
+     *
+     * @param Cookbook\CoreBundle\Entity\People $friends
+     */
+    public function removeFriend(\Cookbook\CoreBundle\Entity\People $friends)
+    {
+        $this->friends->removeElement($friends);
+    }
 }

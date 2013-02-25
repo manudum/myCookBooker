@@ -173,4 +173,14 @@ class FormatRecipe
     {
         return $this->showorder;
     }
+
+    /**
+     * Remove recipes
+     *
+     * @param Cookbook\CoreBundle\Entity\Recipe $recipes
+     */
+    public function removeRecipe(\Cookbook\CoreBundle\Entity\Recipe $recipes)
+    {
+        $this->recipes->removeElement($recipes);
+    }
 }

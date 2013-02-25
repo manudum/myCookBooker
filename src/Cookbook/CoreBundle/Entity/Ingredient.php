@@ -35,7 +35,25 @@ class Ingredient
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     protected $description;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Aliment", inversedBy="aliments")
+     * @ORM\JoinColumn(name="aliment_id", referencedColumnName="id", nullable=true)
+     */
+    protected $aliment; 
+    
+    /**
+     *
+     * @ORM\Column(name="quantity", type="decimal", scale=3, nullable=true)
+     */
+    protected $quantity;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Unit", inversedBy="units")
+     * @ORM\JoinColumn(name="unit_id", referencedColumnName="id", nullable=true)
+     */
+    protected $unit; 
+    
     /**
      * @ORM\ManyToOne(targetEntity="Recipe", inversedBy="ingredients")
      * @ORM\JoinColumn(name="recipe_id", referencedColumnName="id")
@@ -116,5 +134,74 @@ class Ingredient
     public function getRecipe()
     {
         return $this->recipe;
+    }
+
+    /**
+     * Set quantity
+     *
+     * @param float $quantity
+     * @return Ingredient
+     */
+    public function setQuantity($quantity)
+    {
+        $this->quantity = $quantity;
+    
+        return $this;
+    }
+
+    /**
+     * Get quantity
+     *
+     * @return float 
+     */
+    public function getQuantity()
+    {
+        return $this->quantity;
+    }
+
+    /**
+     * Set aliment
+     *
+     * @param Cookbook\CoreBundle\Entity\Aliment $aliment
+     * @return Ingredient
+     */
+    public function setAliment(\Cookbook\CoreBundle\Entity\Aliment $aliment = null)
+    {
+        $this->aliment = $aliment;
+    
+        return $this;
+    }
+
+    /**
+     * Get aliment
+     *
+     * @return Cookbook\CoreBundle\Entity\Aliment 
+     */
+    public function getAliment()
+    {
+        return $this->aliment;
+    }
+
+    /**
+     * Set unit
+     *
+     * @param Cookbook\CoreBundle\Entity\Unit $unit
+     * @return Ingredient
+     */
+    public function setUnit(\Cookbook\CoreBundle\Entity\Unit $unit = null)
+    {
+        $this->unit = $unit;
+    
+        return $this;
+    }
+
+    /**
+     * Get unit
+     *
+     * @return Cookbook\CoreBundle\Entity\Unit 
+     */
+    public function getUnit()
+    {
+        return $this->unit;
     }
 }

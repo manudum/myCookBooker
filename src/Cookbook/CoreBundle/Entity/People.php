@@ -309,4 +309,34 @@ class People implements UserInterface, \Serializable
            $this->name,
        ) = unserialize($data);
     }
+
+    /**
+     * Remove recipes
+     *
+     * @param Cookbook\CoreBundle\Entity\Recipe $recipes
+     */
+    public function removeRecipe(\Cookbook\CoreBundle\Entity\Recipe $recipes)
+    {
+        $this->recipes->removeElement($recipes);
+    }
+
+    /**
+     * Remove friends
+     *
+     * @param Cookbook\CoreBundle\Entity\Friend $friends
+     */
+    public function removeFriend(\Cookbook\CoreBundle\Entity\Friend $friends)
+    {
+        $this->friends->removeElement($friends);
+    }
+
+    /**
+     * Remove events
+     *
+     * @param Cookbook\CoreBundle\Entity\Event $events
+     */
+    public function removeEvent(\Cookbook\CoreBundle\Entity\Event $events)
+    {
+        $this->events->removeElement($events);
+    }
 }

@@ -122,4 +122,14 @@ class Friend
     {
         return $this->events;
     }
+
+    /**
+     * Remove events
+     *
+     * @param Cookbook\CoreBundle\Entity\Event $events
+     */
+    public function removeEvent(\Cookbook\CoreBundle\Entity\Event $events)
+    {
+        $this->events->removeElement($events);
+    }
 }
