@@ -19,7 +19,7 @@ class UserProvider implements UserProviderInterface
 
             // ...
 
-            return new WebserviceUser($username, $password, $salt, $roles)
+            return new WebserviceUser($username, $password, $salt, $roles);
         } else {
             throw new UsernameNotFoundException(sprintf('Username "%s" does not exist.', $username));
         }

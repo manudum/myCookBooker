@@ -37,7 +37,7 @@ class Ingredient
     protected $description;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Aliment", inversedBy="aliments")
+     * @ORM\ManyToOne(targetEntity="Aliment")
      * @ORM\JoinColumn(name="aliment_id", referencedColumnName="id", nullable=true)
      */
     protected $aliment; 
@@ -49,7 +49,7 @@ class Ingredient
     protected $quantity;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Unit", inversedBy="units")
+     * @ORM\ManyToOne(targetEntity="Unit")
      * @ORM\JoinColumn(name="unit_id", referencedColumnName="id", nullable=true)
      */
     protected $unit; 

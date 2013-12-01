@@ -44,7 +44,7 @@ class Wine
     private $year;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Recipe", inversedBy="ingredients")
+     * @ORM\ManyToMany(targetEntity="Recipe", inversedBy="wines")
      * @ORM\JoinTable(name="recipe_wines")
      * @ORM\OrderBy({"name" = "ASC"})
      */

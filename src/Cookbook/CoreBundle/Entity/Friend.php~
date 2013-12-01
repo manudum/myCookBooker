@@ -48,6 +48,11 @@ class Friend
     {
         return $this->name;
     }
+    
+    public function __toArray()
+    {
+       return array('id'=>$this->getId(),'name' => $this->getName());
+    }
     /**
      * Get id
      *
@@ -116,5 +121,15 @@ class Friend
     public function getEvents()
     {
         return $this->events;
+    }
+
+    /**
+     * Remove events
+     *
+     * @param Cookbook\CoreBundle\Entity\Event $events
+     */
+    public function removeEvent(\Cookbook\CoreBundle\Entity\Event $events)
+    {
+        $this->events->removeElement($events);
     }
 }

@@ -5,6 +5,8 @@ namespace Cookbook\CoreBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
 class FriendType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -12,11 +14,11 @@ class FriendType extends AbstractType
         $builder->add('name');
     }
 
-    public function getDefaultOptions(array $options)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        return array(
+        $resolver->setDefaults(array(
             'data_class' => 'Cookbook\CoreBundle\Entity\Friend',
-        );
+        ));
     }
 
     public function getName()

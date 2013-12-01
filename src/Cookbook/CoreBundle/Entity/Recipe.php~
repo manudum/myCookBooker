@@ -59,6 +59,7 @@ class Recipe
     /**
      * @ORM\ManyToOne(targetEntity="CategoryRecipe", inversedBy="recipes")
      * @ORM\JoinColumn(name="categoryrecipe_id", referencedColumnName="id")
+     * @ORM\OrderBy({"showorder" = "ASC"})
      */
     protected $category; //entree plat dessert
     
@@ -80,7 +81,7 @@ class Recipe
     private $events;
     
     /**
-     * @ORM\OneToMany(targetEntity="Ingredient", mappedBy="recipe")
+     * @ORM\OneToMany(targetEntity="Ingredient", mappedBy="recipe", cascade={"remove"})
      */
     protected $ingredients;
     
@@ -132,7 +133,14 @@ class Recipe
     
     public function __toArray()
     {
-       return array('id'=>$this->getId(),'name' => $this->getName());
+       return array('id' => $this->getId(),
+                    'name' => $this->getName(),
+                    'description' => $this->getDescription(),
+                    'cooktime' => $this->getCooktime(),
+                    'preparetime' => $this->getPreparetime(),
+                    'image' => $this->getImage(),
+                    'difficulty' => $this->getDifficulty()
+           );
     }
     
     public function serialize()
@@ -200,6 +208,9 @@ class Recipe
      */
     public function removeImage()
     {
+        if (null === $this->image || $this->image == "" || (!is_object($this->image))) {
+            return;
+        }
         unlink($this->getFullImagePath());
         rmdir($this->getUploadRootDir());
     }
@@ -284,25 +295,6 @@ class Recipe
         return $this->people;
     }
 
-    /**
-     * Set decription
-     *
-     * @param text $decription
-     */
-    public function setDecription($decription)
-    {
-        $this->decription = $decription;
-    }
-
-    /**
-     * Get decription
-     *
-     * @return text 
-     */
-    public function getDecription()
-    {
-        return $this->decription;
-    }
 
     /**
      * Set category
@@ -592,5 +584,58 @@ class Recipe
     public function getPostits()
     {
         return $this->postits;
+    }
+
+    /**
+     * Remove events
+     *
+     * @param Cookbook\CoreBundle\Entity\Event $events
+     */
+    public function removeEvent(\Cookbook\CoreBundle\Entity\Event $events)
+    {
+        $this->events->removeElement($events);
+    }
+
+    /**
+     * Remove ingredients
+     *
+     * @param Cookbook\CoreBundle\Entity\Ingredient $ingredients
+     */
+    public function removeIngredient(\Cookbook\CoreBundle\Entity\Ingredient $ingredients)
+    {
+        $this->ingredients->removeElement($ingredients);
+    }
+
+    /**
+     * Add postits
+     *
+     * @param Cookbook\CoreBundle\Entity\PostItRecipe $postits
+     * @return Recipe
+     */
+    public function addPostit(\Cookbook\CoreBundle\Entity\PostItRecipe $postits)
+    {
+        $this->postits[] = $postits;
+    
+        return $this;
+    }
+
+    /**
+     * Remove postits
+     *
+     * @param Cookbook\CoreBundle\Entity\PostItRecipe $postits
+     */
+    public function removePostit(\Cookbook\CoreBundle\Entity\PostItRecipe $postits)
+    {
+        $this->postits->removeElement($postits);
+    }
+
+    /**
+     * Remove wines
+     *
+     * @param Cookbook\CoreBundle\Entity\Wine $wines
+     */
+    public function removeWine(\Cookbook\CoreBundle\Entity\Wine $wines)
+    {
+        $this->wines->removeElement($wines);
     }
 }

@@ -44,7 +44,7 @@ class Event
     private $date;
 
     /**
-     * @ORM\ManyToOne(targetEntity="People", inversedBy="recipes")
+     * @ORM\ManyToOne(targetEntity="People", inversedBy="events")
      * @ORM\JoinColumn(name="people_id", referencedColumnName="id")
      */
     protected $people;

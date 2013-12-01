@@ -7,14 +7,7 @@ CookbookCoreBundle:
     type:     annotation
     prefix:   /
 
-AcmeStoreBundle:
-    resource: "@AcmeStoreBundle/Controller/"
-    type:     annotation
-    prefix:   /
 
-AcmeHelloBundle:
-    resource: "@AcmeHelloBundle/Resources/config/routing.yml"
-    prefix:   /
 
 # Internal routing configuration to handle ESI
 #_internal:

@@ -44,7 +44,7 @@ class Event
     private $date;
 
     /**
-     * @ORM\ManyToOne(targetEntity="People", inversedBy="recipes")
+     * @ORM\ManyToOne(targetEntity="People", inversedBy="events")
      * @ORM\JoinColumn(name="people_id", referencedColumnName="id")
      */
     protected $people;
@@ -198,5 +198,25 @@ class Event
     public function getRecipes()
     {
         return $this->recipes;
+    }
+
+    /**
+     * Remove friends
+     *
+     * @param Cookbook\CoreBundle\Entity\Friend $friends
+     */
+    public function removeFriend(\Cookbook\CoreBundle\Entity\Friend $friends)
+    {
+        $this->friends->removeElement($friends);
+    }
+
+    /**
+     * Remove recipes
+     *
+     * @param Cookbook\CoreBundle\Entity\Recipe $recipes
+     */
+    public function removeRecipe(\Cookbook\CoreBundle\Entity\Recipe $recipes)
+    {
+        $this->recipes->removeElement($recipes);
     }
 }

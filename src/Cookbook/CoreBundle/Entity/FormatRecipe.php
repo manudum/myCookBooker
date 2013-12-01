@@ -41,7 +41,7 @@ class FormatRecipe
     protected $recipes;
     
     /**
-     * @ORM\ManyToOne(targetEntity="People", inversedBy="formatrecipes")
+     * @ORM\ManyToOne(targetEntity="People")
      * @ORM\JoinColumn(name="people_id", referencedColumnName="id")
      */
     protected $people;

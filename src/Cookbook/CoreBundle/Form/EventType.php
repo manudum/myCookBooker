@@ -6,6 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Doctrine\ORM\EntityRepository;
 
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
 class EventType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -54,11 +56,11 @@ class EventType extends AbstractType
         return 'cookbook_corebundle_recipetype';
     }
     
-    public function getDefaultOptions(array $options)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        return array(
+        $resolver->setDefaults(array(
             'data_class' => 'Cookbook\CoreBundle\Entity\Event',
             'user_id'         => null,
-        );
+        ));
     }
 }

@@ -1,8 +1,7 @@
 <?php
 
-namespace Acme\DemoBundle;
+namespace Acme\DemoBundle\EventListener;
 
-use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Acme\DemoBundle\Twig\Extension\DemoExtension;

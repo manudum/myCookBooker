@@ -41,7 +41,7 @@ class CategoryRecipe
     protected $recipes;
     
     /**
-     * @ORM\ManyToOne(targetEntity="People", inversedBy="categoryrecipes")
+     * @ORM\ManyToOne(targetEntity="People")
      * @ORM\JoinColumn(name="people_id", referencedColumnName="id")
      */
     protected $people;
@@ -55,6 +55,11 @@ class CategoryRecipe
     public function __toString()
     {
         return $this->name;
+    }
+    
+    public function __toArray()
+    {
+       return array('id'=>$this->getId(),'name' => $this->getName());
     }
     
     
@@ -166,5 +171,15 @@ class CategoryRecipe
     public function getShoworder()
     {
         return $this->showorder;
+    }
+
+    /**
+     * Remove recipes
+     *
+     * @param Cookbook\CoreBundle\Entity\Recipe $recipes
+     */
+    public function removeRecipe(\Cookbook\CoreBundle\Entity\Recipe $recipes)
+    {
+        $this->recipes->removeElement($recipes);
     }
 }
