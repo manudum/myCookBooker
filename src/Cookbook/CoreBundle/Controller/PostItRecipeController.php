@@ -31,7 +31,7 @@ class PostItRecipeController extends Controller
         $postitrecipe->setTitle(date("d/m/Y"));
         $postitrecipe->setComment("Remarque");
         // perform some action, such as saving the task to the database
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $em->persist($postitrecipe);
         $em->flush();
         if(!$request->isXmlHttpRequest())
@@ -53,7 +53,7 @@ class PostItRecipeController extends Controller
      */
     public function deleteAction($id) {
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('CookbookCoreBundle:PostItRecipe');
 
         if ($repository->deletePostIt($id)) {
@@ -80,7 +80,7 @@ class PostItRecipeController extends Controller
                 ->getRepository('CookbookCoreBundle:PostItRecipe')
                 ->find($id);
         $postit->setTitle($title);
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $em->persist($postit);
         $em->flush();
         return new Response('ok',200,array('Content-Type'=>'application/json'));
@@ -102,7 +102,7 @@ class PostItRecipeController extends Controller
                 ->find($id);
             
         $postit->setComment($content);
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $em->persist($postit);
         $em->flush();
         return new Response('ok',200,array('Content-Type'=>'application/json'));

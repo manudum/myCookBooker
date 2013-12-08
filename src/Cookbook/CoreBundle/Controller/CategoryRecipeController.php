@@ -36,7 +36,7 @@ class CategoryRecipeController extends Controller
         
                 $categoryRecipe->setPeople($people);
                 // perform some action, such as saving the task to the database
-                $em = $this->getDoctrine()->getEntityManager();
+                $em = $this->getDoctrine()->getManager();
                 $em->persist($categoryRecipe);
                 $em->flush();
                 if(!$request->isXmlHttpRequest())
@@ -80,7 +80,7 @@ class CategoryRecipeController extends Controller
                 $people = $this->get('security.context')->getToken()->getUser();
         
                 // perform some action, such as saving the task to the database
-                $em = $this->getDoctrine()->getEntityManager();
+                $em = $this->getDoctrine()->getManager();
                 $em->persist($categoryRecipe);
                 $em->flush();
 
@@ -155,11 +155,11 @@ class CategoryRecipeController extends Controller
         $categories = $this->getDoctrine()
                 ->getRepository('CookbookCoreBundle:CategoryRecipe')
                 ->findBy(array('people' => $usr->getId()));
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
             
         foreach ($categories as $category){
             $category->setShoworder(array_search($category->getId(),$filter));
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $em->persist($category);
             $em->flush();
         }
@@ -173,7 +173,7 @@ class CategoryRecipeController extends Controller
      */
     public function deleteAction($id) {
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('CookbookCoreBundle:CategoryRecipe');
 
         if ($repository->deleteCategoryRecipe($id)) {

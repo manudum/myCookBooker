@@ -30,7 +30,7 @@ class IngredientController extends Controller
                 ))
                 ->getForm();
         if ($request->getMethod() == 'POST') {
-            $form->bindRequest($request);
+            $form->bind($request);
 
             if ($form->isValid()) {
                 $recipe = $this->getDoctrine()
@@ -38,7 +38,7 @@ class IngredientController extends Controller
                 ->find($request->request->get('recipe_id'));
                 $ingredient->setRecipe($recipe);
                 // perform some action, such as saving the task to the database
-                $em = $this->getDoctrine()->getEntityManager();
+                $em = $this->getDoctrine()->getManager();
                 $em->persist($ingredient);
                 $em->flush();
                 if(!$request->isXmlHttpRequest())
@@ -65,7 +65,7 @@ class IngredientController extends Controller
      */
     public function deleteAction($id) {
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('CookbookCoreBundle:Ingredient');
 
         if ($repository->deleteIngredient($id)) {

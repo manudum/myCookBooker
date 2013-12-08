@@ -66,7 +66,7 @@ class AdminController extends Controller {
 
             if ($form->isValid()) {
                 // perform some action, such as saving the task to the database
-                $em = $this->getDoctrine()->getEntityManager();
+                $em = $this->getDoctrine()->getManager();
                 $em->persist($people);
                 $em->flush();
 

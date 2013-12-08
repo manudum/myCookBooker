@@ -36,7 +36,7 @@ class TypeRecipeController extends Controller
         
                 $typeRecipe->setPeople($people);
                 // perform some action, such as saving the task to the database
-                $em = $this->getDoctrine()->getEntityManager();
+                $em = $this->getDoctrine()->getManager();
                 $em->persist($typeRecipe);
                 $em->flush();
 
@@ -81,7 +81,7 @@ class TypeRecipeController extends Controller
                 $people = $this->get('security.context')->getToken()->getUser();
         
                 // perform some action, such as saving the task to the database
-                $em = $this->getDoctrine()->getEntityManager();
+                $em = $this->getDoctrine()->getManager();
                 $em->persist($typeRecipe);
                 $em->flush();
 
@@ -157,11 +157,11 @@ class TypeRecipeController extends Controller
         $types = $this->getDoctrine()
                 ->getRepository('CookbookCoreBundle:TypeRecipe')
                 ->findBy(array('people' => $usr->getId()));
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
             
         foreach ($types as $type){
             $type->setShoworder(array_search($type->getId(),$filter));
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $em->persist($type);
             $em->flush();
         }
@@ -175,7 +175,7 @@ class TypeRecipeController extends Controller
      */
     public function deleteAction($id) {
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('CookbookCoreBundle:TypeRecipe');
 
         if ($repository->deleteTypeRecipe($id)) {

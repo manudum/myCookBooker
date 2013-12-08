@@ -37,7 +37,7 @@ class FriendController extends Controller
                 
                 $friend->setPeople($usr);
                 // perform some action, such as saving the task to the database
-                $em = $this->getDoctrine()->getEntityManager();
+                $em = $this->getDoctrine()->getManager();
                 $em->persist($friend);
                 $em->flush();
                 if ( false !== strpos($request->headers->get('Accept'), 'text/html')) {
@@ -92,7 +92,7 @@ class FriendController extends Controller
             if ($form->isValid()) {
                 
                 // perform some action, such as saving the task to the database
-                $em = $this->getDoctrine()->getEntityManager();
+                $em = $this->getDoctrine()->getManager();
                 $em->persist($friend);
                 $em->flush();
                 if ( false !== strpos($request->headers->get('Accept'), 'text/html')) {
@@ -138,7 +138,7 @@ class FriendController extends Controller
         $friend = $repository
                 ->find($id);
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $query = $em->createQuery('Select cf, e from CookbookCoreBundle:Friend cf JOIN cf.events e  JOIN e.friends f where f.id = :user_id and cf.id != f.id');
         $query->setParameters(array('user_id' => $id));
         $mutualfriends = $query->getResult();
@@ -161,7 +161,7 @@ class FriendController extends Controller
         $friend = $repository
                 ->find($id);
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $em->remove($friend);
         $em->flush();
         return $this->redirect($this->generateUrl('friend_list'));

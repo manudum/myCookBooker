@@ -36,7 +36,7 @@ class FormatRecipeController extends Controller
         
                 $formatRecipe->setPeople($people);
                 // perform some action, such as saving the task to the database
-                $em = $this->getDoctrine()->getEntityManager();
+                $em = $this->getDoctrine()->getManager();
                 $em->persist($formatRecipe);
                 $em->flush();
 
@@ -81,7 +81,7 @@ class FormatRecipeController extends Controller
                 $people = $this->get('security.context')->getToken()->getUser();
         
                 // perform some action, such as saving the task to the database
-                $em = $this->getDoctrine()->getEntityManager();
+                $em = $this->getDoctrine()->getManager();
                 $em->persist($formatRecipe);
                 $em->flush();
 
@@ -157,11 +157,11 @@ class FormatRecipeController extends Controller
         $formats = $this->getDoctrine()
                 ->getRepository('CookbookCoreBundle:FormatRecipe')
                 ->findBy(array('people' => $usr->getId()));
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
             
         foreach ($formats as $format){
             $format->setShoworder(array_search($format->getId(),$filter));
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $em->persist($format);
             $em->flush();
         }
@@ -175,7 +175,7 @@ class FormatRecipeController extends Controller
      */
     public function deleteAction($id) {
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('CookbookCoreBundle:FormatRecipe');
 
         if ($repository->deleteFormatRecipe($id)) {

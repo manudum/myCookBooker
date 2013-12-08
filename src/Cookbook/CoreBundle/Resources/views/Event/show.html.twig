@@ -1,41 +1,60 @@
  {% extends '::base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+<link rel="stylesheet" href="{{ asset('bundles/cookbookcore/css/smoothness/jquery-ui-1.8.22.custom.css') }}" type="text/css" media="all" />
+{% endblock %}
+
  {% block body %}
 {% include 'CookbookCoreBundle:Default:header.html.twig' %}
 
 </div>
 <div id="content_header"><h1>{{ event.name }}</h1>
-<input type="hidden" id="recipe_id" value="{{ event.id }}" />
+    <input type="hidden" id="recipe_id" value="{{ event.id }}" />
 </div>
 
 <div id="content_left">
-<div class="stepImg">
-<img src="{{ asset('bundles/cookbookcore/images/event.png') }}" />
-</div>
+    <div class="stepImg">
+        <img src="{{ asset('bundles/cookbookcore/images/event.png') }}" />
+    </div>
 </div>
 <div id="content_middle">
 
-<div class="content_event"> {{ event.description }}
-</div>
-Le : {{ event.date|date("d/m/Y") }}
-<br />
-Invité : 
-<ul> 
+    <div class="content_event"> {{ event.description }}
+    </div>
+    Le : {{ event.date|date("d/m/Y") }}
+    <br />
+    Invité : 
+    <ul> 
 {% for friend in event.friends %}
-            <li><a href="{{ path('friend_show', { 'id': friend.id }) }}">{{ friend.name }}</a></li>
+        <li><a href="{{ path('friend_show', { 'id': friend.id }) }}">{{ friend.name }}</a></li>
 {% endfor %}
-</ul>
+    </ul>
 
-Plats : 
-<ul> 
+    Plats : 
+    <ul> 
 {% for recipe in event.recipes %}
-            <li>{{ recipe.category }} : <a href="{{ path('recipe_show', { 'id': recipe.id }) }}">{{ recipe.name }}</a></li>
+        <li>{{ recipe.category }} : <a href="{{ path('recipe_show', { 'id': recipe.id }) }}">{{ recipe.name }}</a></li>
 {% endfor %}
-</ul>
+    </ul>
 
 
- une evenement de  {{ event.people.name }}
-<a href="{{ path('event_edit', { 'id': event.id }) }}">modifer</a>
+    un evenement de  {{ event.people.name }}
 </div>
-<div id="content_right">&nbsp;</div>
+<div id="content_right"> 
+    <a href="{{ path('event_edit', { 'id': event.id }) }}"><button class="hand action" id="btnMod">Modifer</button></a>
+
+    <a href="{{ path('event_delete', { 'id': event.id }) }}" onclick="removeEvent(this);
+            return false;" ><button class="hand action" id="btnSuppr">Supprimer</button></a>
+    <div id="del" title="Supprimer cet evenement" style="display:none;">
+        <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Cet evenement sera supprimé définitivement. Etes-vous sûr ??</p>
+    </div>
+</div>
+ {% endblock %}
+
+ {% block javascripts %}
+    {{ parent() }}
+<script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/jquery-ui-1.8.22.custom.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/event.js') }}"></script>
+
  {% endblock %}

@@ -58,7 +58,7 @@ class DefaultController extends Controller
                 $people = $this->get('security.context')->getToken()->getUser();
         
                 $peopleFriend->setPeople($people);
-                $em = $this->getDoctrine()->getEntityManager();
+                $em = $this->getDoctrine()->getManager();
                 $em->persist($peopleFriend);
                 $em->flush();
 

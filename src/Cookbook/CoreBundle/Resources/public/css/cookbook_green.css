@@ -506,6 +506,9 @@ ul#listFriends li {
     font-size: 13px;
 }
 
+#ingredients{
+    clear: both;
+}
 
 #ingredients input[type=text]{ 
    
