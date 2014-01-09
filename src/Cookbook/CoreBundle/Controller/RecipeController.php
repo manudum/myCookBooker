@@ -366,9 +366,11 @@ class RecipeController extends Controller
 
         $filter = $request->request->all();
         $filter = array_filter($filter);
-        $recipes = $this->getDoctrine()
+        
+        
+        $recipes = $this->getDoctrine()->getManager()
             ->getRepository('CookbookCoreBundle:Recipe')
-            ->findBy(array_merge($filter, array('people' => $usr->getId())),
+            ->getRecipe(array_merge($filter, array('people' => $usr->getId())),
             array('name' => 'ASC'));
         // only do something when the client accepts "text/html" as response format
         if (false !== strpos($request->headers->get('Accept'), 'text/html')) {

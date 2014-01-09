@@ -2,43 +2,43 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('bundles/cookbookcore/css/smoothness/jquery-ui-1.8.22.custom.css') }}" type="text/css" media="all" />
-    <link rel="stylesheet" href="{{ asset('bundles/cookbookcore/star-rating/jquery.rating.css') }}" type="text/css" media="all" />
+<link rel="stylesheet" href="{{ asset('bundles/cookbookcore/css/smoothness/jquery-ui-1.8.22.custom.css') }}" type="text/css" media="all" />
+<link rel="stylesheet" href="{{ asset('bundles/cookbookcore/star-rating/jquery.rating.css') }}" type="text/css" media="all" />
 {% endblock %}
 
  {% block body %}
 
 {% include 'CookbookCoreBundle:Default:header.html.twig' %}
 <script type="text/html" id="recipe_tmpl">
-    
+
     <li>
         <div class="recipe_pic lfloat">
-                        <% if (image) { %>
-                <img class="recipe_picture" src="../../../uploads/recipies/<%= id %>/picture/<%=image%>" alt="photo" />
-                        <% } else { %>
-                <img class="recipe_picture opacity20" src="../../../bundles/cookbookcore/images/spoon.png" />
-                        <% } %>
-            </div>
-            <a href="../../recipe/show/<%= id %>"><div class="recipe">
-                    <div class="recipe_header">
+            <% if (image) { %>
+            <img class="recipe_picture" src="../../../uploads/recipies/<%= id %>/picture/<%=image%>" alt="photo" />
+            <% } else { %>
+            <img class="recipe_picture opacity20" src="../../../bundles/cookbookcore/images/spoon.png" />
+            <% } %>
+        </div>
+        <a href="../../recipe/show/<%= id %>"><div class="recipe">
+                <div class="recipe_header">
                     <%= name %>
-                            <div class="difficulties" class="hand">
-                    <% for ( var i = 1; i < 4; i++ ) {  %>
-                                    <input type="radio"  disabled="disabled" <% if (difficulty == i) {  %> checked="checked" <% } %> />
-                    <% } %>
-                                </div>
-                            <div class="recipe_content"><%= description %></div>
-                            </div>
-                    <div class="recipe_footer">
-        <div class="lfloat">Préparation : <%= preparetime %> min</div><div class="rfloat">Cuisson : <%= cooktime %> min</div>
-        <br class="clear"/>
+                    <div class="difficulties" class="hand">
+                        <% for ( var i = 1; i < 4; i++ ) {  %>
+                        <input type="radio"  disabled="disabled" <% if (difficulty == i) {  %> checked="checked" <% } %> />
+                               <% } %>
                     </div>
-                    </div>
-                    </a>
+                    <div class="recipe_content"><%= description %></div>
+                </div>
+                <div class="recipe_footer">
+                    <div class="lfloat">Préparation : <%= preparetime %> min</div><div class="rfloat">Cuisson : <%= cooktime %> min</div>
+                    <br class="clear"/>
+                </div>
+            </div>
+        </a>
 
 
 
-                </li>
+    </li>
 </script>
 <div id="content_header"><h1>Mes plats</h1>
 </div>
@@ -59,149 +59,161 @@
     <div class="recipes">
         <a class="lienAdd" href="{{ path('recipe_new') }}"><img src="{{ asset('bundles/cookbookcore/images/plus.gif') }}" border="0" /></a>
 
-            <ul id="listRecipes"> 
+        <ul id="listRecipes"> 
                     {% for recipe in user.recipes %}
-                    <li>
-                        <div class="recipe_pic lfloat">
+            <li>
+                <div class="recipe_pic lfloat">
                                         {% if recipe.image != '' %}
-                                <img class="recipe_picture" src="{{ asset('uploads/recipies/' ~ recipe.id ~'/picture/' ~ recipe.image)}}" alt="photo" />
+                    <img class="recipe_picture" src="{{ asset('uploads/recipies/' ~ recipe.id ~'/picture/' ~ recipe.image)}}" alt="photo" />
                                         {% else %}
-                                <img class="recipe_picture opacity20" src="{{ asset('bundles/cookbookcore/images/spoon.png') }}" />
+                    <img class="recipe_picture opacity20" src="{{ asset('bundles/cookbookcore/images/spoon.png') }}" />
                                         {% endif %}
-                            </div>
-                            <a href="{{ path('recipe_show', { 'id': recipe.id }) }}"><div class="recipe">
-                                    <div class="recipe_header">
+                </div>
+                <a href="{{ path('recipe_show', { 'id': recipe.id }) }}"><div class="recipe">
+                        <div class="recipe_header">
                                     {{ recipe.name }}
-                                            <div class="difficulties" class="hand">
+                            <div class="difficulties" class="hand">
                                     {% for i in range(1, 3) %}
-                                                    <input type="radio"  disabled="disabled" {% if recipe.difficulty == i  %} checked="checked" {% endif %} />
+                                <input type="radio"  disabled="disabled" {% if recipe.difficulty == i  %} checked="checked" {% endif %} />
                                     {% endfor %}
-                                                </div>
-                                            <div class="recipe_content">{{ recipe.description|raw }}</div>
-                                            </div>
-                                    <div class="recipe_footer">
-                        <div class="lfloat">Préparation : {{ recipe.preparetime }} min</div><div class="rfloat">Cuisson : {{ recipe.cooktime }} min</div>
-                        <br class="clear"/>
-                                    </div>
-                                    </div>
-                                    </a>
-
-
-                                    
-                                </li>
-                    {% endfor %}
-                            </ul>
-                            <a href="{{ path('recipe_new') }}">Ajouter une recette</a>
+                            </div>
+                            <div class="recipe_content">{{ recipe.description|raw }}</div>
+                        </div>
+                        <div class="recipe_footer">
+                            <div class="lfloat">Préparation : {{ recipe.preparetime }} min</div><div class="rfloat">Cuisson : {{ recipe.cooktime }} min</div>
+                            <br class="clear"/>
                         </div>
                     </div>
-                    <div id="content_right">
+                </a>
 
-                        <label class="libFiltre"> Catégorie</label> 
-                        <select id="category" name="category">
-                            <option value="" selected="selected"><label for="category0">Tous</label></option>
+
+
+            </li>
+                    {% endfor %}
+        </ul>
+        <a href="{{ path('recipe_new') }}">Ajouter une recette</a>
+    </div>
+</div>
+<div id="content_right">
+
+    <label class="libFiltre"> Catégorie</label> 
+    <select id="category" name="category">
+        <option value="" selected="selected"><label for="category0">Tous</label></option>
  {% for category in categories %}
-                            <option value="{{ category.id }}"><label for="category{{ category.id }}">{{ category.name }}</label></option>
+        <option value="{{ category.id }}"><label for="category{{ category.id }}">{{ category.name }}</label></option>
 {% endfor %}
-                        </select><hr>
-                        <label class="libFiltre"> Type</label> 
-                        <select id="type" name="type">
-                            <option value="" selected="selected"><label for="type0">Tous</label></option>
+    </select><hr>
+    <label class="libFiltre"> Type</label> 
+    <select id="type" name="type">
+        <option value="" selected="selected"><label for="type0">Tous</label></option>
  {% for type in types %}
-                            <option value="{{ type.id }}"><label for="type{{ type.id }}">{{ type.name }}</label></option>
+        <option value="{{ type.id }}"><label for="type{{ type.id }}">{{ type.name }}</label></option>
 {% endfor %}
-                        </select><hr>
+    </select><hr>
 
-                        <label class="libFiltre"> Format</label> 
-                        <select id="format" name="format">
-                            <option value="" selected="selected"><label for="format0">Tous</label></option>
+    <label class="libFiltre"> Format</label> 
+    <select id="format" name="format">
+        <option value="" selected="selected"><label for="format0">Tous</label></option>
  {% for format in formats %}
-                            <option value="{{ format.id }}"><label for="format{{ format.id }}">{{ format.name }}</label></option>
+        <option value="{{ format.id }}"><label for="format{{ format.id }}">{{ format.name }}</label></option>
 {% endfor %}
-                        </select><hr>
+    </select><hr>
 
-                        <label class="libFiltre"> Pas cuisiné depuis</label> 
-                        <input id="lastcook" name="lastcook" class="date" value="" /><hr>
+    <label class="libFiltre"> Pas cuisiné depuis</label> 
+    <input id="lastcook" name="lastcook" class="date" value="" /><hr>
 
-                        <label class="libFiltre"> Invités</label> 
-                        <select id="friend0" name="friends0">
-                            <option value="" selected="selected"><label for="friend0">--</label></option>
+    <label class="libFiltre"> Invités</label> 
+    <select id="friend-0" name="friends[]">
+        <option value="" selected="selected"><label for="friend-0">--</label></option>
  {% for friend in user.friends %}
-                            <option value="{{ friend.id }}"><label for="friend{{ friend.id }}">{{ friend.name }}</label></option>
+        <option value="{{ friend.id }}"><label for="friend{{ friend.id }}">{{ friend.name }}</label></option>
 {% endfor %}
-                        </select><br>
-                        <label class="libFiltre">&nbsp;</label> 
-                        <select id="choixfriend0" name="choixfriend0">
-                            <option value="" selected="selected"><label for="choixfriend0">A déjà mangé</label></option>
-                            <option value=""><label for="choixfriend1">N'a jamais mangé</label></option>
- 
-                        </select>
-                            
-                    </div>
+    </select><br>
+    <label class="libFiltre">&nbsp;</label> 
+    <select id="choixfriend-0" name="choixfriend[]">
+        <option value="1" selected="selected"><label for="choixfriend-0">A déjà mangé</label></option>
+        <option value="0"><label for="choixfriend-1">N'a jamais mangé</label></option>
+
+    </select>
+
+</div>
 
  {% endblock %}
 {% block javascripts %}
     {{ parent() }}
-                    <script type="text/javascript" src="{{ asset('bundles/cookbookcore/star-rating/jquery.rating.pack.js') }}"></script>
-                    <script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/jquery-ui-1.8.22.custom.min.js') }}"></script>
-                    <script type="text/javascript">
-                $(document).ready(function() {
+<script type="text/javascript" src="{{ asset('bundles/cookbookcore/star-rating/jquery.rating.pack.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/jquery-ui-1.8.22.custom.min.js') }}"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
 
-                    if ( $("#stepRecipe") )  $("#stepRecipe").click(function(){
-                        window.location = '{{ path('recipe_new') }}';
-                    });
-                    if ( $("#stepEvent") )  $("#stepEvent").click(function(){
-                        window.location = '{{ path('event_new') }}';
-                    });
-                    if ( $("#stepFriend") )  $("#stepFriend").click(function(){
-                        window.location = '{{ path('friend_new') }}';
-                    });
+        if ($("#stepRecipe"))
+            $("#stepRecipe").click(function() {
+                window.location = '{{ path('recipe_new') }}';
+            });
+        if ($("#stepEvent"))
+            $("#stepEvent").click(function() {
+                window.location = '{{ path('event_new') }}';
+            });
+        if ($("#stepFriend"))
+            $("#stepFriend").click(function() {
+                window.location = '{{ path('friend_new') }}';
+            });
 
-                    $('#category').change(refreshRecipes); 
-                    $('#format').change(refreshRecipes); 
-                    $('#type').change(refreshRecipes); 
+        $('#category').change(refreshRecipes);
+        $('#format').change(refreshRecipes);
+        $('#type').change(refreshRecipes);
+        $("select[name='friends\\[\\]']").change(refreshRecipes);
+        
+        $("select[name='choixfriend\\[\\]']").change(refreshRecipes);
 
-                    if ($('#category').val() || $('#format').val() || $('#type').val()){
-                        refreshRecipes();
-                    }
-                    if ( $(".difficulties").length ) {
-                        $(".difficulties").each(function(i){
-                            $(this).children().rating();
-                            });
-                    }
-                    
-                    
-                    $( "input.date" ).datepicker();
+        if ($('#category').val() || $('#format').val() || $('#type').val()) {
+            refreshRecipes();
+        }
+        if ($(".difficulties").length) {
+            $(".difficulties").each(function(i) {
+                $(this).children().rating();
+            });
+        }
 
+
+        $("input.date").datepicker();
+
+    });
+
+    function refreshRecipes()
+    {
+//get the url for the form
+        var url = '../get';
+
+        var personn = $("select[name='friends\\[\\]']").map(function() {
+            var split = this.id.split('-')[1];
+            return {personn: $(this).val(), choix: $('#choixfriend-' + split).val()};
+        }).get();
+        console.log(personn);
+//start send the post request
+        $.post(url, {
+            category: $('#category').attr('value'),
+            type: $('#type').attr('value'),
+            format: $('#format').attr('value'),
+            personn: personn
+        }, function(data) {
+            //the response is in the data variable
+            var show_recipe = tmpl("recipe_tmpl"), html = "";
+            for (var i = 0; i < data.length; i++) {
+                html += show_recipe(data[i]);
+            }
+            //$('#recipes').html(tmpl("recipe_tmpl", data));
+            $('#listRecipes').html(html);
+            if ($(".difficulties").length) {
+                $(".difficulties").each(function(i) {
+                    $(this).children().rating();
                 });
-
-                function refreshRecipes()
-                {
-                    //get the url for the form
-                    var url='../get';
-
-                    //start send the post request
-                    $.post(url,{
-                           category:$('#category').attr('value'),
-                           type:$('#type').attr('value'),
-                           format:$('#format').attr('value')
-                       },function(data){
-                        //the response is in the data variable
-                            var show_recipe = tmpl("recipe_tmpl"), html = "";
-                            for ( var i = 0; i < data.length; i++ ) {
-                              html += show_recipe( data[i] );
-                            }
-                            //$('#recipes').html(tmpl("recipe_tmpl", data));
-                            $('#listRecipes').html(html);
-                            if ( $(".difficulties").length ) {
-                            $(".difficulties").each(function(i){
-                                    $(this).children().rating();
-                                    });
-                            }
-
-            
-                    }, 'json');//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down
+            }
 
 
-                }
-                        </script>
+        }, 'json');//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down
+
+
+    }
+</script>
  {% endblock %}

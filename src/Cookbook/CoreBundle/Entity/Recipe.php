@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table()
  * @ORM\HasLifecycleCallbacks
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Cookbook\CoreBundle\Entity\RecipeRepository")
  */
 class Recipe
 {
