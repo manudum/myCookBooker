@@ -95,7 +95,7 @@
     </div>
 </div>
 <div id="content_right">
-
+    <h3>Recherche</h3>
     <label class="libFiltre"> Catégorie</label> 
     <select id="category" name="category">
         <option value="" selected="selected"><label for="category0">Tous</label></option>
@@ -121,8 +121,8 @@
 
     <label class="libFiltre"> Pas cuisiné depuis</label> 
     <input id="lastcook" name="lastcook" class="date" value="" /><hr>
-
-    <label class="libFiltre"> Invités</label> 
+    <div id="divfriend-0">
+    <label class="libFiltre"> Invité 1</label> 
     <select id="friend-0" name="friends[]">
         <option value="" selected="selected"><label for="friend-0">--</label></option>
  {% for friend in user.friends %}
@@ -135,6 +135,8 @@
         <option value="0"><label for="choixfriend-1">N'a jamais mangé</label></option>
 
     </select>
+    </div>
+<a class="lienAdd" href="#"><img src="{{ asset('bundles/cookbookcore/images/plus.gif') }}" border="0" /></a>
 
 </div>
 
