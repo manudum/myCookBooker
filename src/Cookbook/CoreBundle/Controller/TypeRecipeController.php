@@ -29,7 +29,7 @@ class TypeRecipeController extends Controller
                 ))
                 ->getForm();
         if ($request->getMethod() == 'POST') {
-            $form->bindRequest($request);
+            $form->bind($request);
 
             if ($form->isValid()) {
                 $people = $this->get('security.context')->getToken()->getUser();
@@ -42,7 +42,7 @@ class TypeRecipeController extends Controller
 
                 if(!$request->isXmlHttpRequest())
                 {
-                    return $this->redirect($this->generateUrl('cookbook'));
+                    return $this->redirect($this->generateUrl('typerecipe_list'));
                 } else {
                     $return = json_encode(array('id' => $typeRecipe->getId(), 'name' => $typeRecipe->getName()));
                     return new Response($return,200,array('Content-Type'=>'application/json'));
