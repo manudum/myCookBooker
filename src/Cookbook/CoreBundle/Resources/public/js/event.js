@@ -12,7 +12,7 @@ $(document).ready(function() {
         friendsList = $("#cookbook_corebundle_recipetype_friends").multiselect();
         recipiesList = $("#cookbook_corebundle_recipetype_recipes").multiselect();
         $('input[type=radio]').change(refreshRecipes);
-        $.browser.mozilla && $('input[type=radio]').each(function() {
+        $('input[type=radio]').each(function() {
             this.checked = this.defaultChecked;
         });
         $('#categories_recipe').buttonset();

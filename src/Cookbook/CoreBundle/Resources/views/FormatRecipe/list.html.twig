@@ -2,7 +2,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('bundles/cookbookcore/css/smoothness/jquery-ui-1.8.22.custom.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ asset('bundles/cookbookcore/jquery-ui-1.11.3/jquery-ui.min.css') }}" type="text/css" media="all" />
 {% endblock %}
 
  {% block body %}
@@ -42,6 +42,6 @@
  {% endblock %}
 {% block javascripts %}
     {{ parent() }}
-    <script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/jquery-ui-1.8.22.custom.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/cookbookcore/jquery-ui-1.11.3/jquery-ui.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/recipe.js') }}"></script>
  {% endblock %}

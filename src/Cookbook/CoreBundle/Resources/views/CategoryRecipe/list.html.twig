@@ -2,11 +2,11 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('bundles/cookbookcore/css/smoothness/jquery-ui-1.8.22.custom.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{{ asset('bundles/cookbookcore/jquery-ui-1.11.3/jquery-ui.min.css') }}" type="text/css" media="all" />
 {% endblock %}
 
  {% block body %}
-
+     
 {% include 'CookbookCoreBundle:Default:header.html.twig' %}
 
 <div id="content_header"><h1>Mes Catégories</h1>
@@ -37,12 +37,12 @@
 </div>
 <div id="new_cat"></div>
 <div id="dialog-confirm" title="Supprimer la catégorie" style="display:none;">
-	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>La catéhorie sera supprimé définitivement. Etes-vous sûr ??</p>
+	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>La cathéorie sera supprimée définitivement. Etes-vous sûr ??</p>
 </div>
 
  {% endblock %}
  {% block javascripts %}
     {{ parent() }}
-    <script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/jquery-ui-1.8.22.custom.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/cookbookcore/jquery-ui-1.11.3/jquery-ui.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/cookbookcore/js/recipe.js') }}"></script>
  {% endblock %}
