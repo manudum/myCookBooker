@@ -23,7 +23,7 @@
 <table id="table_info_recipe">
     <tr>
           <td>Catégorie</td>
-          <td><div id="libCategory" class="hand">{{ recipe.category }}</div></td>
+          <td style="width:40%;"><div id="libCategory" class="hand">{{ recipe.category }}</div></td>
       </tr>
       <tr>
           <td>Type</td>
@@ -44,11 +44,11 @@
       </tr>
       <tr>
           <td>Temps de préparation</td>
-          <td><div id="libPrepareTime" class="hand">{{ recipe.preparetime | default("??") }}</div>&nbsp;min.</td>
+          <td><div id="libPrepareTime" class="hand">{{ recipe.preparetime | default("..") }}</div>&nbsp;min</td>
       </tr>
       <tr>
           <td>Temps de cuisson</td>
-          <td><div id="libCookTime" class="hand">{{ recipe.cooktime | default("??") }}</div>&nbsp;min.</td>
+          <td><div id="libCookTime" class="hand">{{ recipe.cooktime | default("..") }}</div>&nbsp;min</td>
       </tr>
     </table>
 </div>
@@ -121,7 +121,13 @@
   </ul>
 		</div>
 <div class="div_info">
-<h3>Déjà servie</h3>
+<h3>
+    {% if recipe.events|length %}
+    Déjà servie
+    {% else %}
+    Pas encore servie
+    {% endif %}
+</h3>
 <ul> 
 {% for event in recipe.events %}
             <li><a href="{{ path('event_show', { 'id': event.id }) }}">{{ event.name }}</a> le {{ event.date|date("d/m/Y") }}</li>

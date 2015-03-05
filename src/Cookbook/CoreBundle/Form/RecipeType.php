@@ -24,7 +24,7 @@ class RecipeType extends AbstractType
                         ->where('q.people = '.$options['user_id'])
                         ->orderBy('q.showorder');
                     },
-                    'empty_value' => 'Choisir une valeur',
+                    'empty_data'  => null,
                     'required' => true,
                     'expanded' => true, 
                 ))
